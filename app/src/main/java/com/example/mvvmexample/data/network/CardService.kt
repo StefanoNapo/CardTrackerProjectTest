@@ -5,15 +5,13 @@ import com.example.mvvmexample.data.model.CardModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.create
+import javax.inject.Inject
 
-class CardService {
-
-    private val retrofit = RetrofitHelper.getRetrofit()
+class CardService @Inject constructor(private val api:CardApiClient) {
 
     suspend fun getCards():List<CardModel>{
         return withContext(Dispatchers.IO) {
-
-            val response = retrofit.create(CardApiClient::class.java).getAllCards()
+            val response = api.getAllCards()
             response.body() ?: emptyList()
         }
     }

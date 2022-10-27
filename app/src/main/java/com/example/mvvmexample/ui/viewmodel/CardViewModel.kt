@@ -7,17 +7,19 @@ import com.example.mvvmexample.data.model.CardModel
 import com.example.mvvmexample.data.model.CardProvider
 import com.example.mvvmexample.domain.GetCardsUseCase
 import com.example.mvvmexample.domain.GetRandomCardUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CardViewModel : ViewModel() {
+@HiltViewModel
+class CardViewModel @Inject constructor(
+    private val getCardsUseCase: GetCardsUseCase,
+    private val getRandomCardUseCase: GetRandomCardUseCase
+): ViewModel() {
 
     val cardModel = MutableLiveData<CardModel>()
 
     val isLoading = MutableLiveData<Boolean>()
-
-    var getCardsUseCase = GetCardsUseCase()
-
-    var getRandomCardUseCase = GetRandomCardUseCase()
 
     fun onCreate() {
         viewModelScope.launch {

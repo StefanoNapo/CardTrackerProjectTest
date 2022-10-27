@@ -1,8 +1,10 @@
 package com.example.mvvmexample.data.model
 
-class CardProvider {
+import javax.inject.Inject
+import javax.inject.Singleton
 
-    companion object {
+@Singleton
+class CardProvider @Inject constructor() {
+
         var cards:List<CardModel> = emptyList()
-    }
 }

@@ -10,7 +10,7 @@ data class CardImage (
 
     @SerializedName("image_url")
     @Expose
-    var imageUrl: String? = null,
+    var imageUrl: String,
 
     @SerializedName("image_url_small")
     @Expose

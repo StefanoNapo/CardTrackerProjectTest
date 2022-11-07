@@ -1,13 +1,17 @@
 package com.example.mvvmexample.data.database.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.mvvmexample.data.database.Converters
+import com.example.mvvmexample.data.database.ImageConverter
+import com.example.mvvmexample.data.database.PriceConverter
+import com.example.mvvmexample.data.database.SetConverter
 import com.example.mvvmexample.data.model.CardImage
 import com.example.mvvmexample.data.model.CardPrice
 import com.example.mvvmexample.data.model.CardSet
+import com.example.mvvmexample.domain.model.Card
 
 @Entity(tableName = "card_table")
+
 data class CardEntity (
 
     @PrimaryKey(autoGenerate = false)
@@ -39,15 +43,19 @@ data class CardEntity (
     var linkval: Int? = null,
 
     @ColumnInfo(name = "linkmarkers")
+    @field:TypeConverters(Converters::class)
     var linkmarkers: List<String>? = null,
 
     @ColumnInfo(name = "cardSets")
+    @field:TypeConverters(SetConverter::class)
     var cardSets: List<CardSet>? = null,
 
-    @ColumnInfo(name = "cardImages")
+    @ColumnInfo(name = "card_images")
+    @field:TypeConverters(ImageConverter::class)
     var cardImages: List<CardImage>? = null,
 
     @ColumnInfo(name = "cardPrices")
+    @field:TypeConverters(PriceConverter::class)
     var cardPrices: List<CardPrice>? = null,
 
     @ColumnInfo(name = "def")
@@ -56,3 +64,7 @@ data class CardEntity (
     @ColumnInfo(name = "level")
     var level: Int? = null
     )
+
+fun Card.toDatabase() = CardEntity(
+    id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level
+)

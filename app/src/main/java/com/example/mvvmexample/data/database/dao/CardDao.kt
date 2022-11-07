@@ -14,4 +14,7 @@ interface CardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(cards:List<CardEntity>)
+
+    @Query("DELETE FROM card_table")
+    suspend fun deleteAllCards()
 }

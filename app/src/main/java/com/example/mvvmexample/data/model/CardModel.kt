@@ -1,6 +1,7 @@
 package com.example.mvvmexample.data.model
 
 
+
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -51,7 +52,7 @@ data class CardModel (
 
     @SerializedName("card_images")
     @Expose
-    var cardImages: List<CardImage>? = null,
+    var cardImages: List<CardImage>,
 
     @SerializedName("card_prices")
     @Expose

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/cardName"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:text="Card Name"
+        app:autoSizeTextType="uniform"
+        app:emojiCompatEnabled="false"
+        app:layout_constraintEnd_toStartOf="@+id/CardImageButton"
+        app:layout_constraintStart_toEndOf="@+id/cardCheckBox"
+        app:textAllCaps="false"
+        tools:layout_editor_absoluteY="25dp" />
+
+    <ImageButton
+        android:id="@+id/CardImageButton"
+        android:layout_width="56dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/cardName"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <CheckBox
+        android:id="@+id/cardCheckBox"
+        android:layout_width="48dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/cardName"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="10dp" />
+
+    <Spinner
+        android:id="@+id/cardAmountSpinner"
+        android:layout_width="81dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toEndOf="@+id/CardImageButton"
+        tools:layout_editor_absoluteY="10dp"
+        tools:listitem="1,2,3,4,5,6,7,8,9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

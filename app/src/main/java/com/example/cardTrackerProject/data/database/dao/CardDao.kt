@@ -19,8 +19,8 @@ interface CardDao {
     @Query("DELETE FROM card_table")
     suspend fun deleteAllCards()
 
-    @Query("SELECT * FROM card_table WHERE name LIKE :searchQuery OR `desc` LIKE :searchQuery")
-    fun searchCardsNameAndText(searchQuery: String): Flow<List<CardEntity>>
+    @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY name ASC")
+    suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
 
 
 }

@@ -59,7 +59,7 @@ class CardViewModel @Inject constructor(
 
             val cardSearched = getCardSearchUseCase()
 
-            if (cardSearched != null){
+            if (cardSearched.isNotEmpty()){
                 cardSearch.postValue(cardSearched)
             }
 

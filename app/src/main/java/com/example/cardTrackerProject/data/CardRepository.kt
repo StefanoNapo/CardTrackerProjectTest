@@ -29,8 +29,10 @@ class CardRepository @Inject constructor(private val api : CardService, private 
         cardDao.deleteAllCards()
     }
 
-    suspend fun searchCardsNameAndText (searchQuery : String): Flow<List<CardEntity>>{
-        return cardDao.searchCardsNameAndText(searchQuery)
+    suspend fun searchCardsNameAndText (searchQuery : String): List<Card>{
+        val response = cardDao.searchCardsNameAndText(searchQuery)
+        return response.map { it.toDomain() }
+
     }
 
 }

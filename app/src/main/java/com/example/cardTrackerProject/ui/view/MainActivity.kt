@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         cardViewModel.onCreate()
 
+
         binding.searchButton.setOnClickListener() {
 
         }
@@ -62,7 +63,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        cardViewModel.cardSearch()
+        binding.addCardsButton.setOnClickListener(){cardViewModel.cardSearch()
+        }
+
+
 
         /*      cardViewModel.cardModel.observe(this, Observer { currentCard ->
                   binding.tvCardName.text = currentCard.name
@@ -72,11 +76,12 @@ class MainActivity : AppCompatActivity() {
                   Picasso.get().load(cardLink).into(binding.imageView)
 
               })
-
+        */
               cardViewModel.isLoading.observe(this, Observer {
                   binding.progress.isVisible = it
               })
 
+        /*
               binding.viewContainer.setOnClickListener{ cardViewModel.randomCard()}
         */
     }

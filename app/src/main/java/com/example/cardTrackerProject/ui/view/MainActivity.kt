@@ -2,29 +2,22 @@ package com.example.cardTrackerProject.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.SearchView
+
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.LayoutInflaterCompat
+
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.cardTrackerProject.data.CardRepository
-import com.example.cardTrackerProject.data.database.CardDatabase
-import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
-import com.example.cardTrackerProject.domain.GetCardSearchUseCase
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
 
@@ -32,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val cardViewModel: CardViewModel by viewModels()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -63,26 +56,39 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.addCardsButton.setOnClickListener(){cardViewModel.cardSearch()
-        }
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchView.clearFocus()
+                return false
+            }
 
+            private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+            private var searchJob: Job? = null
 
-        /*      cardViewModel.cardModel.observe(this, Observer { currentCard ->
-                  binding.tvCardName.text = currentCard.name
-                  binding.tvDesc.text = currentCard.desc
-                  val cardLink : String? = currentCard.cardImages?.get(0)?.imageUrlSmall
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchJob?.cancel()
+                searchJob = coroutineScope.launch {
+                    newText?.let {
+                        delay(300)
+                        if (newText.length > 2) {
+                            cardViewModel.cardSearch(newText)
+                        }
+                    }
+                }
 
-                  Picasso.get().load(cardLink).into(binding.imageView)
+                return false
+            }
 
-              })
-        */
+        })
+
               cardViewModel.isLoading.observe(this, Observer {
                   binding.progress.isVisible = it
               })
 
-        /*
-              binding.viewContainer.setOnClickListener{ cardViewModel.randomCard()}
-        */
+
     }
+
+
+
 }

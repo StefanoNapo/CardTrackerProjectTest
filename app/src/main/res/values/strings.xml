@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">mvvmexample</string>
     <string name="searcher" />
+    <string name="search">Search</string>
 </resources>

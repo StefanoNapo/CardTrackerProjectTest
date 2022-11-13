@@ -3,10 +3,8 @@ package com.example.cardTrackerProject.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.domain.GetCardSearchUseCase
 import com.example.cardTrackerProject.domain.GetCardsUseCase
-import com.example.cardTrackerProject.domain.GetRandomCardUseCase
 import com.example.cardTrackerProject.domain.model.Card
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class CardViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase,
-    private val getRandomCardUseCase: GetRandomCardUseCase,
     private val getCardSearchUseCase: GetCardSearchUseCase
 ) : ViewModel() {
 
@@ -38,26 +35,13 @@ class CardViewModel @Inject constructor(
 
     }
 
-    fun randomCard() {
-        viewModelScope.launch {
-            isLoading.postValue(true)
 
-            val card = getRandomCardUseCase()
-
-            if (card != null) {
-                cardModel.postValue(card)
-            }
-
-            isLoading.postValue(false)
-        }
-    }
-
-    fun cardSearch() {
+    fun cardSearch(query : String) {
 
         viewModelScope.launch {
             isLoading.postValue(true)
 
-            val cardSearched = getCardSearchUseCase()
+            val cardSearched = getCardSearchUseCase.invoke(query)
 
             if (cardSearched.isNotEmpty()){
                 cardSearch.postValue(cardSearched)

@@ -8,11 +8,11 @@ import javax.inject.Inject
 
 class GetCardSearchUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(): List<Card> {
+    suspend operator fun invoke(searchQuery: String): List<Card> {
 
         val cardsSearched = repository.getAllCardsFromDatabase()
 
-        val response = repository.searchCardsNameAndText("Blue")
+        val response = repository.searchCardsNameAndText(searchQuery)
 
         return if (cardsSearched.isNotEmpty()) {
             response

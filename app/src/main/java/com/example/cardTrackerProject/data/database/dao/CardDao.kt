@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.cardTrackerProject.data.database.entities.CardEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CardDao {
@@ -21,6 +20,9 @@ interface CardDao {
 
     @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY name ASC")
     suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
+
+    @Query("SELECT * FROM card_table WHERE (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    suspend fun searchCardsWithType(searchQuery: String, searchType: String): List<CardEntity>
 
 
 }

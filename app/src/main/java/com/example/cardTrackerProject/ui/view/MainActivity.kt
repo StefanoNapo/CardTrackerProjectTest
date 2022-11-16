@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(){
     private val cardViewModel: CardViewModel by viewModels()
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -46,18 +46,31 @@ class MainActivity : AppCompatActivity(){
         binding.apply {
             cardRecyclerView.apply {
                 adapter = recyclerAdapter
-                layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+                layoutManager =
+                    LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 setHasFixedSize(true)
             }
         }
 
-        cardViewModel.cardSearch.observe(this){
+        cardViewModel.cardSearch.observe(this) {
+
             recyclerAdapter.submitList(it)
 
         }
 
+        var spellSelected: Boolean = false
+        var effMonSelected: Boolean = false
+        var norMonSelected: Boolean = false
+        var trapSelected: Boolean = false
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+        binding.checkBox.setOnClickListener() {
+            spellSelected = binding.checkBox.isChecked
+
+        }
+
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchView.clearFocus()
                 return false
@@ -70,25 +83,30 @@ class MainActivity : AppCompatActivity(){
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {
                     newText?.let {
-                        delay(300)
-                        if (newText.length > 2) {
+                        delay(350)
+                        if (newText.length > 2 && spellSelected) {
+
+                            cardViewModel.cardSearchWithType(newText, "Spell Card")
+                        } else if (newText.length > 2) {
                             cardViewModel.cardSearch(newText)
                         }
                     }
                 }
+
 
                 return false
             }
 
         })
 
-              cardViewModel.isLoading.observe(this, Observer {
-                  binding.progress.isVisible = it
-              })
+
+
+        cardViewModel.isLoading.observe(this, Observer {
+            binding.progress.isVisible = it
+        })
 
 
     }
-
 
 
 }

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         collectionSpinner.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                collectionSelected = collectionSpinner[p2].toString()
+                collectionSelected = collectionSpinner.selectedItem.toString()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

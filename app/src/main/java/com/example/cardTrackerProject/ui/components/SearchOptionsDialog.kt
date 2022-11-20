@@ -84,6 +84,85 @@ class SearchOptionsDialog : DialogFragment(){
 
         }
 
+        val monsterTypeOptions = arrayOf(
+            "Aqua",
+            "Beast",
+            "Beast-Warrior",
+            "Creator-God",
+            "Cyberse",
+            "Dinosaur",
+            "Divine-Beast",
+            "Dragon",
+            "Fairy",
+            "Fiend",
+            "Fish",
+            "Insect",
+            "Machine",
+            "Plant",
+            "Psychic",
+            "Pyro",
+            "Reptile",
+            "Rock",
+            "Sea Serpent",
+            "Spellcaster",
+            "Thunder",
+            "Warrior",
+            "Winged Beast",
+            "Wyrm",
+            "Zombie")
+
+        val monsterTypeSpinner : Spinner = view.findViewById(R.id.monsTypeSpinner)
+
+        var monsterTypeSelected : String
+
+        monsterTypeSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,monsterTypeOptions) }
+
+        monsterTypeSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                monsterTypeSelected = monsterTypeSpinner.selectedItem.toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+        }
+
+        val attrOptions = arrayOf(
+            "DARK",
+            "EARTH",
+            "FIRE",
+            "LIGHT",
+            "WATER",
+            "WIND",
+            "DIVINE"
+            )
+
+        val attrSpinner : Spinner = view.findViewById(R.id.attrSpinner)
+
+        var attrSelected : String
+
+        attrSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,attrOptions) }
+
+        attrSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                attrSelected = attrSpinner.selectedItem.toString()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+        }
+
         return view
 
     }

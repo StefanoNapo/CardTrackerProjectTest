@@ -97,7 +97,7 @@
         android:layout_marginTop="144dp" />
 
     <Spinner
-        android:id="@+id/AttrSpinner"
+        android:id="@+id/attrSpinner"
         android:layout_width="219dp"
         android:layout_height="53dp"
         android:layout_alignParentStart="true"

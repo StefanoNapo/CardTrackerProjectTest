@@ -70,14 +70,6 @@ class MainActivity : AppCompatActivity() {
 
             dialog.show(supportFragmentManager, "searchOptionDialog")
 
-
-            //Averiguar como hacer para poder inicializar los valores de los spinner en el search dialog
-
-/*
-
-
-
-*/
         }
 
         binding.addCardsButton.setOnClickListener() {
@@ -100,6 +92,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+        //Cambiar booleans por lo que devuelva el onClickListener del Dialog
         var spellSelected: Boolean = false
         var effMonSelected: Boolean = false
         var norMonSelected: Boolean = false
@@ -128,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                     newText?.let {
                         delay(350)
                         if (newText.length > 2 && spellSelected) {
-
+                            //cambiar el && y el searchType por lo que devuelva el Dialog
                             cardViewModel.cardSearchWithType(newText, "Spell Card")
                         } else if (newText.length > 2) {
                             cardViewModel.cardSearch(newText)

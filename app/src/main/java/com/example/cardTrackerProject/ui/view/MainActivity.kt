@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {
                     newText?.let {
-                        delay(350)
+                        delay(250)
                         if (newText.length > 2 && spellSelected) {
                             //cambiar el && y el searchType por lo que devuelva el Dialog
                             cardViewModel.cardSearchWithType(newText, "Spell Card")

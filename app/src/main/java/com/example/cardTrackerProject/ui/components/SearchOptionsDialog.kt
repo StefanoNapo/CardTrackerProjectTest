@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
 import com.example.cardTrackerProject.R
@@ -139,8 +136,7 @@ class SearchOptionsDialog : DialogFragment(){
             "LIGHT",
             "WATER",
             "WIND",
-            "DIVINE"
-            )
+            "DIVINE")
 
         val attrSpinner : Spinner = view.findViewById(R.id.attrSpinner)
 
@@ -161,6 +157,16 @@ class SearchOptionsDialog : DialogFragment(){
 
             }
 
+        }
+
+        val confirmOptionsBtn : Button = view.findViewById(R.id.confirmOptionsBtn)
+
+        confirmOptionsBtn.setOnClickListener(){
+
+            //Conseguir forma de enviar esto a main activity para saber cual carta buscar
+            //cardTypeSelected
+            //monsterTypeSelected
+            //attrSelected
         }
 
         return view

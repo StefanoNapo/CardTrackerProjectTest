@@ -9,12 +9,13 @@
 
     <ImageButton
         android:id="@+id/closeImageButton"
-        android:layout_width="wrap_content"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="7dp"
+        android:background="#5A57AE"
         android:minHeight="48dp"
         app:srcCompat="@drawable/ic_baseline_close_24" />
 
@@ -115,26 +116,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="291dp"
-        android:layout_marginEnd="83dp"
-        android:inputType="number"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="68dp"
         android:ems="10"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/defEditText"
-        android:layout_width="131dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="359dp"
-        android:layout_marginEnd="85dp"
         android:inputType="number"
-        android:ems="10"
         android:minHeight="48dp" />
 
     <EditText
@@ -145,15 +131,30 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="426dp"
-        android:layout_marginEnd="86dp"
-        android:inputType="number"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="428dp"
+        android:layout_marginEnd="68dp"
         android:ems="10"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/defEditText"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginEnd="68dp"
+        android:ems="10"
+        android:inputType="number"
         android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/addCardsButton"
+        android:id="@+id/confirmOptionsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

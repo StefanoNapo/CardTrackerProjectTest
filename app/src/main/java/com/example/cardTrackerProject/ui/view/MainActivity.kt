@@ -71,65 +71,11 @@ class MainActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager, "searchOptionDialog")
 
 
-
-
             //Averiguar como hacer para poder inicializar los valores de los spinner en el search dialog
-            //y como hacer funcionar el botón cerrar
 
 /*
 
 
-                    val cardTypeOptions = arrayOf(
-            "Effect Monster",
-            "Flip Effect Monster",
-            "Flip Tuner Effect Monster",
-            "Gemini Monster",
-            "Normal Monster",
-            "Normal Tuner Monster",
-            "Pendulum Effect Monster",
-            "Pendulum Flip Effect Monster",
-            "Pendulum Normal Monster",
-            "Pendulum Tuner Effect Monster",
-            "Ritual Effect Monster",
-            "Ritual Monster",
-            "Skill Card",
-            "Spell Card",
-            "Spirit Monster",
-            "Toon Monster",
-            "Trap Card",
-            "Tuner Monster",
-            "Union Effect Monster",
-            "Fusion Monster",
-            "Link Monster",
-            "Pendulum Effect Fusion Monster",
-            "Synchro Monster",
-            "Synchro Pendulum Effect Monster",
-            "Synchro Tuner Monster",
-            "XYZ Monster",
-            "XYZ Pendulum Effect Monster",
-            "Spell Card",
-            "Trap Card")
-
-            val cardTypeSpinner : Spinner = findViewById(R.id.cardTypeSpinner)
-
-            var cardTypeSelected : String
-
-            cardTypeSpinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardTypeOptions)
-
-            cardTypeSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    cardTypeSelected = cardTypeSpinner[p2].toString()
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-                }
-
-            }
 
 */
         }

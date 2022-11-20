@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="450dp"
+    android:layout_width="360dp"
+    android:layout_height="600dp"
     android:layout_gravity="center">
 
     <ImageButton
@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="93dp"
         android:text="Card Type" />
 
     <TextView
@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="156dp"
         android:text="Monster Type" />
 
     <TextView
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="182dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="230dp"
         android:text="Attribute" />
 
     <TextView
@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="229dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="308dp"
         android:text="Attack" />
 
     <TextView
@@ -64,8 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="278dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="372dp"
         android:text="Defense" />
 
     <TextView
@@ -74,8 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="447dp"
         android:text="Level/Rank" />
 
     <Spinner
@@ -84,8 +84,8 @@
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="63dp" />
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="79dp" />
 
     <Spinner
         android:id="@+id/monsTypeSpinner"
@@ -93,53 +93,63 @@
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="112dp" />
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="144dp" />
 
     <Spinner
         android:id="@+id/AttrSpinner"
-        android:layout_width="222dp"
-        android:layout_height="48dp"
+        android:layout_width="219dp"
+        android:layout_height="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="161dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="25dp" />
 
     <EditText
         android:id="@+id/atkEditText"
-        android:layout_width="141dp"
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="211dp"
-        android:layout_marginEnd="58dp"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="291dp"
+        android:layout_marginEnd="83dp"
         android:inputType="number"
+        android:ems="10"
         android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/defEditText"
-        android:layout_width="140dp"
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="262dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="359dp"
+        android:layout_marginEnd="85dp"
         android:inputType="number"
+        android:ems="10"
         android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/lvlEditText"
-        android:layout_width="138dp"
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="315dp"
-        android:layout_marginEnd="59dp"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="426dp"
+        android:layout_marginEnd="86dp"
         android:inputType="number"
+        android:ems="10"
         android:minHeight="48dp" />
 
     <Button
@@ -148,7 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="46dp"
         android:text="Confirm Options"
         tools:ignore="HardcodedText" />
 

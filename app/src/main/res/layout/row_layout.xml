@@ -7,13 +7,16 @@
 
     <TextView
         android:id="@+id/cardName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_width="227dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="24dp"
         android:text="Card Name"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="17sp"
         app:autoSizeTextType="uniform"
         app:emojiCompatEnabled="false"
         app:layout_constraintEnd_toStartOf="@+id/CardImageButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cardCheckBox"
         app:layout_constraintTop_toTopOf="parent"
         app:textAllCaps="false" />

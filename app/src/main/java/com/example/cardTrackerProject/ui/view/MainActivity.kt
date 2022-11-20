@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         cardViewModel.onCreate()
 
 
-        val collectionsSpin = arrayOf("Every Card", "My Collection","For Sale Collection", "Competitive Collection")
+        val collectionsSpin = arrayOf("Every Card", "My Collection", "For Sale Collection", "Competitive Collection")
 
         val collectionSpinner : Spinner = binding.collectionsSpinner
 

@@ -1,12 +1,12 @@
-package com.example.cardTrackerProject.components
+package com.example.cardTrackerProject.ui.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.cardTrackerProject.R
-import kotlinx.android.synthetic.main.search_options_popup.*
 
 class SearchOptionsDialog : DialogFragment(){
 
@@ -19,9 +19,19 @@ class SearchOptionsDialog : DialogFragment(){
 
 
 
-        return inflater.inflate(R.layout.search_options_popup, container, false)
+        val view = inflater.inflate(R.layout.search_options_popup, container, false)
+
+        val closeDialogBtn : ImageButton = view.findViewById(R.id.closeImageButton)
+
+        closeDialogBtn.setOnClickListener(){
+            dismiss()
+        }
+
+
+        return view
 
     }
+
 
 
 

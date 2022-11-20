@@ -1,27 +1,22 @@
 package com.example.cardTrackerProject.ui.view
 
-import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-
 import androidx.activity.viewModels
-import androidx.core.view.get
-
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cardTrackerProject.R
-import com.example.cardTrackerProject.components.SearchOptionsDialog
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
+import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.android.synthetic.main.search_options_popup.*
 import kotlinx.coroutines.*
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -67,10 +62,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
         binding.searchButton.setOnClickListener() {
+
             val dialog = SearchOptionsDialog()
 
             dialog.show(supportFragmentManager, "searchOptionDialog")
+
+
 
 
             //Averiguar como hacer para poder inicializar los valores de los spinner en el search dialog
@@ -78,9 +78,7 @@ class MainActivity : AppCompatActivity() {
 
 /*
 
-                    closeButton.setOnClickListener() {
-            dismiss()
-        }
+
                     val cardTypeOptions = arrayOf(
             "Effect Monster",
             "Flip Effect Monster",

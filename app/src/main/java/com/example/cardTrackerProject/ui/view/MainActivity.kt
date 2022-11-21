@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels()
 
+    var cardTypeChoose : String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,18 +61,23 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
-
+        val dialog = SearchOptionsDialog()
 
 
         binding.searchButton.setOnClickListener() {
 
-            val dialog = SearchOptionsDialog()
+
 
             dialog.show(supportFragmentManager, "searchOptionDialog")
 
+
         }
+
+
+        SearchOptionsDialog().cardTypeSelected.observe(this, Observer {
+            cardTypeChoose = it
+        })
+
 
         binding.addCardsButton.setOnClickListener() {
 
@@ -123,6 +130,8 @@ class MainActivity : AppCompatActivity() {
                         delay(250)
                         if (newText.length > 2 && spellSelected) {
                             //cambiar el && y el searchType por lo que devuelva el Dialog
+                            //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
+                            //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
                             cardViewModel.cardSearchWithType(newText, "Spell Card")
                         } else if (newText.length > 2) {
                             cardViewModel.cardSearch(newText)

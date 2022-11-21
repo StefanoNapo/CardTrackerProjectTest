@@ -7,10 +7,21 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.cardTrackerProject.R
 import com.example.cardTrackerProject.ui.view.MainActivity
+import kotlinx.coroutines.launch
 
 class SearchOptionsDialog : DialogFragment(){
+
+    var cardTypeSelected = MutableLiveData<String>()
+
+    var monsterTypeSelected : String = ""
+
+    var attrSelected : String = ""
+
+    var cardTypeChoose : String = ""
 
 
     override fun onCreateView(
@@ -62,13 +73,14 @@ class SearchOptionsDialog : DialogFragment(){
 
         val cardTypeSpinner : Spinner = view.findViewById(R.id.cardTypeSpinner)
 
-        var cardTypeSelected : String
+
 
         cardTypeSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,cardTypeOptions) }
 
         cardTypeSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                cardTypeSelected = cardTypeSpinner.selectedItem.toString()
+                cardTypeChoose = cardTypeSpinner.selectedItem.toString()
+
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -76,6 +88,7 @@ class SearchOptionsDialog : DialogFragment(){
             }
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                cardTypeChoose = cardTypeSpinner.selectedItem.toString()
 
             }
 
@@ -110,7 +123,7 @@ class SearchOptionsDialog : DialogFragment(){
 
         val monsterTypeSpinner : Spinner = view.findViewById(R.id.monsTypeSpinner)
 
-        var monsterTypeSelected : String
+
 
         monsterTypeSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,monsterTypeOptions) }
 
@@ -140,7 +153,7 @@ class SearchOptionsDialog : DialogFragment(){
 
         val attrSpinner : Spinner = view.findViewById(R.id.attrSpinner)
 
-        var attrSelected : String
+
 
         attrSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,attrOptions) }
 
@@ -159,9 +172,16 @@ class SearchOptionsDialog : DialogFragment(){
 
         }
 
+
+
         val confirmOptionsBtn : Button = view.findViewById(R.id.confirmOptionsBtn)
 
         confirmOptionsBtn.setOnClickListener(){
+
+            cardTypeSelected.postValue(cardTypeChoose)
+
+            dismiss()
+
 
             //Conseguir forma de enviar esto a main activity para saber cual carta buscar
             //cardTypeSelected

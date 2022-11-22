@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 collectionSelected = collectionSpinner.selectedItem.toString()
+                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_LONG).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -72,13 +73,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
-        SearchOptionsDialog().cardTypeSelected.observe(this, Observer {
-            cardTypeChoose = it
-
-            binding.textView.text = it
-        })
 
 
         binding.addCardsButton.setOnClickListener() {

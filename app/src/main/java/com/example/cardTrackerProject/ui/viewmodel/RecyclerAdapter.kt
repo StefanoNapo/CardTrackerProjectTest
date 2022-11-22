@@ -48,7 +48,7 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
         holder.bind(currentCard)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Card>(){
+    class DiffCallback : DiffUtil.ItemCallback<Card>() {
         override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean =
             oldItem.id == newItem.id
 

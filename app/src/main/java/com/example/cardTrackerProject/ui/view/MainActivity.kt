@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private val cardViewModel: CardViewModel by viewModels()
 
-    var cardTypeChoose : String = ""
+    var cardTypeChoose: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,13 +37,15 @@ class MainActivity : AppCompatActivity() {
         cardViewModel.onCreate()
 
 
-        val collectionsSpin = arrayOf("Every Card", "My Collection", "For Sale Collection", "Competitive Collection")
+        val collectionsSpin =
+            arrayOf("Every Card", "My Collection", "For Sale Collection", "Competitive Collection")
 
-        val collectionSpinner : Spinner = binding.collectionsSpinner
+        val collectionSpinner: Spinner = binding.collectionsSpinner
 
-        var collectionSelected : String
+        var collectionSelected: String
 
-        collectionSpinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, collectionsSpin)
+        collectionSpinner.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, collectionsSpin)
 
         collectionSpinner.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
@@ -66,21 +68,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.searchButton.setOnClickListener() {
 
-
-
             dialog.show(supportFragmentManager, "searchOptionDialog")
-
 
         }
 
 
+
         SearchOptionsDialog().cardTypeSelected.observe(this, Observer {
             cardTypeChoose = it
+
+            binding.textView.text = it
         })
 
 
         binding.addCardsButton.setOnClickListener() {
-
+            Toast.makeText(baseContext, "Cards added to collection", Toast.LENGTH_LONG).show()
         }
         val recyclerAdapter = RecyclerAdapter()
 
@@ -128,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 searchJob = coroutineScope.launch {
                     newText?.let {
                         delay(250)
-                        if (newText.length > 2 && spellSelected) {
+                        if (newText.length > 2 && cardTypeChoose.isNotBlank()) {
                             //cambiar el && y el searchType por lo que devuelva el Dialog
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"

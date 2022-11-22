@@ -13,15 +13,15 @@ import com.example.cardTrackerProject.R
 import com.example.cardTrackerProject.ui.view.MainActivity
 import kotlinx.coroutines.launch
 
-class SearchOptionsDialog : DialogFragment(){
+class SearchOptionsDialog : DialogFragment() {
 
     var cardTypeSelected = MutableLiveData<String>()
 
-    var monsterTypeSelected : String = ""
+    var monsterTypeSelected: String = ""
 
-    var attrSelected : String = ""
+    var attrSelected: String = ""
 
-    var cardTypeChoose : String = ""
+    var cardTypeChoose: String = ""
 
 
     override fun onCreateView(
@@ -31,16 +31,16 @@ class SearchOptionsDialog : DialogFragment(){
     ): View? {
 
 
-
         val view = inflater.inflate(R.layout.search_options_popup, container, false)
 
-        val closeDialogBtn : ImageButton = view.findViewById(R.id.closeImageButton)
+        val closeDialogBtn: ImageButton = view.findViewById(R.id.closeImageButton)
 
-        closeDialogBtn.setOnClickListener(){
+        closeDialogBtn.setOnClickListener() {
             dismiss()
         }
 
         val cardTypeOptions = arrayOf(
+            "",
             "Effect Monster",
             "Flip Effect Monster",
             "Flip Tuner Effect Monster",
@@ -69,32 +69,42 @@ class SearchOptionsDialog : DialogFragment(){
             "XYZ Monster",
             "XYZ Pendulum Effect Monster",
             "Spell Card",
-            "Trap Card")
+            "Trap Card"
+        )
 
-        val cardTypeSpinner : Spinner = view.findViewById(R.id.cardTypeSpinner)
+        val cardTypeSpinner: Spinner = view.findViewById(R.id.cardTypeSpinner)
 
 
 
-        cardTypeSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,cardTypeOptions) }
-
-        cardTypeSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                cardTypeChoose = cardTypeSpinner.selectedItem.toString()
-
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                cardTypeChoose = cardTypeSpinner.selectedItem.toString()
-
-            }
-
+        cardTypeSpinner.adapter = context?.let {
+            ArrayAdapter<String>(
+                it,
+                android.R.layout.simple_list_item_1,
+                cardTypeOptions
+            )
         }
 
+        cardTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    cardTypeChoose = cardTypeOptions[p2]
+
+
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+
+                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    cardTypeChoose = cardTypeOptions[p2]
+
+                }
+
+            }
+
         val monsterTypeOptions = arrayOf(
+            "",
             "Aqua",
             "Beast",
             "Beast-Warrior",
@@ -119,70 +129,88 @@ class SearchOptionsDialog : DialogFragment(){
             "Warrior",
             "Winged Beast",
             "Wyrm",
-            "Zombie")
+            "Zombie"
+        )
 
-        val monsterTypeSpinner : Spinner = view.findViewById(R.id.monsTypeSpinner)
+        val monsterTypeSpinner: Spinner = view.findViewById(R.id.monsTypeSpinner)
 
 
 
-        monsterTypeSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,monsterTypeOptions) }
-
-        monsterTypeSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                monsterTypeSelected = monsterTypeSpinner.selectedItem.toString()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-            }
-
+        monsterTypeSpinner.adapter = context?.let {
+            ArrayAdapter<String>(
+                it,
+                android.R.layout.simple_list_item_1,
+                monsterTypeOptions
+            )
         }
 
+        monsterTypeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+
+                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    monsterTypeSelected = monsterTypeSpinner.selectedItem.toString()
+                }
+
+            }
+
         val attrOptions = arrayOf(
+            "",
             "DARK",
             "EARTH",
             "FIRE",
             "LIGHT",
             "WATER",
             "WIND",
-            "DIVINE")
+            "DIVINE"
+        )
 
-        val attrSpinner : Spinner = view.findViewById(R.id.attrSpinner)
+        val attrSpinner: Spinner = view.findViewById(R.id.attrSpinner)
 
 
 
-        attrSpinner.adapter = context?.let { ArrayAdapter<String>(it,android.R.layout.simple_list_item_1,attrOptions) }
-
-        attrSpinner.onItemSelectedListener = object :AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                attrSelected = attrSpinner.selectedItem.toString()
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
-            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-            }
-
+        attrSpinner.adapter = context?.let {
+            ArrayAdapter<String>(
+                it,
+                android.R.layout.simple_list_item_1,
+                attrOptions
+            )
         }
 
+        attrSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    attrSelected = attrSpinner.selectedItem.toString()
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+
+                override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                }
+
+            }
 
 
-        val confirmOptionsBtn : Button = view.findViewById(R.id.confirmOptionsBtn)
+        val confirmOptionsBtn: Button = view.findViewById(R.id.confirmOptionsBtn)
 
-        confirmOptionsBtn.setOnClickListener(){
+        confirmOptionsBtn.setOnClickListener() {
 
             cardTypeSelected.postValue(cardTypeChoose)
 
+            Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
+
+            Toast.makeText(context, "Card Type $cardTypeChoose", Toast.LENGTH_LONG).show()
+
             dismiss()
-
-
             //Conseguir forma de enviar esto a main activity para saber cual carta buscar
             //cardTypeSelected
             //monsterTypeSelected
@@ -192,8 +220,6 @@ class SearchOptionsDialog : DialogFragment(){
         return view
 
     }
-
-
 
 
 }

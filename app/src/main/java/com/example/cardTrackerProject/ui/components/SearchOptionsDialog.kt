@@ -11,9 +11,9 @@ import com.example.cardTrackerProject.ui.DialogCommunicator
 
 class SearchOptionsDialog : DialogFragment() {
 
-    var monsterTypeSelected: String = ""
+    var monsterTypeChoose: String = ""
 
-    var attrSelected: String = ""
+    var attrChoose: String = ""
 
     var cardTypeChoose: String = ""
 
@@ -141,7 +141,7 @@ class SearchOptionsDialog : DialogFragment() {
         monsterTypeSpinner.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+                    monsterTypeChoose = monsterTypeOptions[p2]
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -149,7 +149,7 @@ class SearchOptionsDialog : DialogFragment() {
                 }
 
                 override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    monsterTypeSelected = monsterTypeSpinner.selectedItem.toString()
+                    monsterTypeChoose = monsterTypeOptions[p2]
                 }
 
             }
@@ -180,7 +180,7 @@ class SearchOptionsDialog : DialogFragment() {
         attrSpinner.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    attrSelected = attrSpinner.selectedItem.toString()
+                    attrChoose = attrOptions[p2]
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -188,7 +188,7 @@ class SearchOptionsDialog : DialogFragment() {
                 }
 
                 override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+                    attrChoose = attrOptions[p2]
                 }
 
             }
@@ -201,7 +201,9 @@ class SearchOptionsDialog : DialogFragment() {
 
             communicator.getCardTypeSelected(cardTypeChoose)
 
+            communicator.getMonsterTypeSelected(monsterTypeChoose)
 
+            communicator.getAttrSelected(attrChoose)
 
             Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
 

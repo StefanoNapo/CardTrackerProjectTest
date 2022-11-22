@@ -3,6 +3,7 @@ package com.example.cardTrackerProject.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cardTrackerProject.domain.GetCardSearchTypeAttrMonTypeUseCase
 import com.example.cardTrackerProject.domain.GetCardSearchTypeUseCase
 import com.example.cardTrackerProject.domain.GetCardSearchUseCase
 import com.example.cardTrackerProject.domain.GetCardsUseCase
@@ -16,6 +17,7 @@ class CardViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase,
     private val getCardSearchUseCase: GetCardSearchUseCase,
     private val getCardSearchTypeUseCase: GetCardSearchTypeUseCase,
+    private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase
 ) : ViewModel() {
 
     val cardModel = MutableLiveData<Card>()
@@ -68,6 +70,17 @@ class CardViewModel @Inject constructor(
         }
     }
 
+   fun cardSearchWithTypeAttrMonType(searchQuery: String, searchType: String, searchAttr: String, monsType: String){
+       viewModelScope.launch {
+           isLoading.postValue(true)
 
+           val cardSearched = getCardSearchTypeAttrMonTypeUseCase.invoke(searchQuery, searchType, searchAttr, monsType)
+
+           cardSearch.postValue(cardSearched)
+
+
+           isLoading.postValue(false)
+       }
+   }
 
 }

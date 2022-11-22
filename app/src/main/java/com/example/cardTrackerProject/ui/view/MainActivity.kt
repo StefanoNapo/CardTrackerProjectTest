@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     var cardTypeChoose: String = ""
 
+    var monsterTypeChoose: String = ""
+
+    var attrChoose: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,12 +128,16 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                 searchJob = coroutineScope.launch {
                     newText?.let {
                         delay(250)
-                        if (newText.length > 2 && cardTypeChoose.isNotBlank()) {
-                            //cambiar el && y el searchType por lo que devuelva el Dialog
+                        if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
+
+                            cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
+
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)
-                        } else if (newText.length > 2) {
+                        }
+                        else if (newText.length > 2) {
                             cardViewModel.cardSearch(newText)
                         }
                     }
@@ -152,6 +159,14 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     override fun getCardTypeSelected(cardTypeSelec: String) {
         cardTypeChoose = cardTypeSelec
+    }
+
+    override fun getMonsterTypeSelected(monsTypeSelec: String) {
+        monsterTypeChoose = monsTypeSelec
+    }
+
+    override fun getAttrSelected(attrSelec: String) {
+        attrChoose = attrSelec
     }
 
 

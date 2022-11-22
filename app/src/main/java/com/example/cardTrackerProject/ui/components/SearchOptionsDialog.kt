@@ -5,17 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.cardTrackerProject.R
-import com.example.cardTrackerProject.ui.view.MainActivity
-import kotlinx.coroutines.launch
+import com.example.cardTrackerProject.ui.DialogCommunicator
 
 class SearchOptionsDialog : DialogFragment() {
-
-    var cardTypeSelected = MutableLiveData<String>()
 
     var monsterTypeSelected: String = ""
 
@@ -199,16 +193,17 @@ class SearchOptionsDialog : DialogFragment() {
 
             }
 
+        val communicator:DialogCommunicator = activity as DialogCommunicator
 
         val confirmOptionsBtn: Button = view.findViewById(R.id.confirmOptionsBtn)
 
         confirmOptionsBtn.setOnClickListener() {
 
-            cardTypeSelected.postValue(cardTypeChoose)
+            communicator.getCardTypeSelected(cardTypeChoose)
+
+
 
             Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
-
-            Toast.makeText(context, "Card Type $cardTypeChoose", Toast.LENGTH_LONG).show()
 
             dismiss()
             //Conseguir forma de enviar esto a main activity para saber cual carta buscar
@@ -216,6 +211,7 @@ class SearchOptionsDialog : DialogFragment() {
             //monsterTypeSelected
             //attrSelected
         }
+
 
         return view
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cardTrackerProject.R
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
+import com.example.cardTrackerProject.ui.DialogCommunicator
 import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
@@ -19,7 +20,7 @@ import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -128,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                             //cambiar el && y el searchType por lo que devuelva el Dialog
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
-                            cardViewModel.cardSearchWithType(newText, "Spell Card")
+                            cardViewModel.cardSearchWithType(newText, cardTypeChoose)
                         } else if (newText.length > 2) {
                             cardViewModel.cardSearch(newText)
                         }
@@ -147,6 +148,10 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    override fun getCardTypeSelected(cardTypeSelec: String) {
+        cardTypeChoose = cardTypeSelec
     }
 
 

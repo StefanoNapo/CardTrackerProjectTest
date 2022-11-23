@@ -100,14 +100,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
         }
 
 
-        //Cambiar booleans por lo que devuelva el onClickListener del Dialog
-        var spellSelected: Boolean = false
-        var effMonSelected: Boolean = false
-        var norMonSelected: Boolean = false
-        var trapSelected: Boolean = false
-
-
-
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -135,12 +127,17 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithTypeAttr(newText,cardTypeChoose,attrChoose)
-                        }
-                        else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)
-                        }
-                        else if (newText.length > 2) {
+                        }else if (newText.length > 2 && monsterTypeChoose.isNotBlank()) {
+
+                            cardViewModel.cardSearchWithMonType(newText, monsterTypeChoose)
+                        }else if (newText.length > 2 && attrChoose.isNotBlank()) {
+
+                            cardViewModel.cardSearchWithAttr(newText, attrChoose)
+                        }else if (newText.length > 2) {
+
                             cardViewModel.cardSearch(newText)
                         }
                     }

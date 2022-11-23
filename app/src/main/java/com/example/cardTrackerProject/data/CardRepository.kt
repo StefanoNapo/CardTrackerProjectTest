@@ -31,11 +31,20 @@ class CardRepository @Inject constructor(private val api : CardService, private 
     suspend fun searchCardsNameAndText (searchQuery : String): List<Card>{
         val response = cardDao.searchCardsNameAndText(searchQuery)
         return response.map { it.toDomain() }
-
     }
 
     suspend fun searchCardsNameWithType (searchQuery : String, searchType: String): List<Card> {
         val response = cardDao.searchCardsWithType(searchQuery, searchType)
+        return response.map { it.toDomain() }
+    }
+
+    suspend fun searchCardsNameWithMonType (searchQuery : String, monsType: String): List<Card> {
+        val response = cardDao.searchCardsWithMonType(searchQuery, monsType)
+        return response.map { it.toDomain() }
+    }
+
+    suspend fun searchCardsNameWithAttr (searchQuery: String, searchAttr: String): List<Card> {
+        val response = cardDao.searchCardsWithAttr(searchQuery, searchAttr)
         return response.map { it.toDomain() }
     }
 

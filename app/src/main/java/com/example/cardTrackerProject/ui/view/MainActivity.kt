@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 collectionSelected = collectionSpinner.selectedItem.toString()
-                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -127,6 +127,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithTypeAttr(newText,cardTypeChoose,attrChoose)
+                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
+
+                            cardViewModel.cardSearchWithMonTypeAttr(newText,monsterTypeChoose,attrChoose)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)

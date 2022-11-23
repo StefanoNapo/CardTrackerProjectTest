@@ -107,11 +107,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
         var trapSelected: Boolean = false
 
 
-        binding.checkBox.setOnClickListener() {
-            spellSelected = binding.checkBox.isChecked
-
-        }
-
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

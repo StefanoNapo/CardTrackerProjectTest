@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mvvmexample</string>
+    <string name="app_name">Yu-Gi-Oh! Collection Tracker</string>
     <string name="searcher" />
     <string name="search">Search</string>
 </resources>

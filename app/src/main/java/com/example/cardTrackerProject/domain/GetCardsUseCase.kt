@@ -1,5 +1,6 @@
 package com.example.cardTrackerProject.domain
 
+import android.widget.Toast
 import com.example.cardTrackerProject.data.CardRepository
 import com.example.cardTrackerProject.data.database.entities.toDatabase
 import com.example.cardTrackerProject.domain.model.Card
@@ -17,6 +18,7 @@ class GetCardsUseCase @Inject constructor(private val repository: CardRepository
         }else{
             repository.getAllCardsFromDatabase()
         }
+
     }
 
 }

@@ -8,15 +8,9 @@ class GetCardSearchTypeMonTypeUseCase @Inject constructor(private val repository
 
     suspend operator fun invoke(searchQuery: String, searchType: String, monsType: String): List<Card> {
 
-        val cardsSearched = repository.getAllCardsFromDatabase()
 
-        val response = repository.searchCardsNameWithTypeMonType(searchQuery, searchType, monsType)
+        return repository.searchCardsNameWithTypeMonType(searchQuery, searchType, monsType)
 
-        return if (cardsSearched.isNotEmpty()) {
-            response
-        } else {
-            return emptyList()
-        }
 
     }
 }

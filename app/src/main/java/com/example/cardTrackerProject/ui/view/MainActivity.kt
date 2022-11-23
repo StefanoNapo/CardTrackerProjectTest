@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {
                     newText?.let {
-                        delay(250)
+
                         if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
 
                             cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)

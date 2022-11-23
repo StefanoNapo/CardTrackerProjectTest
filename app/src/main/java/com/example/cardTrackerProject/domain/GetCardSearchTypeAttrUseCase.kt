@@ -8,15 +8,8 @@ class GetCardSearchTypeAttrUseCase @Inject constructor(private val repository: C
 
     suspend operator fun invoke(searchQuery: String, searchType: String, searchAttr: String): List<Card> {
 
-        val cardsSearched = repository.getAllCardsFromDatabase()
 
-        val response = repository.searchCardsNameWithTypeAttr(searchQuery, searchType, searchAttr)
-
-        return if (cardsSearched.isNotEmpty()) {
-            response
-        } else {
-            return emptyList()
-        }
+        return repository.searchCardsNameWithTypeAttr(searchQuery, searchType, searchAttr)
 
     }
 }

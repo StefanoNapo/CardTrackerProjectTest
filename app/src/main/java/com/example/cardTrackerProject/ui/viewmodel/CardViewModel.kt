@@ -3,10 +3,7 @@ package com.example.cardTrackerProject.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cardTrackerProject.domain.GetCardSearchTypeAttrMonTypeUseCase
-import com.example.cardTrackerProject.domain.GetCardSearchTypeUseCase
-import com.example.cardTrackerProject.domain.GetCardSearchUseCase
-import com.example.cardTrackerProject.domain.GetCardsUseCase
+import com.example.cardTrackerProject.domain.*
 import com.example.cardTrackerProject.domain.model.Card
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +14,8 @@ class CardViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase,
     private val getCardSearchUseCase: GetCardSearchUseCase,
     private val getCardSearchTypeUseCase: GetCardSearchTypeUseCase,
-    private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase
+    private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase,
+    private val getCardSearchTypeMonTypeUseCase: GetCardSearchTypeMonTypeUseCase
 ) : ViewModel() {
 
     val cardModel = MutableLiveData<Card>()
@@ -62,6 +60,19 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(true)
 
             val cardSearched = getCardSearchTypeUseCase.invoke(searchQuery, searchType)
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun cardSearchWithTypeMonType(searchQuery: String, searchType: String, monsType: String){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchTypeMonTypeUseCase.invoke(searchQuery, searchType, monsType)
 
             cardSearch.postValue(cardSearched)
 

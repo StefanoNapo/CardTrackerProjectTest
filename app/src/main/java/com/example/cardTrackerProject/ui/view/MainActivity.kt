@@ -129,7 +129,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
 
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank()){
+
+                            cardViewModel.cardSearchWithTypeMonType(newText,cardTypeChoose,monsterTypeChoose)
+                        }
+                        else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)
                         }
                         else if (newText.length > 2) {

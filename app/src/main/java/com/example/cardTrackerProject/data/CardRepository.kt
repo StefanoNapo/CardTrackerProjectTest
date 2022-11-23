@@ -6,7 +6,6 @@ import com.example.cardTrackerProject.data.model.CardModel
 import com.example.cardTrackerProject.data.network.CardService
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.domain.model.toDomain
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CardRepository @Inject constructor(private val api : CardService, private val cardDao: CardDao) {
@@ -42,6 +41,11 @@ class CardRepository @Inject constructor(private val api : CardService, private 
 
     suspend fun searchCardsNameWithTypeMonType (searchQuery: String, searchType: String, monsType: String): List<Card> {
         val response = cardDao.searchCardsWithTypeMonType(searchQuery, searchType, monsType)
+        return response.map { it.toDomain() }
+    }
+
+    suspend fun searchCardsNameWithTypeAttr (searchQuery: String, searchType: String, searchAttr: String): List<Card> {
+        val response = cardDao.searchCardsWithTypeAttr(searchQuery, searchType, searchAttr)
         return response.map { it.toDomain() }
     }
 

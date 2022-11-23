@@ -27,6 +27,9 @@ interface CardDao {
     @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTypeMonType(searchQuery: String, searchType: String, monsType: String):List<CardEntity>
 
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    suspend fun searchCardsWithTypeAttr(searchQuery: String, searchType: String, searchAttr: String):List<CardEntity>
+
     @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTypeAttrMonType(searchQuery: String, searchType: String, searchAttr: String, monsType: String): List<CardEntity>
 

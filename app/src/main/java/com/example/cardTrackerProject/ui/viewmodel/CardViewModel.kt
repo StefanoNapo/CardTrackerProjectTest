@@ -14,8 +14,10 @@ class CardViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase,
     private val getCardSearchUseCase: GetCardSearchUseCase,
     private val getCardSearchTypeUseCase: GetCardSearchTypeUseCase,
-    private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase,
-    private val getCardSearchTypeMonTypeUseCase: GetCardSearchTypeMonTypeUseCase
+    private val getCardSearchTypeMonTypeUseCase: GetCardSearchTypeMonTypeUseCase,
+    private val getCardSearchTypeAttrUseCase: GetCardSearchTypeAttrUseCase,
+    private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase
+
 ) : ViewModel() {
 
     val cardModel = MutableLiveData<Card>()
@@ -73,6 +75,19 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(true)
 
             val cardSearched = getCardSearchTypeMonTypeUseCase.invoke(searchQuery, searchType, monsType)
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun cardSearchWithTypeAttr(searchQuery: String, searchType: String, searchAttr: String){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchTypeAttrUseCase.invoke(searchQuery, searchType, searchAttr)
 
             cardSearch.postValue(cardSearched)
 

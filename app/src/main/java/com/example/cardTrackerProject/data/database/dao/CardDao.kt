@@ -42,5 +42,8 @@ interface CardDao {
     @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTypeAttrMonType(searchQuery: String, searchType: String, searchAttr: String, monsType: String): List<CardEntity>
 
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsCollection(cards: List<CardEntity>)
+
 
 }

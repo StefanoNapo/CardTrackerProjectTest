@@ -24,8 +24,6 @@ class CardViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    val cardModel = MutableLiveData<Card>()
-
     val isLoading = MutableLiveData<Boolean>()
 
     val cardSearch = MutableLiveData<List<Card>>()
@@ -33,12 +31,10 @@ class CardViewModel @Inject constructor(
     fun onCreate() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            val result = getCardsUseCase()
+            getCardsUseCase()
 
-            if (!result.isNullOrEmpty()) {
-                cardModel.postValue(result[0])
-                isLoading.postValue(false)
-            }
+            isLoading.postValue(false)
+
         }
 
     }

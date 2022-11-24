@@ -8,14 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cardTrackerProject.R
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
 import com.example.cardTrackerProject.ui.DialogCommunicator
 import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.search_options_popup.*
 import kotlinx.coroutines.*
 
 
@@ -148,6 +146,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if (newText.length > 2 && atkChoose != null) {
 
                             cardViewModel.cardSearchWithAtk(newText, atkChoose!!)
+                        }else if (newText.length > 2 && defChoose != null) {
+
+                            cardViewModel.cardSearchWithDef(newText, defChoose!!)
                         }else if (newText.length > 2) {
 
                             cardViewModel.cardSearch(newText)
@@ -181,15 +182,15 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
         attrChoose = attrSelec
     }
 
-    override fun getAtkSelected(atkSelec: Int) {
+    override fun getAtkSelected(atkSelec: Int?) {
         atkChoose = atkSelec
     }
 
-    override fun getDefSelected(defSelec: Int) {
+    override fun getDefSelected(defSelec: Int?) {
         defChoose = defSelec
     }
 
-    override fun getLvlSelected(lvlSelec: Int) {
+    override fun getLvlSelected(lvlSelec: Int?) {
         lvlChoose = lvlSelec
     }
 

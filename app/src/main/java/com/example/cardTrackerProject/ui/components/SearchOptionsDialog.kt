@@ -217,11 +217,14 @@ class SearchOptionsDialog : DialogFragment() {
 
             val lvlSelec = lvlEditText.text.toString()
 
-            if (atkSelec != "") atkChoose = atkSelec.toInt()
+            atkChoose = if (atkSelec != "") atkSelec.toInt()
+            else null
 
-            if (defSelec != "") defChoose = defSelec.toInt()
+            defChoose = if (defSelec != "") defSelec.toInt()
+            else null
 
-            if (lvlSelec != "") lvlChoose = lvlSelec.toInt()
+            lvlChoose = if (lvlSelec != "") lvlSelec.toInt()
+            else null
 
             communicator.getCardTypeSelected(cardTypeChoose)
 
@@ -229,11 +232,12 @@ class SearchOptionsDialog : DialogFragment() {
 
             communicator.getAttrSelected(attrChoose)
 
-            atkChoose?.let { it1 -> communicator.getAtkSelected(it1) }
+            communicator.getAtkSelected(atkChoose)
 
-            defChoose?.let { it1 -> communicator.getDefSelected(it1) }
+            communicator.getDefSelected(defChoose)
 
-            lvlChoose?.let { it1 -> communicator.getLvlSelected(it1) }
+            communicator.getLvlSelected(lvlChoose)
+
 
             Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
 

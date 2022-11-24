@@ -7,10 +7,10 @@ interface DialogCommunicator {
 
     fun getAttrSelected(attrSelec:String)
 
-    fun getAtkSelected(atkSelec:Int)
+    fun getAtkSelected(atkSelec: Int?)
 
-    fun getDefSelected(defSelec:Int)
+    fun getDefSelected(defSelec: Int?)
 
-    fun getLvlSelected(lvlSelec:Int)
+    fun getLvlSelected(lvlSelec: Int?)
 
 }

@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     var attrChoose: String = ""
 
+    var atkChoose: Int? = null
+
+    var defChoose: Int? = null
+
+    var lvlChoose: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -139,6 +145,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if (newText.length > 2 && attrChoose.isNotBlank()) {
 
                             cardViewModel.cardSearchWithAttr(newText, attrChoose)
+                        }else if (newText.length > 2 && atkChoose != null) {
+
+                            cardViewModel.cardSearchWithAtk(newText, atkChoose!!)
                         }else if (newText.length > 2) {
 
                             cardViewModel.cardSearch(newText)
@@ -170,6 +179,18 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     override fun getAttrSelected(attrSelec: String) {
         attrChoose = attrSelec
+    }
+
+    override fun getAtkSelected(atkSelec: Int) {
+        atkChoose = atkSelec
+    }
+
+    override fun getDefSelected(defSelec: Int) {
+        defChoose = defSelec
+    }
+
+    override fun getLvlSelected(lvlSelec: Int) {
+        lvlChoose = lvlSelec
     }
 
 

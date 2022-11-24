@@ -17,6 +17,12 @@ class SearchOptionsDialog : DialogFragment() {
 
     var cardTypeChoose: String = ""
 
+    var atkChoose: Int? = null
+
+    var defChoose: Int? = null
+
+    var lvlChoose: Int? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -197,13 +203,37 @@ class SearchOptionsDialog : DialogFragment() {
 
         val confirmOptionsBtn: Button = view.findViewById(R.id.confirmOptionsBtn)
 
+        val atkEditText: EditText = view.findViewById(R.id.atkEditText)
+
+        val defEditText: EditText = view.findViewById(R.id.defEditText)
+
+        val lvlEditText: EditText = view.findViewById(R.id.lvlEditText)
+
         confirmOptionsBtn.setOnClickListener() {
+
+            val atkSelec = atkEditText.text.toString()
+
+            val defSelec = defEditText.text.toString()
+
+            val lvlSelec = lvlEditText.text.toString()
+
+            if (atkSelec != "") atkChoose = atkSelec.toInt()
+
+            if (defSelec != "") defChoose = defSelec.toInt()
+
+            if (lvlSelec != "") lvlChoose = lvlSelec.toInt()
 
             communicator.getCardTypeSelected(cardTypeChoose)
 
             communicator.getMonsterTypeSelected(monsterTypeChoose)
 
             communicator.getAttrSelected(attrChoose)
+
+            atkChoose?.let { it1 -> communicator.getAtkSelected(it1) }
+
+            defChoose?.let { it1 -> communicator.getDefSelected(it1) }
+
+            lvlChoose?.let { it1 -> communicator.getLvlSelected(it1) }
 
             Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
 

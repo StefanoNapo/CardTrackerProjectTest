@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cardTrackerProject.domain.*
 import com.example.cardTrackerProject.domain.model.Card
+import com.example.cardTrackerProject.domain.model.GetCardSearchAtkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class CardViewModel @Inject constructor(
     private val getCardSearchTypeUseCase: GetCardSearchTypeUseCase,
     private val getCardSearchMonTypeUseCase: GetCardSearchMonTypeUseCase,
     private val getCardSearchAttrUseCase: GetCardSearchAttrUseCase,
+    private val getCardSearchAtkUseCase: GetCardSearchAtkUseCase,
     private val getCardSearchTypeMonTypeUseCase: GetCardSearchTypeMonTypeUseCase,
     private val getCardSearchTypeAttrUseCase: GetCardSearchTypeAttrUseCase,
     private val getCardSearchMonTypeAttrUseCase: GetCardSearchMonTypeAttrUseCase,
@@ -88,6 +90,19 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(true)
 
             val cardSearched = getCardSearchAttrUseCase.invoke(searchQuery, searchAttr)
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun cardSearchWithAtk(searchQuery: String, searchAtk: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchAtkUseCase.invoke(searchQuery, searchAtk)
 
             cardSearch.postValue(cardSearched)
 

@@ -119,12 +119,16 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                 searchJob = coroutineScope.launch {
                     newText?.let {
 
-                        if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
+                        if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && atkChoose != null && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)
+                            cardViewModel.cardSearchWithTAMTAtkDL(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, defChoose!!, lvlChoose!!)
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
 
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
+
+                            cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithTypeMonType(newText,cardTypeChoose,monsterTypeChoose)

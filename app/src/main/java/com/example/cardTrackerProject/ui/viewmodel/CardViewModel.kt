@@ -1,12 +1,11 @@
 package com.example.cardTrackerProject.ui.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cardTrackerProject.domain.*
 import com.example.cardTrackerProject.domain.model.Card
-import com.example.cardTrackerProject.domain.model.GetCardSearchAtkUseCase
+import com.example.cardTrackerProject.domain.GetCardSearchAtkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +31,7 @@ class CardViewModel @Inject constructor(
     private val getCardSearchMonTypeLvlUseCase: GetCardSearchMonTypeLvlUseCase,
     private val getCardSearchAttrAtkUseCase: GetCardSearchAttrAtkUseCase,
     private val getCardSearchAttrDefUseCase: GetCardSearchAttrDefUseCase,
+    private val getCardSearchAttrLvlUseCase: GetCardSearchAttrLvlUseCase,
     private val getCardSearchTypeAttrMonTypeUseCase: GetCardSearchTypeAttrMonTypeUseCase,
     private val getCardSearchTAMTAtkDUseCase: GetCardSearchTAMTAtkDUseCase,
     private val getCardSearchTAMTAtkDLUseCase: GetCardSearchTAMTAtkDLUseCase
@@ -284,6 +284,19 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(true)
 
             val cardSearched = getCardSearchAttrDefUseCase.invoke(searchQuery, searchAttr, searchDef)
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun cardSearchWithAttrLvl(searchQuery: String, searchAttr: String, searchLvl: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchAttrLvlUseCase.invoke(searchQuery, searchAttr, searchLvl)
 
             cardSearch.postValue(cardSearched)
 

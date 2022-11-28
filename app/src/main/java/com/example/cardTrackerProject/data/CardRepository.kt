@@ -128,6 +128,11 @@ class CardRepository @Inject constructor(private val api : CardService, private 
         return response.map { it.toDomain() }
     }
 
+    suspend fun searchCardsNameWithAtkLvl (searchQuery: String, searchLvl: Int, searchAtk: Int): List<Card> {
+        val response = cardDao.searchCardsWithAtkLvl(searchQuery, searchLvl, searchAtk)
+        return response.map { it.toDomain() }
+    }
+
     suspend fun searchCardsWithTypeAttrMonType (searchQuery: String, searchType: String, searchAttr: String, monsType: String): List<Card>{
         val response = cardDao.searchCardsWithTypeAttrMonType(searchQuery, searchType, searchAttr, monsType)
         return response.map { it.toDomain() }

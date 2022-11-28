@@ -157,6 +157,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && defChoose != null){
 
                             cardViewModel.cardSearchWithMonTypeDef(newText,monsterTypeChoose,defChoose!!)
+                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && lvlChoose != null){
+
+                            cardViewModel.cardSearchWithMonTypeLvl(newText,monsterTypeChoose,lvlChoose!!)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)

@@ -114,6 +114,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
             private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
             private var searchJob: Job? = null
 
+
+            //Card Searcher with every possible combinations calling viewModel functions with the search parameters
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {
@@ -136,6 +138,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null){
 
                             cardViewModel.cardSearchWithTypeMonTypeAtk(newText, cardTypeChoose, monsterTypeChoose, atkChoose!!)
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && defChoose != null){
+
+                            cardViewModel.cardSearchWithTypeMonTypeDef(newText, cardTypeChoose, monsterTypeChoose, defChoose!!)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithTypeMonType(newText,cardTypeChoose,monsterTypeChoose)

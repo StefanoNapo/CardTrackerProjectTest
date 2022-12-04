@@ -18,6 +18,8 @@ interface CardDao {
     @Query("DELETE FROM card_table")
     suspend fun deleteAllCards()
 
+    //Queries for the cardSearchView
+
     @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY name ASC")
     suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
 
@@ -123,6 +125,10 @@ interface CardDao {
     @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
             " ORDER BY name ASC")
     suspend fun searchCardsWithTypeDefLvl(searchQuery: String, searchType: String, searchDef: Int, searchLvl: Int): List<CardEntity>
+
+    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
+            " ORDER BY name ASC")
+    suspend fun searchCardsWithMonTypeAttrAtk(searchQuery: String, monsType: String, searchAttr: String, searchAtk: Int): List<CardEntity>
 
     @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
             " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")

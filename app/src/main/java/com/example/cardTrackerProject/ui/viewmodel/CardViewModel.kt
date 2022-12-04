@@ -40,6 +40,7 @@ class CardViewModel @Inject constructor(
     private val getCardSearchTypeMonTypeDefUseCase: GetCardSearchTypeMonTypeDefUseCase,
     private val getCardSearchTypeMonTypeLvlUseCase: GetCardSearchTypeMonTypeLvlUseCase,
     private val getCardSearchTypeAttrAtkUseCase: GetCardSearchTypeAttrAtkUseCase,
+    private val getCardSearchTypeAttrDefUseCase: GetCardSearchTypeAttrDefUseCase,
     private val getCardSearchTAMTAtkDUseCase: GetCardSearchTAMTAtkDUseCase,
     private val getCardSearchTAMTAtkDLUseCase: GetCardSearchTAMTAtkDLUseCase
 
@@ -408,6 +409,19 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(true)
 
             val cardSearched = getCardSearchTypeAttrAtkUseCase.invoke(searchQuery, searchType, searchAttr, searchAtk)
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun cardSearchWithTypeAttrDef(searchQuery: String, searchType: String, searchAttr: String, searchDef: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchTypeAttrDefUseCase.invoke(searchQuery, searchType, searchAttr, searchDef)
 
             cardSearch.postValue(cardSearched)
 

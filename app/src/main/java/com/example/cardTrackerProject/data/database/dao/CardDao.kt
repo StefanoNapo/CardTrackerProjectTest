@@ -146,6 +146,10 @@ interface CardDao {
             " ORDER BY name ASC")
     suspend fun searchCardsWithMonTypeAtkLvl(searchQuery: String, monsType: String, searchAtk: Int, searchLvl: Int): List<CardEntity>
 
+    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
+            " ORDER BY name ASC")
+    suspend fun searchCardsWithMonTypeDefLvl(searchQuery: String, monsType: String, searchDef: Int, searchLvl: Int): List<CardEntity>
+
     @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
             " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTAMTAtkD(searchQuery: String, searchType: String, searchAttr: String, monsType: String, searchAtk: Int, searchDef: Int): List<CardEntity>

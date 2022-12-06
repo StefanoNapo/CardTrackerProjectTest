@@ -148,6 +148,10 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                             && defChoose != null ){
 
                             cardViewModel.cardSearchWithTypeAttrAtkDef(newText, cardTypeChoose, attrChoose, atkChoose!!, defChoose!!)
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && lvlChoose != null ){
+
+                            cardViewModel.cardSearchWithTypeAttrAtkLvl(newText, cardTypeChoose, attrChoose, atkChoose!!, lvlChoose!!)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
 
                             cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)

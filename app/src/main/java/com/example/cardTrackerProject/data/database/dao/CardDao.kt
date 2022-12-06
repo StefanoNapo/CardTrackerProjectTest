@@ -190,6 +190,10 @@ interface CardDao {
             "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTypeAttrDefLvl(searchQuery: String, searchType: String, searchAttr: String, searchDef: Int, searchLvl: Int): List<CardEntity>
 
+    @Query("SELECT * FROM card_table WHERE (type = :searchType) AND (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl)" +
+            "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    suspend fun searchCardsWithTypeAtkDefLvl(searchQuery: String, searchType: String, searchAtk: Int, searchDef: Int, searchLvl: Int): List<CardEntity>
+
     @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (def = :searchDef) " +
             "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithMonTypeAttrAtkDef(searchQuery: String, monsType: String, searchAttr: String, searchAtk: Int, searchDef: Int): List<CardEntity>

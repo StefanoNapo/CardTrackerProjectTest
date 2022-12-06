@@ -308,6 +308,11 @@ class CardRepository @Inject constructor(private val api : CardService, private 
         return response.map { it.toDomain() }
     }
 
+    suspend fun searchCardsWithTAMTDL (searchQuery: String, searchType: String, searchAttr: String, monsType: String, searchDef: Int, searchLvl: Int): List<Card>{
+        val response = cardDao.searchCardsWithTAMTDL(searchQuery, searchType, searchAttr, monsType, searchDef, searchLvl)
+        return response.map { it.toDomain() }
+    }
+
     suspend fun searchCardsWithTAMTAtkDL (searchQuery: String, searchType: String, searchAttr: String, monsType: String, searchAtk: Int, searchDef: Int, searchLvl: Int): List<Card>{
         val response = cardDao.searchCardsWithTAMTAtkDL(searchQuery, searchType, searchAttr, monsType, searchAtk, searchDef, searchLvl)
         return response.map { it.toDomain() }

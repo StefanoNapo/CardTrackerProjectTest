@@ -133,6 +133,10 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
                             cardViewModel.cardSearchWithTAMTAtkD(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, defChoose!!)
                         }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && atkChoose != null && lvlChoose != null){
+
+                            cardViewModel.cardSearchWithTAMTAtkL(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, lvlChoose!!)
+                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
                             && atkChoose != null){
 
                             cardViewModel.cardSearchWithTypeMonTypeAttrAtk(newText, cardTypeChoose, monsterTypeChoose, attrChoose, atkChoose!!)

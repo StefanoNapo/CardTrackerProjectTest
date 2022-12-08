@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.cardTrackerProject.data.database.entities.CardEntity
+import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
 
 @Dao
 interface CardDao {
@@ -253,5 +254,13 @@ interface CardDao {
     @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
             " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
     suspend fun searchCardsWithTAMTAtkDL(searchQuery: String, searchType: String, searchAttr: String, monsType: String, searchAtk: Int, searchDef: Int, searchLvl: Int): List<CardEntity>
+
+    @Query("SELECT * FROM card_table WHERE name = :cardName")
+    suspend fun cardsToUpdateTables(cardName: String): List<CardEntity>
+
+
+    //Using function to convert like card to cardentity toDatabase function?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInCollection (cards: List<CompetitiveCollectionEntity>)
 
 }

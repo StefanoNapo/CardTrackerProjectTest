@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
 import com.example.cardTrackerProject.ui.DialogCommunicator
 import com.example.cardTrackerProject.ui.components.SearchOptionsDialog

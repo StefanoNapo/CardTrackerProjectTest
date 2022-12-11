@@ -6,7 +6,12 @@ import javax.inject.Inject
 
 class GetCardSearchAtkDefLvlUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(searchQuery: String, searchAtk: Int, searchDef: Int, searchLvl: Int): List<Card> {
+    suspend operator fun invoke(
+        searchQuery: String,
+        searchAtk: Int,
+        searchDef: Int,
+        searchLvl: Int
+    ): List<Card> {
 
 
         return repository.searchCardsWithAtkDefLvl(searchQuery, searchAtk, searchDef, searchLvl)

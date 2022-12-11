@@ -13,7 +13,7 @@ import com.example.cardTrackerProject.data.model.CardPrice
 import com.example.cardTrackerProject.data.model.CardSet
 
 @Entity(tableName = "my_collection")
-data class MyCollectionEntity (
+data class MyCollectionEntity(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
@@ -67,4 +67,4 @@ data class MyCollectionEntity (
 
     @ColumnInfo(name = "quantity")
     var quantity: Int? = null
-    )
+)

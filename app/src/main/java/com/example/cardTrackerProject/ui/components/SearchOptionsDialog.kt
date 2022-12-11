@@ -199,7 +199,7 @@ class SearchOptionsDialog : DialogFragment() {
 
             }
 
-        val communicator:DialogCommunicator = activity as DialogCommunicator
+        val communicator: DialogCommunicator = activity as DialogCommunicator
 
         val confirmOptionsBtn: Button = view.findViewById(R.id.confirmOptionsBtn)
 

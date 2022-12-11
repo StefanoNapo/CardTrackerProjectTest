@@ -13,7 +13,7 @@ import com.example.cardTrackerProject.data.model.CardPrice
 import com.example.cardTrackerProject.data.model.CardSet
 
 @Entity(tableName = "competitive_collection")
-data class CompetitiveCollectionEntity (
+data class CompetitiveCollectionEntity(
 
 
     @PrimaryKey(autoGenerate = false)

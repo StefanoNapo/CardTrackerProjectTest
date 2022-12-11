@@ -4,7 +4,7 @@ package com.example.cardTrackerProject.data.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class CardPrice (
+data class CardPrice(
     @SerializedName("cardmarket_price")
     @Expose
     var cardmarketPrice: String? = null,
@@ -24,4 +24,4 @@ data class CardPrice (
     @SerializedName("coolstuffinc_price")
     @Expose
     var coolstuffincPrice: String? = null
-    )
+)

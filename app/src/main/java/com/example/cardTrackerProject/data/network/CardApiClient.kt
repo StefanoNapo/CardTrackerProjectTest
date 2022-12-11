@@ -7,8 +7,7 @@ import retrofit2.http.GET
 interface CardApiClient {
 
     @GET("cardlist.json")
-    suspend fun getAllCards():Response <List<CardModel>>
-
+    suspend fun getAllCards(): Response<List<CardModel>>
 
 
 }

@@ -14,7 +14,6 @@ class GetCardSearchUseCase @Inject constructor(private val repository: CardRepos
         return repository.searchCardsNameAndText(searchQuery)
 
 
-
     }
 
 }

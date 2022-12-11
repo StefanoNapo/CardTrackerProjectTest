@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class CardSet (
+data class CardSet(
     @SerializedName("set_name")
     @Expose
     var setName: String? = null,
@@ -24,4 +24,4 @@ data class CardSet (
     @SerializedName("set_price")
     @Expose
     var setPrice: String? = null
-    )
+)

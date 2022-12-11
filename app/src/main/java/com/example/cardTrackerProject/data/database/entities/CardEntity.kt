@@ -12,7 +12,7 @@ import com.example.cardTrackerProject.domain.model.Card
 
 @Entity(tableName = "card_table")
 
-data class CardEntity (
+data class CardEntity(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
@@ -63,8 +63,22 @@ data class CardEntity (
 
     @ColumnInfo(name = "level")
     var level: Int? = null
-    )
+)
 
 fun Card.toDatabase() = CardEntity(
-    id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level
+    id,
+    name,
+    type,
+    desc,
+    atk,
+    race,
+    attribute,
+    archetype,
+    linkval,
+    linkmarkers,
+    cardSets,
+    cardImages,
+    cardPrices,
+    def,
+    level
 )

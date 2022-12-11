@@ -13,7 +13,7 @@ import com.example.cardTrackerProject.data.model.CardPrice
 import com.example.cardTrackerProject.data.model.CardSet
 
 @Entity(tableName = "for_sale_collection")
-data class ForSaleCollectionEntity (
+data class ForSaleCollectionEntity(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")

@@ -4,12 +4,26 @@ import com.example.cardTrackerProject.data.CardRepository
 import com.example.cardTrackerProject.domain.model.Card
 import javax.inject.Inject
 
-class GetCardSearchTAAtkDLUseCase @Inject constructor(private val repository: CardRepository){
+class GetCardSearchTAAtkDLUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(searchQuery: String, searchType: String, searchAttr: String, searchAtk: Int, searchDef: Int, searchLvl: Int): List<Card> {
+    suspend operator fun invoke(
+        searchQuery: String,
+        searchType: String,
+        searchAttr: String,
+        searchAtk: Int,
+        searchDef: Int,
+        searchLvl: Int
+    ): List<Card> {
 
 
-        return repository.searchCardsWithTAAtkDL(searchQuery, searchType, searchAttr, searchAtk, searchDef, searchLvl)
+        return repository.searchCardsWithTAAtkDL(
+            searchQuery,
+            searchType,
+            searchAttr,
+            searchAtk,
+            searchDef,
+            searchLvl
+        )
 
 
     }

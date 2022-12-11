@@ -16,7 +16,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit():Retrofit{
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://raw.githubusercontent.com/StefanoNapo/ApiTest/main/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -25,7 +25,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideCardApiClient(retrofit: Retrofit):CardApiClient{
+    fun provideCardApiClient(retrofit: Retrofit): CardApiClient {
         return retrofit.create(CardApiClient::class.java)
     }
 }

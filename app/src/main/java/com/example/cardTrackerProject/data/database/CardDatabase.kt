@@ -9,10 +9,13 @@ import com.example.cardTrackerProject.data.database.entities.CompetitiveCollecti
 import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
 
-@Database(entities = [CardEntity::class, CompetitiveCollectionEntity::class, ForSaleCollectionEntity::class, MyCollectionEntity::class], version = 1)
+@Database(
+    entities = [CardEntity::class, CompetitiveCollectionEntity::class, ForSaleCollectionEntity::class, MyCollectionEntity::class],
+    version = 1
+)
 @TypeConverters()
-abstract class CardDatabase : RoomDatabase(){
+abstract class CardDatabase : RoomDatabase() {
 
-    abstract fun getCardDao():CardDao
+    abstract fun getCardDao(): CardDao
 
 }

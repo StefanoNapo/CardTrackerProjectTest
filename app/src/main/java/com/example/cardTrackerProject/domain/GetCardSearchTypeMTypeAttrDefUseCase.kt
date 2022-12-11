@@ -6,10 +6,22 @@ import javax.inject.Inject
 
 class GetCardSearchTypeMTypeAttrDefUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(searchQuery: String, searchType: String, monsType: String, searchAttr: String, searchDef: Int): List<Card> {
+    suspend operator fun invoke(
+        searchQuery: String,
+        searchType: String,
+        monsType: String,
+        searchAttr: String,
+        searchDef: Int
+    ): List<Card> {
 
 
-        return repository.searchCardsWithTypeMonTypeAttrDef(searchQuery, searchType, monsType, searchAttr, searchDef)
+        return repository.searchCardsWithTypeMonTypeAttrDef(
+            searchQuery,
+            searchType,
+            monsType,
+            searchAttr,
+            searchDef
+        )
 
 
     }

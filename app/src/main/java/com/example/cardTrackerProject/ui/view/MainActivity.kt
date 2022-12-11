@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 collectionSelected = collectionSpinner.selectedItem.toString()
-                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -123,220 +124,518 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                     newText?.let {
 
                         if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && atkChoose != null && defChoose != null && lvlChoose != null) {
+                            && atkChoose != null && defChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTAMTAtkDL(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, defChoose!!, lvlChoose!!)
+                            cardViewModel.cardSearchWithTAMTAtkDL(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
                             //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
                             //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
 
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && atkChoose != null && defChoose != null){
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && atkChoose != null && defChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTAMTAtkD(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && atkChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTAMTAtkD(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && atkChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTAMTAtkL(newText, cardTypeChoose, attrChoose, monsterTypeChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTAMTAtkL(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && defChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTAMTDL(newText, cardTypeChoose, attrChoose, monsterTypeChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTAMTDL(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                monsterTypeChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTAAtkDL(newText, cardTypeChoose, attrChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTAAtkDL(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTMTAtkDL(newText, cardTypeChoose, monsterTypeChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTMTAtkDL(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithMTAAtkDL(newText, monsterTypeChoose, attrChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && atkChoose != null){
+                            cardViewModel.cardSearchWithMTAAtkDL(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && atkChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAttrAtk(newText, cardTypeChoose, monsterTypeChoose, attrChoose, atkChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && defChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAttrAtk(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                attrChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && defChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAttrDef(newText, cardTypeChoose, monsterTypeChoose, attrChoose, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
-                            && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAttrDef(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                attrChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAttrLvl(newText, cardTypeChoose, monsterTypeChoose, attrChoose, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAttrLvl(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                attrChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAtkDef(newText, cardTypeChoose, monsterTypeChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
-                            && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAtkDef(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAtkLvl(newText, cardTypeChoose, monsterTypeChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && defChoose != null
-                            && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAtkLvl(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeDefLvl(newText, cardTypeChoose, monsterTypeChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null ){
+                            cardViewModel.cardSearchWithTypeMonTypeDefLvl(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeAttrAtkDef(newText, cardTypeChoose, attrChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithTypeAttrAtkDef(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeAttrAtkLvl(newText, cardTypeChoose, attrChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithTypeAttrAtkLvl(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeAttrDefLvl(newText, cardTypeChoose, attrChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && defChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithTypeAttrDefLvl(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithTypeAtkDefLvl(newText, cardTypeChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && defChoose != null ){
+                            cardViewModel.cardSearchWithTypeAtkDefLvl(
+                                newText,
+                                cardTypeChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && defChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrAtkDef(newText, monsterTypeChoose, attrChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithMonTypeAttrAtkDef(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrAtkLvl(newText, monsterTypeChoose, attrChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithMonTypeAttrAtkLvl(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrDefLvl(newText, monsterTypeChoose, attrChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && defChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithMonTypeAttrDefLvl(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithMonTypeAtkDefLvl(newText, monsterTypeChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && defChoose != null
-                            && lvlChoose != null ){
+                            cardViewModel.cardSearchWithMonTypeAtkDefLvl(
+                                newText,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && defChoose != null
+                            && lvlChoose != null
+                        ) {
 
-                            cardViewModel.cardSearchWithAttrAtkDefLvl(newText, attrChoose, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
+                            cardViewModel.cardSearchWithAttrAtkDefLvl(
+                                newText,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
 
-                            cardViewModel.cardSearchWithTypeAttrMonType(newText, cardTypeChoose, attrChoose, monsterTypeChoose)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithTypeAttrMonType(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                monsterTypeChoose
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeAtk(newText, cardTypeChoose, monsterTypeChoose, atkChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeAtk(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeDef(newText, cardTypeChoose, monsterTypeChoose, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeDef(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeMonTypeLvl(newText, cardTypeChoose, monsterTypeChoose, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithTypeMonTypeLvl(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAttrAtk(newText, cardTypeChoose, attrChoose, atkChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithTypeAttrAtk(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAttrDef(newText, cardTypeChoose, attrChoose, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeAttrDef(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAttrLvl(newText, cardTypeChoose, attrChoose, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && defChoose != null){
+                            cardViewModel.cardSearchWithTypeAttrLvl(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && defChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAtkDef(newText, cardTypeChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeAtkDef(
+                                newText,
+                                cardTypeChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAtkLvl(newText, cardTypeChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeAtkLvl(
+                                newText,
+                                cardTypeChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeDefLvl(newText, cardTypeChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithTypeDefLvl(
+                                newText,
+                                cardTypeChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrAtk(newText, monsterTypeChoose, attrChoose, atkChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAttrAtk(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrDef(newText, monsterTypeChoose, attrChoose, defChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAttrDef(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAttrLvl(newText, monsterTypeChoose, attrChoose, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && defChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAttrLvl(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && defChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAtkDef(newText, monsterTypeChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAtkDef(
+                                newText,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAtkLvl(newText, monsterTypeChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAtkLvl(
+                                newText,
+                                monsterTypeChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeDefLvl(newText, monsterTypeChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && defChoose != null){
+                            cardViewModel.cardSearchWithMonTypeDefLvl(
+                                newText,
+                                monsterTypeChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && defChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrAtkDef(newText, attrChoose, atkChoose!!, defChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithAttrAtkDef(
+                                newText,
+                                attrChoose,
+                                atkChoose!!,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrAtkLvl(newText, attrChoose, atkChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithAttrAtkLvl(
+                                newText,
+                                attrChoose,
+                                atkChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrDefLvl(newText, attrChoose, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && atkChoose != null && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithAttrDefLvl(
+                                newText,
+                                attrChoose,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && atkChoose != null && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithAtkDefLvl(newText, atkChoose!!, defChoose!!, lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank()){
+                            cardViewModel.cardSearchWithAtkDefLvl(
+                                newText,
+                                atkChoose!!,
+                                defChoose!!,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank()) {
 
-                            cardViewModel.cardSearchWithTypeMonType(newText,cardTypeChoose,monsterTypeChoose)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
+                            cardViewModel.cardSearchWithTypeMonType(
+                                newText,
+                                cardTypeChoose,
+                                monsterTypeChoose
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
 
-                            cardViewModel.cardSearchWithTypeAttr(newText,cardTypeChoose,attrChoose)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()){
+                            cardViewModel.cardSearchWithTypeAttr(
+                                newText,
+                                cardTypeChoose,
+                                attrChoose
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()) {
 
-                            cardViewModel.cardSearchWithMonTypeAttr(newText,monsterTypeChoose,attrChoose)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAttr(
+                                newText,
+                                monsterTypeChoose,
+                                attrChoose
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeAtk(newText,cardTypeChoose,atkChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithTypeAtk(
+                                newText,
+                                cardTypeChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeDef(newText,cardTypeChoose,defChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithTypeDef(
+                                newText,
+                                cardTypeChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithTypeLvl(newText,cardTypeChoose,lvlChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithTypeLvl(
+                                newText,
+                                cardTypeChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeAtk(newText,monsterTypeChoose,atkChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithMonTypeAtk(
+                                newText,
+                                monsterTypeChoose,
+                                atkChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeDef(newText,monsterTypeChoose,defChoose!!)
-                        }else if(newText.length > 2 && monsterTypeChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithMonTypeDef(
+                                newText,
+                                monsterTypeChoose,
+                                defChoose!!
+                            )
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithMonTypeLvl(newText,monsterTypeChoose,lvlChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null){
+                            cardViewModel.cardSearchWithMonTypeLvl(
+                                newText,
+                                monsterTypeChoose,
+                                lvlChoose!!
+                            )
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrAtk(newText,attrChoose,atkChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && defChoose != null){
+                            cardViewModel.cardSearchWithAttrAtk(newText, attrChoose, atkChoose!!)
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && defChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrDef(newText,attrChoose,defChoose!!)
-                        }else if(newText.length > 2 && attrChoose.isNotBlank() && lvlChoose != null){
+                            cardViewModel.cardSearchWithAttrDef(newText, attrChoose, defChoose!!)
+                        } else if (newText.length > 2 && attrChoose.isNotBlank() && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithAttrLvl(newText,attrChoose,lvlChoose!!)
-                        }else if(newText.length > 2 && defChoose != null && atkChoose != null){
+                            cardViewModel.cardSearchWithAttrLvl(newText, attrChoose, lvlChoose!!)
+                        } else if (newText.length > 2 && defChoose != null && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithAtkDef(newText,defChoose!!,atkChoose!!)
-                        }else if(newText.length > 2 && lvlChoose != null && atkChoose != null){
+                            cardViewModel.cardSearchWithAtkDef(newText, defChoose!!, atkChoose!!)
+                        } else if (newText.length > 2 && lvlChoose != null && atkChoose != null) {
 
-                            cardViewModel.cardSearchWithAtkLvl(newText,lvlChoose!!,atkChoose!!)
-                        }else if(newText.length > 2 && defChoose != null && lvlChoose != null){
+                            cardViewModel.cardSearchWithAtkLvl(newText, lvlChoose!!, atkChoose!!)
+                        } else if (newText.length > 2 && defChoose != null && lvlChoose != null) {
 
-                            cardViewModel.cardSearchWithDefLvl(newText,defChoose!!,lvlChoose!!)
-                        }else if(newText.length > 2 && cardTypeChoose.isNotBlank()){
+                            cardViewModel.cardSearchWithDefLvl(newText, defChoose!!, lvlChoose!!)
+                        } else if (newText.length > 2 && cardTypeChoose.isNotBlank()) {
 
                             cardViewModel.cardSearchWithType(newText, cardTypeChoose)
-                        }else if (newText.length > 2 && monsterTypeChoose.isNotBlank()) {
+                        } else if (newText.length > 2 && monsterTypeChoose.isNotBlank()) {
 
                             cardViewModel.cardSearchWithMonType(newText, monsterTypeChoose)
-                        }else if (newText.length > 2 && attrChoose.isNotBlank()) {
+                        } else if (newText.length > 2 && attrChoose.isNotBlank()) {
 
                             cardViewModel.cardSearchWithAttr(newText, attrChoose)
-                        }else if (newText.length > 2 && atkChoose != null) {
+                        } else if (newText.length > 2 && atkChoose != null) {
 
                             cardViewModel.cardSearchWithAtk(newText, atkChoose!!)
-                        }else if (newText.length > 2 && defChoose != null) {
+                        } else if (newText.length > 2 && defChoose != null) {
 
                             cardViewModel.cardSearchWithDef(newText, defChoose!!)
-                        }else if (newText.length > 2 && lvlChoose != null) {
+                        } else if (newText.length > 2 && lvlChoose != null) {
 
                             cardViewModel.cardSearchWithLvl(newText, lvlChoose!!)
-                        }else if (newText.length > 2) {
+                        } else if (newText.length > 2) {
 
                             cardViewModel.cardSearch(newText)
                         }

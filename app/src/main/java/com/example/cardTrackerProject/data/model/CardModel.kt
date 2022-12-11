@@ -1,11 +1,10 @@
 package com.example.cardTrackerProject.data.model
 
 
-
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class CardModel (
+data class CardModel(
     @SerializedName("id")
     @Expose
     var id: Int? = null,

@@ -4,7 +4,7 @@ import com.example.cardTrackerProject.data.CardRepository
 import com.example.cardTrackerProject.domain.model.Card
 import javax.inject.Inject
 
-class GetCardSearchAttrUseCase @Inject constructor(private val repository: CardRepository){
+class GetCardSearchAttrUseCase @Inject constructor(private val repository: CardRepository) {
 
     suspend operator fun invoke(searchQuery: String, searchAttr: String): List<Card> {
 

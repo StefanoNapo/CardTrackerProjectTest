@@ -6,10 +6,22 @@ import javax.inject.Inject
 
 class GetCardSearchTypeMTypeAttrLvlUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(searchQuery: String, searchType: String, monsType: String, searchAttr: String, searchLvl: Int): List<Card> {
+    suspend operator fun invoke(
+        searchQuery: String,
+        searchType: String,
+        monsType: String,
+        searchAttr: String,
+        searchLvl: Int
+    ): List<Card> {
 
 
-        return repository.searchCardsWithTypeMonTypeAttrLvl(searchQuery, searchType, monsType, searchAttr, searchLvl)
+        return repository.searchCardsWithTypeMonTypeAttrLvl(
+            searchQuery,
+            searchType,
+            monsType,
+            searchAttr,
+            searchLvl
+        )
 
 
     }

@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
 
             //Card Searcher with every possible combinations calling viewModel functions with the search parameters
+            //Going from every variable use for the search (6 + text in searchView) to none (only searchView text)
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchJob?.cancel()
                 searchJob = coroutineScope.launch {

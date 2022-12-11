@@ -1,11 +1,10 @@
 package com.example.cardTrackerProject.data.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.cardTrackerProject.data.database.entities.CardEntity
 import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
+import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
+import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
 
 @Dao
 interface CardDao {
@@ -21,126 +20,141 @@ interface CardDao {
 
     //Queries for the cardSearchView
 
-    @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithType(searchQuery: String, searchType: String): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithMonType(searchQuery: String, monsType: String): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAttr(searchQuery: String, searchAttr: String): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAtk(searchQuery: String, searchAtk: Int): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithDef(searchQuery: String, searchDef: Int): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithLvl(searchQuery: String, searchLvl: Int): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (race = :monsType) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithTypeMonType(
         searchQuery: String,
         searchType: String,
         monsType: String
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithTypeAttr(
         searchQuery: String,
         searchType: String,
         searchAttr: String
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithMonTypeAttr(
         searchQuery: String,
         monsType: String,
         searchAttr: String
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithTypeAtk(
         searchQuery: String,
         searchType: String,
         searchAtk: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithTypeDef(
         searchQuery: String,
         searchType: String,
         searchDef: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithTypeLvl(
         searchQuery: String,
         searchType: String,
         searchLvl: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (atk = :searchAtk) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithMonTypeAtk(
         searchQuery: String,
         monsType: String,
         searchAtk: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithMonTypeDef(
         searchQuery: String,
         monsType: String,
         searchDef: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (race = :monsType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithMonTypeLvl(
         searchQuery: String,
         monsType: String,
         searchLvl: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAttrAtk(
         searchQuery: String,
         searchAttr: String,
         searchAtk: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAttrDef(
         searchQuery: String,
         searchAttr: String,
         searchDef: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAttrLvl(
         searchQuery: String,
         searchAttr: String,
         searchLvl: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAtkDef(
         searchQuery: String,
         searchDef: Int,
         searchAtk: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (level = :searchLvl) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithAtkLvl(
         searchQuery: String,
         searchLvl: Int,
         searchAtk: Int
     ): List<CardEntity>
 
-    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC")
+    @Query("SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') " +
+            "ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithDefLvl(
         searchQuery: String,
         searchDef: Int,
@@ -149,7 +163,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrMonType(
         searchQuery: String,
@@ -160,7 +174,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAtk(
         searchQuery: String,
@@ -171,7 +185,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeDef(
         searchQuery: String,
@@ -182,7 +196,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (level = :searchLvl) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeLvl(
         searchQuery: String,
@@ -193,7 +207,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrAtk(
         searchQuery: String,
@@ -204,7 +218,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrDef(
         searchQuery: String,
@@ -215,7 +229,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (level = :searchLvl) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrLvl(
         searchQuery: String,
@@ -226,7 +240,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (def = :searchDef) AND (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAtkDef(
         searchQuery: String,
@@ -237,7 +251,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (level = :searchLvl) AND (atk = :searchAtk) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAtkLvl(
         searchQuery: String,
@@ -248,7 +262,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (level = :searchLvl) AND (def = :searchDef) AND (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeDefLvl(
         searchQuery: String,
@@ -259,7 +273,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrAtk(
         searchQuery: String,
@@ -270,7 +284,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrDef(
         searchQuery: String,
@@ -281,7 +295,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrLvl(
         searchQuery: String,
@@ -292,7 +306,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (atk = :searchAtk) AND (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAtkDef(
         searchQuery: String,
@@ -303,7 +317,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (atk = :searchAtk) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAtkLvl(
         searchQuery: String,
@@ -314,7 +328,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeDefLvl(
         searchQuery: String,
@@ -325,7 +339,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (def = :searchDef) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithAttrAtkDef(
         searchQuery: String,
@@ -336,7 +350,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithAttrAtkLvl(
         searchQuery: String,
@@ -347,7 +361,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithAttrDefLvl(
         searchQuery: String,
@@ -358,7 +372,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%')" +
-                " ORDER BY name ASC"
+                " ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithAtkDefLvl(
         searchQuery: String,
@@ -369,7 +383,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAttrAtk(
         searchQuery: String,
@@ -381,7 +395,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (attribute = :searchAttr) AND (def = :searchDef) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAttrDef(
         searchQuery: String,
@@ -393,7 +407,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (attribute = :searchAttr) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAttrLvl(
         searchQuery: String,
@@ -405,7 +419,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (atk = :searchAtk) AND (def = :searchDef) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAtkDef(
         searchQuery: String,
@@ -417,7 +431,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (atk = :searchAtk) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeAtkLvl(
         searchQuery: String,
@@ -429,7 +443,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (race = :monsType) AND (def = :searchDef) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeMonTypeDefLvl(
         searchQuery: String,
@@ -441,7 +455,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (def = :searchDef)" +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrAtkDef(
         searchQuery: String,
@@ -453,7 +467,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (level = :searchLvl)" +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrAtkLvl(
         searchQuery: String,
@@ -465,7 +479,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (attribute = :searchAttr) AND (def = :searchDef) AND (level = :searchLvl)" +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAttrDefLvl(
         searchQuery: String,
@@ -477,7 +491,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (type = :searchType) AND (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl)" +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTypeAtkDefLvl(
         searchQuery: String,
@@ -489,7 +503,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (def = :searchDef) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrAtkDef(
         searchQuery: String,
@@ -501,7 +515,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (atk = :searchAtk) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrAtkLvl(
         searchQuery: String,
@@ -513,7 +527,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (attribute = :searchAttr) AND (def = :searchDef) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAttrDefLvl(
         searchQuery: String,
@@ -525,7 +539,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (race = :monsType) AND (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMonTypeAtkDefLvl(
         searchQuery: String,
@@ -537,7 +551,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (attribute = :searchAttr) AND (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl) " +
-                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                "AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithAttrAtkDefLvl(
         searchQuery: String,
@@ -549,7 +563,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTAMTAtkD(
         searchQuery: String,
@@ -562,7 +576,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (atk = :searchAtk) AND (level = :searchLvl) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTAMTAtkL(
         searchQuery: String,
@@ -575,7 +589,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTAMTDL(
         searchQuery: String,
@@ -588,7 +602,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (atk = :searchAtk) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTAAtkDL(
         searchQuery: String,
@@ -601,7 +615,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (atk = :searchAtk) AND (race = :monsType) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTMTAtkDL(
         searchQuery: String,
@@ -614,7 +628,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (def = :searchDef) AND (level = :searchLvl) AND (atk = :searchAtk) AND (race = :monsType) AND (attribute = :searchAttr) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithMTAAtkDL(
         searchQuery: String,
@@ -627,7 +641,7 @@ interface CardDao {
 
     @Query(
         "SELECT * FROM card_table WHERE (atk = :searchAtk) AND (def = :searchDef) AND (level = :searchLvl) AND (race = :monsType) AND (attribute = :searchAttr) AND (type = :searchType) AND" +
-                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY name ASC"
+                " (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC"
     )
     suspend fun searchCardsWithTAMTAtkDL(
         searchQuery: String,
@@ -639,12 +653,34 @@ interface CardDao {
         searchLvl: Int
     ): List<CardEntity>
 
+
+/*
     @Query("SELECT * FROM card_table WHERE name = :cardName")
-    suspend fun cardsToUpdateTables(cardName: String): List<CardEntity>
+    suspend fun cardsToUpdateTables(searchQuery: String, cardName: String): List<CardEntity>
 
 
     //Using function to convert like card to card entity toDatabase function?
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCardsInCollection(cards: List<CompetitiveCollectionEntity>)
 
+
+    //Inserts for listing cards into the collections
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInCompColl(cards: List<CompetitiveCollectionEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInForSaleColl(cards: List<ForSaleCollectionEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)
+
+
+    //Querys to set the amount of copies from a card in the collections
+    @Query("UPDATE competitive_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityCompColl(cardQuantity: Int,cardName: String)
+
+    @Query("UPDATE for_sale_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityForSaleColl(cardQuantity: Int,cardName: String)
+
+    @Query("UPDATE my_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityMyColl(cardQuantity: Int,cardName: String)
+*/
 }

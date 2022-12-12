@@ -4,15 +4,11 @@ package com.example.cardTrackerProject.ui.viewmodel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cardTrackerProject.data.database.entities.CardEntity
-import com.example.cardTrackerProject.data.model.CardModel
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
 
@@ -33,6 +29,18 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
 
             }
         }
+    }
+
+    /*This 2 functions help the Recycler to recognize items and not checking 2 items or more with one click
+    (multiple checking or multiple cards getting set the amount when changing only 1 of those, like 1 and 11 row,
+     2 and 12 and so on happened before adding this 2 functions)
+    */
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {

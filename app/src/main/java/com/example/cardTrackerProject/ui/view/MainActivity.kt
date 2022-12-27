@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
         collectionSpinner.adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, collectionsSpin)
 
+        //Here we use an item listener to know what collection we show to the user
+
         collectionSpinner.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -84,6 +86,34 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
         }
 
 
+        val addCollSpin =
+            arrayOf("My Collection", "For Sale Coll", "Competitive Coll")
+
+        val addCollSpinner: Spinner = binding.addCollSpinner
+
+        var addCollSelected: String
+
+        addCollSpinner.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addCollSpin)
+
+        //Here we use an item listener to know what collection the user wants to add the selected cards
+
+        addCollSpinner.onItemSelectedListener = object : AdapterView.OnItemClickListener,
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                addCollSelected = addCollSpinner.selectedItem.toString()
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+        }
 
         binding.addCardsButton.setOnClickListener() {
             Toast.makeText(baseContext, "Cards added to collection", Toast.LENGTH_LONG).show()

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/stefa/AndroidStudioProjects/CardTrackerProjectTest/app/src/main/res/layout/activity_main.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/stefa/AndroidStudioProjects/CardTrackerProjectTest/app/src/main/res/layout/row_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/yosoy/AndroidStudioProjects/CardTrackerProject/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1585" />
         <entry key="..\:/Users/yosoy/AndroidStudioProjects/CardTrackerProject/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.3215" />
         <entry key="..\:/Users/yosoy/AndroidStudioProjects/CardTrackerProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3215" />

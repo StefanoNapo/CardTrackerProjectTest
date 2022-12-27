@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,8 @@ import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.coroutines.*
 
 
@@ -64,6 +67,16 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                 collectionSelected = collectionSpinner.selectedItem.toString()
                 Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT)
                     .show()
+                if (collectionSelected !== "Every Card") {
+                    binding.modifyCardsBtn.isVisible = true
+                    binding.addCardsButton.isVisible = false
+                    binding.addCollSpinner.isVisible = false
+                }
+                else {
+                    binding.modifyCardsBtn.isVisible = false
+                    binding.addCardsButton.isVisible = true
+                    binding.addCollSpinner.isVisible = true
+                }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -133,8 +146,28 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
             recyclerAdapter.submitList(it)
 
+
         }
 
+        //Conseguir como hacer para saber que row se checkea y como adjuntar todos los nombres
+        if (cardRecyclerView.isNotEmpty()) {
+
+            val cardCheckBox = binding.cardRecyclerView.cardCheckBox
+
+            cardCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    val cardName = binding.cardRecyclerView.cardName.text.toString()
+                    val cardSelectedName = arrayOf(cardName)
+
+                    Toast.makeText(
+                        baseContext,
+                        "Cards added to collection$cardSelectedName",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }
+            }
+        }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

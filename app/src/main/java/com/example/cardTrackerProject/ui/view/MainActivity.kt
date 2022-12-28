@@ -9,6 +9,7 @@ import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
 import com.example.cardTrackerProject.ui.DialogCommunicator
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                 collectionSelected = collectionSpinner.selectedItem.toString()
                 Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT)
                     .show()
+
                 if (collectionSelected !== "Every Card") {
                     binding.modifyCardsBtn.isVisible = true
                     binding.addCardsButton.isVisible = false
@@ -77,6 +79,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
                     binding.addCardsButton.isVisible = true
                     binding.addCollSpinner.isVisible = true
                 }
+
+                cardViewModel.cardSearch.value = null
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -154,8 +158,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
             val cardCheckBox = binding.cardRecyclerView.cardCheckBox
 
+
+
             cardCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    val position = cardCheckBox.verticalScrollbarPosition
                     val cardName = binding.cardRecyclerView.cardName.text.toString()
                     val cardSelectedName = arrayOf(cardName)
 

@@ -3,14 +3,18 @@ package com.example.cardTrackerProject.ui.viewmodel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.row_layout.view.*
+
 
 class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
+
 
     class CardViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -54,6 +58,10 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
         val currentCard = getItem(position)
 
         holder.bind(currentCard)
+
+        holder.itemView.cardCheckBox.tag = position
+
+
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Card>() {

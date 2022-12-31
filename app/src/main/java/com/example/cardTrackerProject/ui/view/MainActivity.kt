@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
+import com.example.cardTrackerProject.domain.model.Card
+import com.example.cardTrackerProject.ui.CardTextCheckedListener
 import com.example.cardTrackerProject.ui.DialogCommunicator
 import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
@@ -23,7 +25,7 @@ import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DialogCommunicator {
+class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -40,6 +42,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
     var defChoose: Int? = null
 
     var lvlChoose: Int? = null
+
+    var checkedCards = arrayOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +138,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
         binding.addCardsButton.setOnClickListener() {
             Toast.makeText(baseContext, "Cards added to collection", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseContext, "Added this cards$checkedCards", Toast.LENGTH_LONG).show()
         }
         val recyclerAdapter = RecyclerAdapter()
 
@@ -153,6 +158,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
         }
 
+        recyclerAdapter.cardTextCheckedListener(this)
+
         //Conseguir como hacer para saber que row se checkea y como adjuntar todos los nombres
         if (cardRecyclerView.isNotEmpty()) {
 
@@ -161,7 +168,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
 
             cardCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
                     val position = cardCheckBox.verticalScrollbarPosition
                     val cardName = binding.cardRecyclerView.cardName.text.toString()
                     val cardSelectedName = arrayOf(cardName)
@@ -174,7 +180,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
                 }
             }
-        }
+
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -749,6 +755,25 @@ class MainActivity : AppCompatActivity(), DialogCommunicator {
 
     override fun getLvlSelected(lvlSelec: Int?) {
         lvlChoose = lvlSelec
+    }
+
+    override fun getCardCheckedName(text: String) {
+        if(text.isNotEmpty()) {
+                checkedCards += text
+            }
+        else {
+            checkedCards = checkedCards.filter { it != checkedCards.last() }.toTypedArray()
+        }
+        Toast.makeText(baseContext, "Added this cards" + checkedCards.contentToString(), Toast.LENGTH_LONG).show()
+    }
+//Necesito agregar/usar query para consultar lista de cartas y hacer un insert de las mismas en la coleccion que corresponda
+    //y hacer un update con las cantidades de cartas
+    // Y remover los toast del checkCard onClickListener y puede que cambiarselo al de addCards Button
+    //Ver tambien como hacer persistir los checks en los search y los textview de quantity
+    //Y como hacer para limpiarlos cada vez que se busca algo nuevo
+//Tambien hacer un onTextChangeListener para los quantities de cartas
+    override fun getCardUnCheckedName(text: String) {
+        checkedCards = checkedCards.filter { it != text }.toTypedArray()
     }
 
 

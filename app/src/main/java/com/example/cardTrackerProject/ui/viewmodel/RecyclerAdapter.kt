@@ -4,11 +4,15 @@ package com.example.cardTrackerProject.ui.viewmodel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
+import com.example.cardTrackerProject.ui.CardTextCheckedListener
+import com.example.cardTrackerProject.ui.DialogCommunicator
+import com.example.cardTrackerProject.ui.view.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout.view.*
 
@@ -16,10 +20,11 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
 
 
+
     class CardViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(card: Card) {
+                fun bind(card: Card) {
 
             binding.apply {
 
@@ -29,6 +34,14 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
                 binding.cardName.text = card.name
 
                 Picasso.get().load(cardLink).into(cardImageBtn)
+
+                val cardCheckBox = binding.cardCheckBox
+
+                val cardsChecked = MutableLiveData<List<Card>>()
+
+                if (cardCheckBox.isChecked){
+                    cardsChecked.postValue(listOf(card))
+                }
 
 
             }
@@ -54,12 +67,38 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
 
     }
 
+    private var listener: CardTextCheckedListener? = null
+
+    fun cardTextCheckedListener(listener: CardTextCheckedListener) {
+        this.listener = listener
+    }
+
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentCard = getItem(position)
-
         holder.bind(currentCard)
 
-        holder.itemView.cardCheckBox.tag = position
+        val cardCheckBox = holder.itemView.cardCheckBox
+
+        cardCheckBox.setOnClickListener {
+            if (cardCheckBox.isChecked) {
+                val cardName = currentCard.name
+                if (cardName != null) {
+                    //Como enviar el valor solo cuando presione addCards
+                    //Como hacer para sacar los valores previos
+                    //Probablemente haciendo un array con append y usando "array.filter { it != 3 }"
+                    listener?.getCardCheckedName(cardName)
+                }
+
+            }
+            else {
+                //   array.filter { it != 3 }
+                val cardName = currentCard.name
+                if (cardName != null) {
+                    listener?.getCardUnCheckedName(cardName)
+                }
+            }
+        }
+
 
 
     }

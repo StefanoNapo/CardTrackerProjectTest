@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 
 class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
 
-
+    var checkedCards: MutableList<String> = ArrayList()
 
     class CardViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -78,15 +78,19 @@ class RecyclerAdapter : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCa
 
         val cardCheckBox = holder.itemView.cardCheckBox
 
-        var checkedCards: MutableList<String> = ArrayList()
+
         //Necesito verificar si considera si el array contiene los nombres de la row del mismo check
         //Conseguir una forma de que se pase por el if y no vaya directamente al else
 
-        cardCheckBox.isChecked = false
+        for (cardName in checkedCards) {
 
-        for (cardName in checkedCards){
-
-            cardCheckBox.isChecked = cardName == currentCard.name
+            if (cardName == currentCard.name){
+                cardCheckBox.isChecked = true
+                break
+            }
+            else{
+                cardCheckBox.isChecked = false
+            }
         }
         //Hacer las cosas para que el quantity sea enviado a la main y se alinie con el cardName
         val cardQuantity = holder.itemView.quantity

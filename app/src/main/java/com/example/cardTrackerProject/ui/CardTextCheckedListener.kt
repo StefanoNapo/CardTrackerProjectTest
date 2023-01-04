@@ -5,4 +5,5 @@ interface CardTextCheckedListener {
     fun getCardCheckedName(text: String)
 
     fun getCardUnCheckedName(text: String)
+
 }

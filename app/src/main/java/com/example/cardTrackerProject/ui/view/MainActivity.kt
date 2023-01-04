@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
 import com.example.cardTrackerProject.domain.model.Card
+import com.example.cardTrackerProject.ui.CardQuantityListener
 import com.example.cardTrackerProject.ui.CardTextCheckedListener
 import com.example.cardTrackerProject.ui.DialogCommunicator
 import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
@@ -25,7 +26,7 @@ import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedListener {
+class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedListener, CardQuantityListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -43,7 +44,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedLis
 
     var lvlChoose: Int? = null
 
-    var checkedCards = arrayOf<String>()
+    var checkedCards: MutableList<String> = ArrayList()
+
+    var cardQuantity: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -758,13 +761,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedLis
     }
 
     override fun getCardCheckedName(text: String) {
-        if(text.isNotEmpty()) {
+
                 checkedCards += text
-            }
-        else {
-            checkedCards = checkedCards.filter { it != checkedCards.last() }.toTypedArray()
-        }
-        Toast.makeText(baseContext, "Added this cards" + checkedCards.contentToString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(baseContext, "Added this cards$checkedCards", Toast.LENGTH_SHORT).show()
     }
 //Necesito agregar/usar query para consultar lista de cartas y hacer un insert de las mismas en la coleccion que corresponda
     //y hacer un update con las cantidades de cartas
@@ -773,7 +772,14 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardTextCheckedLis
     //Y como hacer para limpiarlos cada vez que se busca algo nuevo
 //Tambien hacer un onTextChangeListener para los quantities de cartas
     override fun getCardUnCheckedName(text: String) {
-        checkedCards = checkedCards.filter { it != text }.toTypedArray()
+        checkedCards = checkedCards.filter { it != text }.toMutableList()
+    }
+
+    override fun getCardQuantity(quantity: Int) {
+        cardQuantity = quantity
+        //Despues cambiar este toast por el uso de las cantidades para el Update
+        Toast.makeText(baseContext, "Added this cards" + cardQuantity.toString(), Toast.LENGTH_SHORT).show()
+
     }
 
 

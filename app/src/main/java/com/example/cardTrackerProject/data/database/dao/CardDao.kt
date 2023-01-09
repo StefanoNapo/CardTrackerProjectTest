@@ -19,9 +19,21 @@ interface CardDao {
     suspend fun deleteAllCards()
 
     //Queries for the cardSearchView
+    @Query("SELECT * FROM card_table WHERE name LIKE :searchQuery ORDER BY level DESC, linkval DESC, type ASC")
+    suspend fun searchCardsOnlyName(searchQuery: String): List<CardEntity>
 
     @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
+    //Cambiar entities List de cada una
+    @Query("SELECT * FROM my_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
+    suspend fun searchCardsNameMyColl(searchQuery: String): List<MyCollectionEntity>
+
+    @Query("SELECT * FROM competitive_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
+    suspend fun searchCardsNameCompColl(searchQuery: String): List<CompetitiveCollectionEntity>
+    //Necesario crear las otras mismas queries con diferentes nombres de tabla para cada tabla
+    @Query("SELECT * FROM for_sale_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
+    suspend fun searchCardsNameForSaleColl(searchQuery: String): List<ForSaleCollectionEntity>
+
 
     @Query("SELECT * FROM card_table WHERE (type = :searchType) AND (name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%') ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsWithType(searchQuery: String, searchType: String): List<CardEntity>
@@ -652,6 +664,11 @@ interface CardDao {
         searchDef: Int,
         searchLvl: Int
     ): List<CardEntity>
+
+
+    //Testear haciendo las funciones para poder insertar estos
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInCompColl(cards: List<CompetitiveCollectionEntity>)
 
 
 /*

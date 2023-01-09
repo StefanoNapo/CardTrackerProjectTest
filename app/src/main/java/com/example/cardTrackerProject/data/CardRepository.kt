@@ -2,6 +2,7 @@ package com.example.cardTrackerProject.data
 
 import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.data.database.entities.CardEntity
+import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
 import com.example.cardTrackerProject.data.model.CardModel
 import com.example.cardTrackerProject.data.network.CardService
 import com.example.cardTrackerProject.domain.model.Card
@@ -27,13 +28,22 @@ class CardRepository @Inject constructor(
         cardDao.insertAll(cards)
     }
 
+    suspend fun insertCardsComp(cards: List<CompetitiveCollectionEntity>) {
+        cardDao.insertCardsInCompColl(cards)
+    }
+
     suspend fun clearCards() {
         cardDao.deleteAllCards()
     }
 
-    suspend fun searchCardsNameAndText(searchQuery: String): List<Card> {
-        val response = cardDao.searchCardsNameAndText(searchQuery)
+    suspend fun searchCardsOnlyName(searchQuery: String): List<Card> {
+        val response = cardDao.searchCardsOnlyName(searchQuery)
         return response.map { it.toDomain() }
+    }
+
+    suspend fun searchCardsNameAndText(searchQuery: String): List<Card> {
+                val response = cardDao.searchCardsNameAndText(searchQuery)
+                return response.map { it.toDomain() }
     }
 
     suspend fun searchCardsNameWithType(searchQuery: String, searchType: String): List<Card> {

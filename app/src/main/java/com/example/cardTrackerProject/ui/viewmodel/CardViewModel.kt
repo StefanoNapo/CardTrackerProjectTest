@@ -3,11 +3,13 @@ package com.example.cardTrackerProject.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
+import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.domain.*
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.domain.GetCardSearchAtkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -76,7 +78,9 @@ class CardViewModel @Inject constructor(
     private val getCardSearchTAAtkDLUseCase: GetCardSearchTAAtkDLUseCase,
     private val getCardSearchTMTAtkDLUseCase: GetCardSearchTMTAtkDLUseCase,
     private val getCardSearchMTAAtkDLUseCase: GetCardSearchMTAAtkDLUseCase,
-    private val getCardSearchTAMTAtkDLUseCase: GetCardSearchTAMTAtkDLUseCase
+    private val getCardSearchTAMTAtkDLUseCase: GetCardSearchTAMTAtkDLUseCase,
+    private val getCardSearchOnlyNameUseCase: GetCardSearchOnlyNameUseCase,
+    private val getCardsCompUseCase: GetCardsCompUseCase
 
 ) : ViewModel() {
 
@@ -93,6 +97,85 @@ class CardViewModel @Inject constructor(
 
         }
 
+    }
+
+    private fun getCardsComp(listOfCards : MutableList<CompetitiveCollectionEntity>){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            if (listOfCards.isNotEmpty()) {
+
+            getCardsCompUseCase(listOfCards)
+
+            }
+
+
+            isLoading.postValue(false)
+        }
+    }
+
+    fun setListComp(list: MutableList<CardChecked>) {
+        viewModelScope.launch {
+            val cardsToSendComp: MutableList<CompetitiveCollectionEntity> = ArrayList()
+
+            for ((index) in list.withIndex()) {
+                val cardName = list[index].cardName
+
+                val cardQuant = list[index].cardQuant
+
+                val cardSearchList = getCardSearchOnlyNameUseCase.invoke(cardName)
+
+                if(cardSearchList.isNotEmpty()) {
+                    cardSearch.postValue(cardSearchList)
+                }
+
+                delay(100)
+                val cardsSearchedList: List<Card>? = cardSearch.value
+
+
+                val selCardId = cardsSearchedList?.get(0)?.id
+                val selCardName = cardsSearchedList?.get(0)?.name
+                val selCardType = cardsSearchedList?.get(0)?.type
+                val selCardDesc = cardsSearchedList?.get(0)?.desc
+                val selCardAtk = cardsSearchedList?.get(0)?.atk
+                val selCardRace = cardsSearchedList?.get(0)?.race
+                val selCardAttr = cardsSearchedList?.get(0)?.attribute
+                val selCardArch = cardsSearchedList?.get(0)?.archetype
+                val selCardLinkVal = cardsSearchedList?.get(0)?.linkval
+                val selCardLinkMark = cardsSearchedList?.get(0)?.linkmarkers
+                val selCardSets = cardsSearchedList?.get(0)?.cardSets
+                val selCardImages = cardsSearchedList?.get(0)?.cardImages
+                val selCardPrices = cardsSearchedList?.get(0)?.cardPrices
+                val selCardDef = cardsSearchedList?.get(0)?.def
+                val selCardLvl = cardsSearchedList?.get(0)?.level
+
+                val newCard = CompetitiveCollectionEntity(
+                    selCardId,
+                    selCardName,
+                    selCardType,
+                    selCardDesc,
+                    selCardAtk,
+                    selCardRace,
+                    selCardAttr,
+                    selCardArch,
+                    selCardLinkVal,
+                    selCardLinkMark,
+                    selCardSets,
+                    selCardImages,
+                    selCardPrices,
+                    selCardDef,
+                    selCardLvl,
+                    cardQuant
+                )
+
+                cardsToSendComp += newCard
+
+
+            }
+
+            getCardsComp(cardsToSendComp)
+
+        }
     }
 
 

@@ -57,3 +57,9 @@ fun CardModel.toDomain() = Card(id, name, type, desc, atk, race, attribute, arch
 
 fun CardEntity.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
 
+fun MyCollectionEntity.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
+
+fun CompetitiveCollectionEntity.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
+
+fun ForSaleCollectionEntity.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
+

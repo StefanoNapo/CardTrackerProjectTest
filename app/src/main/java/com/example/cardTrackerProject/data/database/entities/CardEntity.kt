@@ -83,20 +83,3 @@ fun Card.toDatabase() = CardEntity(
     level
 )
 
-fun CardEntity.toDatabase() = CompetitiveCollectionEntity(id,
-    name,
-    type,
-    desc,
-    atk,
-    race,
-    attribute,
-    archetype,
-    linkval,
-    linkmarkers,
-    cardSets,
-    cardImages,
-    cardPrices,
-    def,
-    level,
-
-    )

@@ -11,13 +11,13 @@
     <Spinner
         android:id="@+id/collectionsSpinner"
         android:layout_width="410dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/searchButton"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -32,7 +32,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cardRecyclerView"
         android:layout_width="416dp"
-        android:layout_height="573dp"
+        android:layout_height="550dp"
+        android:layout_marginBottom="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,9 +41,9 @@
     <Spinner
         android:id="@+id/addCollSpinner"
         android:layout_width="160dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginStart="-30dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="18dp"
         android:background="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,7 @@
         android:id="@+id/addCardsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="17dp"
         android:layout_marginEnd="190dp"
         android:text="Add Cards"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="17dp"
         android:text="Modify Cards"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

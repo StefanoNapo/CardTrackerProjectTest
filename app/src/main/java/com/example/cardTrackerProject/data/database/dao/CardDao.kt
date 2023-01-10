@@ -673,17 +673,16 @@ interface CardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardsInForSaleColl(cards: List<ForSaleCollectionEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)
+
 /*
     @Query("SELECT * FROM card_table WHERE name = :cardName")
     suspend fun cardsToUpdateTables(searchQuery: String, cardName: String): List<CardEntity>
 
 
     //Using function to convert like card to card entity toDatabase function?
-
-
-
-
-
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)

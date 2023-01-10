@@ -3,6 +3,7 @@ package com.example.cardTrackerProject.data
 import com.example.cardTrackerProject.data.database.dao.CardDao
 import com.example.cardTrackerProject.data.database.entities.CardEntity
 import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
+import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
 import com.example.cardTrackerProject.data.model.CardModel
 import com.example.cardTrackerProject.data.network.CardService
 import com.example.cardTrackerProject.domain.model.Card
@@ -30,6 +31,10 @@ class CardRepository @Inject constructor(
 
     suspend fun insertCardsComp(cards: List<CompetitiveCollectionEntity>) {
         cardDao.insertCardsInCompColl(cards)
+    }
+
+    suspend fun insertCardsForSale(cards: List<ForSaleCollectionEntity>) {
+        cardDao.insertCardsInForSaleColl(cards)
     }
 
     suspend fun clearCards() {

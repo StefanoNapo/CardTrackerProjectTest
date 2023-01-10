@@ -66,19 +66,8 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
     }
 
- //   private var listener: CardTextCheckedListener? = null
-
- //   private var quantListener: CardQuantityListener? = null
-
     private var cardCListener: CardsCheckedListener? = null
 
- //   fun cardTextCheckedListener(listener: CardTextCheckedListener) {
-//        this.listener = listener
-//    }
-
-//    fun cardQuantityListener(listener: CardQuantityListener) {
-//        this.quantListener = listener
-//    }
 
     fun cardsCheckedListener(listener: CardsCheckedListener) {
         this.cardCListener = listener
@@ -100,7 +89,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                 cardCheckBox.isChecked = false
             }
         }
-        //Hacer las cosas para que el quantity sea enviado a la main y se alinie con el cardName
+
         val cardQuantity = holder.itemView.quantity
 
         cardCheckBox.setOnClickListener {
@@ -123,10 +112,6 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                         cardCListener?.getCardChecked(cardsChecked)
 
                     checkedCards += cardName
-                    val quant = checkedCards.count()
-                    //despues cambiar el quantListener y ver como enviar cantidades
-            //        quantListener?.getCardQuantity(quant)
-            //       listener?.getCardCheckedName(cardName)
 
                     }
 
@@ -145,8 +130,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                         cardCListener?.getCardChecked(cardsChecked)
                     checkedCards = checkedCards.filter { it != cardName }.toMutableList()
 
-           //         listener?.getCardUnCheckedName(cardName)
-                }
+               }
             }
             }
             else{
@@ -159,8 +143,6 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
         }
 
 
-        //Conseguir que se envie correctamente las cantidades de las cartas checkeadas
-        //y ver como ordenarlas con el nombre correcto para poder llenar la coleccion
         if (cardCheckBox.isChecked){
 
             if (cardQuantity.text.isNotEmpty() && cardQuantity.text.isNotBlank()) {

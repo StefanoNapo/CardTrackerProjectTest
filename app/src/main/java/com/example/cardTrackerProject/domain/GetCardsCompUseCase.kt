@@ -6,8 +6,6 @@ import javax.inject.Inject
 
 class GetCardsCompUseCase @Inject constructor(private val repository: CardRepository) {
 
-    //ver como cambiar esto para insertar correctamente los valores
-
     suspend operator fun invoke(listOfCards : MutableList<CompetitiveCollectionEntity>) {
 
         if(listOfCards.isNotEmpty()) repository.insertCardsComp(listOfCards)

@@ -666,11 +666,13 @@ interface CardDao {
     ): List<CardEntity>
 
 
-    //Testear haciendo las funciones para poder insertar estos
+    //Inserts for listing cards into the collections
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardsInCompColl(cards: List<CompetitiveCollectionEntity>)
 
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCardsInForSaleColl(cards: List<ForSaleCollectionEntity>)
 /*
     @Query("SELECT * FROM card_table WHERE name = :cardName")
     suspend fun cardsToUpdateTables(searchQuery: String, cardName: String): List<CardEntity>
@@ -679,12 +681,9 @@ interface CardDao {
     //Using function to convert like card to card entity toDatabase function?
 
 
-    //Inserts for listing cards into the collections
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCardsInCompColl(cards: List<CompetitiveCollectionEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCardsInForSaleColl(cards: List<ForSaleCollectionEntity>)
+
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)

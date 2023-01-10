@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
 import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
@@ -49,8 +48,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
     var collectionSelected = ""
 
     var cardsToSendMyColl: MutableList<MyCollectionEntity> = ArrayList()
-
-    var cardsToSendForSale: MutableList<ForSaleCollectionEntity> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,7 +118,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         val addCollSpinner: Spinner = binding.addCollSpinner
 
-        var addCollSelected: String = ""
+        var addCollSelected = ""
 
         addCollSpinner.adapter =
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addCollSpin)
@@ -219,52 +216,26 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                         Toast.LENGTH_SHORT
                     ).show()
 
+                    val cardListToAdd = cardsChecked
+
+                    cardViewModel.setListForSale(cardListToAdd)
+/*
                     for ((index) in cardsChecked.withIndex()) {
+
                         cardName = cardsChecked[index].cardName
 
                         cardQuant = cardsChecked[index].cardQuant
-
-                        //aca hacer las queries e inserts y cortarlo y pegarlo en el onClickListener del addCardsButton
-
-                        //Testear como hacer el query y ver porque hace el refresh al recyclerview
-                        cardViewModel.cardSearch(cardName)
-
-                        val cardsSearchedList = cardViewModel.cardSearch.value
-
-                        //ahora tenemos que hacer un insert tomando todos estos valores
-
-                        val selCardId = cardsSearchedList?.get(index)?.id
-                        val selCardName = cardsSearchedList?.get(index)?.name
-                        val selCardType = cardsSearchedList?.get(index)?.type
-                        val selCardDesc = cardsSearchedList?.get(index)?.desc
-                        val selCardAtk = cardsSearchedList?.get(index)?.atk
-                        val selCardRace = cardsSearchedList?.get(index)?.race
-                        val selCardAttr = cardsSearchedList?.get(index)?.attribute
-                        val selCardArch = cardsSearchedList?.get(index)?.archetype
-                        val selCardLinkVal = cardsSearchedList?.get(index)?.linkval
-                        val selCardLinkMark = cardsSearchedList?.get(index)?.linkmarkers
-                        val selCardSets = cardsSearchedList?.get(index)?.cardSets
-                        val selCardImages = cardsSearchedList?.get(index)?.cardImages
-                        val selCardPrices = cardsSearchedList?.get(index)?.cardPrices
-                        val selCardDef = cardsSearchedList?.get(index)?.def
-                        val selCardLvl = cardsSearchedList?.get(index)?.level
-
-
-                        //Ver como agregarlo a una Lista para poder usarlo con el insert
-                        val newCard = ForSaleCollectionEntity(selCardId, selCardName, selCardType, selCardDesc, selCardAtk, selCardRace, selCardAttr, selCardArch,
-                            selCardLinkVal, selCardLinkMark, selCardSets, selCardImages, selCardPrices, selCardDef, selCardLvl, cardQuant)
-
-                        cardsToSendForSale += newCard
 
                         Toast.makeText(
                             baseContext,
                             "$cardName x$cardQuant",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                    }
-
+                   }
+*/
                 }
+
+
 
             }else if(addCollSelected == "Competitive Coll"){
 
@@ -275,7 +246,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    cardViewModel.setListComp(cardsChecked)
+                    val cardListToAdd = cardsChecked
+
+                    cardViewModel.setListComp(cardListToAdd)
 
                     for ((index) in cardsChecked.withIndex()) {
 
@@ -292,7 +265,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                 }
 
-                cardsChecked.clear()
 
             }
 
@@ -937,8 +909,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         }
 
-     //   Toast.makeText(baseContext, "Added this cards" + this.cardsChecked.toString(), Toast.LENGTH_SHORT).show()
-        //For para sacar valores de nombre y cantidad y hacer querys e inserts con cada uno
     }
 
 

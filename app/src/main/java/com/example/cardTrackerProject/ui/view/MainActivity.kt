@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cardTrackerProject.CardTrackerProject
 import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.databinding.ActivityMainBinding
 import com.example.cardTrackerProject.ui.CardsCheckedListener
@@ -43,8 +44,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
     var cardQuant: Int = 0
 
-    var collectionSelected = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -67,11 +66,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
         collectionSpinner.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                collectionSelected = collectionSpinner.selectedItem.toString()
-                Toast.makeText(baseContext, "Now showing $collectionSelected", Toast.LENGTH_SHORT)
+                CardTrackerProject.collectionSelected = collectionSpinner.selectedItem.toString()
+                Toast.makeText(baseContext, "Now showing " + CardTrackerProject.collectionSelected, Toast.LENGTH_SHORT)
                     .show()
 
-                if (collectionSelected !== "Every Card") {
+                if (CardTrackerProject.collectionSelected !== "Every Card") {
                     binding.modifyCardsBtn.isVisible = true
                     binding.addCardsButton.isVisible = false
                     binding.addCollSpinner.isVisible = false
@@ -231,7 +230,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         //Es necesario configurar este botón para que haga su Update y cambie las listas correspondientes
         binding.modifyCardsBtn.setOnClickListener(){
-            when (collectionSelected) {
+            when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
 
                     //Aca hacer los correspondientes cambios con update o delete
@@ -307,7 +306,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
             //Going from every variable use for the search (6 + text in searchView) to none (only searchView text)
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                when (collectionSelected) {
+                when (CardTrackerProject.collectionSelected) {
                     "Every Card" -> {
 
                         searchJob?.cancel()

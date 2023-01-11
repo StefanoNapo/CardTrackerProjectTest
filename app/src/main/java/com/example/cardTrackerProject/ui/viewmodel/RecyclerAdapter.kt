@@ -5,14 +5,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cardTrackerProject.CardTrackerProject
 import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.ui.CardsCheckedListener
+import com.example.cardTrackerProject.ui.view.MainActivity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
@@ -78,15 +82,43 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
         holder.bind(currentCard)
 
         val cardCheckBox = holder.itemView.cardCheckBox
+        val deleteBtn = holder.itemView.deleteButton
 
-        for (cardName in checkedCards) {
+       // Se podrá usar un listener en el adapter?
+        // MainActivity().collectionsSpinner.onItemSelectedListener
 
-            if (cardName == currentCard.name){
-                cardCheckBox.isChecked = true
-                break
+        //Aca arriba se puede hacer un if que consulte si el spinner de collection esta en every card o alguna collection
+        //Y en el caso de que esté en una collection hacer que no checkee las cartas
+        //O hacer isvisible = false a un botón para que se pueda eliminar la carta de esa row
+        //y isvisible = true a las checkbox
+
+        //Obviamente esto no funciona porque toma siempre el valor original de ""
+        when (CardTrackerProject.collectionSelected) {
+            "Every Card" -> {
+                deleteBtn.isVisible = false
+                cardCheckBox.isVisible = true
+
+                for (cardName in checkedCards) {
+
+                    if (cardName == currentCard.name) {
+                        cardCheckBox.isChecked = true
+                        break
+                    } else {
+                        cardCheckBox.isChecked = false
+                    }
+                }
             }
-            else{
-                cardCheckBox.isChecked = false
+            "My Collection" -> {
+                cardCheckBox.isVisible = false
+                deleteBtn.isVisible = true
+            }
+            "For Sale Collection" -> {
+                cardCheckBox.isVisible = false
+                deleteBtn.isVisible = true
+            }
+            "Competitive Collection" -> {
+                cardCheckBox.isVisible = false
+                deleteBtn.isVisible = true
             }
         }
 

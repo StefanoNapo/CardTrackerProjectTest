@@ -24,13 +24,13 @@ interface CardDao {
 
     @Query("SELECT * FROM card_table WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameAndText(searchQuery: String): List<CardEntity>
-    //Cambiar entities List de cada una
+
     @Query("SELECT * FROM my_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameMyColl(searchQuery: String): List<MyCollectionEntity>
 
     @Query("SELECT * FROM competitive_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameCompColl(searchQuery: String): List<CompetitiveCollectionEntity>
-    //Necesario crear las otras mismas queries con diferentes nombres de tabla para cada tabla
+
     @Query("SELECT * FROM for_sale_collection WHERE name LIKE '%' || :searchQuery || '%' OR `desc` LIKE '%' || :searchQuery || '%' ORDER BY level DESC, linkval DESC, type ASC")
     suspend fun searchCardsNameForSaleColl(searchQuery: String): List<ForSaleCollectionEntity>
 

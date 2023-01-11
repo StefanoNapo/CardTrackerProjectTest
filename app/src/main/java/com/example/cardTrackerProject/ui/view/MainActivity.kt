@@ -856,6 +856,16 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     }
                     "For Sale Collection" -> {
 
+                        searchJob?.cancel()
+                        searchJob = coroutineScope.launch {
+                            newText?.let {
+                                if (newText.length > 2) {
+
+                                    cardViewModel.cardSearchForSale(newText)
+                                }
+                            }
+                        }
+
                     }
                     "Competitive Collection" -> {
 

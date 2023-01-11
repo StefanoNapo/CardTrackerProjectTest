@@ -56,6 +56,11 @@ class CardRepository @Inject constructor(
         return response.map { it }
     }
 
+    suspend fun searchCardsNameForSaleColl(searchQuery: String): List<ForSaleCollectionEntity> {
+        val response = cardDao.searchCardsNameForSaleColl(searchQuery)
+        return response.map { it }
+    }
+
     suspend fun searchCardsNameAndText(searchQuery: String): List<Card> {
                 val response = cardDao.searchCardsNameAndText(searchQuery)
                 return response.map { it.toDomain() }

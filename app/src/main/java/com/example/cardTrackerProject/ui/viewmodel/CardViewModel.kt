@@ -86,13 +86,14 @@ class CardViewModel @Inject constructor(
     private val getCardsForSaleUseCase: GetCardsForSaleUseCase,
     private val getCardsMyCollUseCase: GetCardsMyCollUseCase,
     private val getCardSearchMyCollUseCase: GetCardSearchMyCollUseCase,
+    private val getCardSearchForSaleCollUseCase: GetCardSearchForSaleCollUseCase,
 
 ) : ViewModel() {
 
     val isLoading = MutableLiveData<Boolean>()
 
     var cardSearch = MutableLiveData<List<Card>>()
-    
+
 
     fun onCreate() {
         viewModelScope.launch {
@@ -390,6 +391,44 @@ class CardViewModel @Inject constructor(
                 }
 
                     cardSearch.postValue(cardListSend)
+
+            }
+
+
+            isLoading.postValue(false)
+        }
+
+    }
+
+    fun cardSearchForSale(searchQuery: String) {
+
+        //Ver como hacer la busqueda para que consulte todos los valores de la tabla con los del total de cartas
+
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchUseCase.invoke(searchQuery)
+            val cardSearchedForSale = getCardSearchForSaleCollUseCase.invoke(searchQuery)
+            val cardListSend: MutableList<Card> = mutableListOf()
+            var cardSearchId : Int?
+            var cardSearchForSaleId : Int?
+
+            if (cardSearched.isNotEmpty()) {
+                for ((index) in cardSearchedForSale.withIndex()){
+                    for((index2) in cardSearched.withIndex()){
+                        cardSearchId = cardSearched[index2].id
+                        cardSearchForSaleId = cardSearchedForSale[index].id
+
+                        if (cardSearchId == cardSearchForSaleId){
+                            cardListSend.add(cardSearched[index2])
+                            break
+                        }
+
+                    }
+
+                }
+
+                cardSearch.postValue(cardListSend)
 
             }
 

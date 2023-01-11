@@ -14,15 +14,13 @@ import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.ui.CardsCheckedListener
-import com.example.cardTrackerProject.ui.view.MainActivity
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
 class RecyclerAdapter(private val context: Context) : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
 
-    var checkedCards: MutableList<String> = ArrayList()
+
 
     var cardsQuant: MutableList<Int> = ArrayList()
 
@@ -30,7 +28,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
     var quantChecked = 0
 
-    var cardsChecked: MutableList<CardChecked> = ArrayList()
+    var cardsChecked = CardTrackerProject.cardsChecked
 
 
     class CardViewHolder(private val binding: RowLayoutBinding) :
@@ -98,7 +96,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                 deleteBtn.isVisible = false
                 cardCheckBox.isVisible = true
 
-                for (cardName in checkedCards) {
+                for (cardName in CardTrackerProject.checkedCardsName) {
 
                     if (cardName == currentCard.name) {
                         cardCheckBox.isChecked = true
@@ -131,9 +129,8 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                 if (cardCheckBox.isChecked) {
 
-
                     if (cardName != null) {
-                    //Como enviar el valor solo cuando presione addCards
+
                         nameChecked = cardName
                         quantChecked = cardQuantity.text.toString().toInt()
 
@@ -143,7 +140,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                         cardCListener?.getCardChecked(cardsChecked)
 
-                    checkedCards += cardName
+                        CardTrackerProject.checkedCardsName += cardName
 
                     }
 
@@ -160,9 +157,10 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                         cardsChecked = cardsChecked.filter { it != cardChecked }.toMutableList()
 
                         cardCListener?.getCardChecked(cardsChecked)
-                    checkedCards = checkedCards.filter { it != cardName }.toMutableList()
+                        CardTrackerProject.checkedCardsName = CardTrackerProject.checkedCardsName.filter { it != cardName }.toMutableList()
 
                }
+
             }
             }
             else{

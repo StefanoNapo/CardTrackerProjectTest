@@ -16,6 +16,7 @@ import com.example.cardTrackerProject.ui.components.SearchOptionsDialog
 import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
 
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
     var lvlChoose: Int? = null
 
-    var cardsChecked: MutableList<CardChecked> = ArrayList()
+    var cardsChecked = CardTrackerProject.cardsChecked
+
+    var cardCheckedName = CardTrackerProject.checkedCardsName
 
     var cardName: String = ""
 
@@ -140,6 +143,14 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         binding.addCardsButton.setOnClickListener() {
 
+            if(cardsChecked.isEmpty()){
+                Toast.makeText(
+                    baseContext,
+                    "Please select the cards first",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             if(addCollSelected == "My Collection"){
 
                 if (cardsChecked.isNotEmpty()) {
@@ -226,6 +237,13 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
             }
 
+        }
+
+        clearListBtn.setOnClickListener(){
+            cardsChecked.clear()
+            cardCheckedName.clear()
+            clearListBtn.isVisible = false
+            cardViewModel.cardSearch.value = null
         }
 
         //Es necesario configurar este botón para que haga su Update y cambie las listas correspondientes
@@ -922,6 +940,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
 
     override fun getCardChecked(cardsChecked: MutableList<CardChecked>) {
+        clearListBtn.isVisible = cardsChecked.isNotEmpty()
+
         this.cardsChecked = cardsChecked
 
         for ((index) in cardsChecked.withIndex()){

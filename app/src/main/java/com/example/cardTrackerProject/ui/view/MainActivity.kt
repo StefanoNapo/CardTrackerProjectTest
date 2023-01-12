@@ -961,7 +961,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     "For Sale Collection" -> {
                         //change dao
                         for(card in CardTrackerProject.cardsToDelete){
-                            cardViewModel.deleteCardMyColl(card)
+                            cardViewModel.deleteCardForSaleColl(card)
                         }
                         CardTrackerProject.cardsToDelete.clear()
 

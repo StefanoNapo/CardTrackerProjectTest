@@ -6,9 +6,9 @@ import javax.inject.Inject
 
 class GetCardsForSaleUseCase @Inject constructor(private val repository: CardRepository) {
 
-    suspend operator fun invoke(listOfCards : MutableList<ForSaleCollectionEntity>) {
+    suspend operator fun invoke(listOfCards: MutableList<ForSaleCollectionEntity>) {
 
-        if(listOfCards.isNotEmpty()) repository.insertCardsForSale(listOfCards)
+        if (listOfCards.isNotEmpty()) repository.insertCardsForSale(listOfCards)
 
     }
 

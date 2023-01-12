@@ -19,8 +19,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
-class RecyclerAdapter(private val context: Context) : ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
-
+class RecyclerAdapter(private val context: Context) :
+    ListAdapter<Card, RecyclerAdapter.CardViewHolder>(DiffCallback()) {
 
 
     var cardsQuant: MutableList<Int> = ArrayList()
@@ -35,7 +35,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
     class CardViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-                fun bind(card: Card) {
+        fun bind(card: Card) {
 
             binding.apply {
 
@@ -146,10 +146,16 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
             when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
 
-                    for (card in CardTrackerProject.cardListMyColl){
-                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+                    for (card in CardTrackerProject.cardListMyColl) {
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString()
+                                .toInt()
+                        ) {
 
-                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "My Collection")
+                            val cardAmountChange = CardAmountChange(
+                                card.name!!,
+                                cardQuantity.text.toString().toInt(),
+                                "My Collection"
+                            )
 
                             CardTrackerProject.cardsAmountForChange += cardAmountChange
 
@@ -160,10 +166,16 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                 }
                 "For Sale Collection" -> {
 
-                    for (card in CardTrackerProject.cardListForSaleColl){
-                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+                    for (card in CardTrackerProject.cardListForSaleColl) {
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString()
+                                .toInt()
+                        ) {
 
-                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "For Sale Collection")
+                            val cardAmountChange = CardAmountChange(
+                                card.name!!,
+                                cardQuantity.text.toString().toInt(),
+                                "For Sale Collection"
+                            )
 
                             CardTrackerProject.cardsAmountForChange += cardAmountChange
 
@@ -173,10 +185,16 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                 }
                 "Competitive Collection" -> {
-                    for (card in CardTrackerProject.cardListCompColl){
-                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+                    for (card in CardTrackerProject.cardListCompColl) {
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString()
+                                .toInt()
+                        ) {
 
-                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "Competitive Collection")
+                            val cardAmountChange = CardAmountChange(
+                                card.name!!,
+                                cardQuantity.text.toString().toInt(),
+                                "Competitive Collection"
+                            )
 
                             CardTrackerProject.cardsAmountForChange += cardAmountChange
 
@@ -188,7 +206,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
         }
 
-        deleteBtn.setOnClickListener{
+        deleteBtn.setOnClickListener {
 
             val cardName = currentCard.name.toString()
             CardTrackerProject.cardsToDelete += cardName
@@ -203,7 +221,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
         cardCheckBox.setOnClickListener {
             val cardName = currentCard.name
 
-            if (cardQuantity.text.isNotBlank() && cardQuantity.text.isNotEmpty()){
+            if (cardQuantity.text.isNotBlank() && cardQuantity.text.isNotEmpty()) {
 
                 if (cardCheckBox.isChecked) {
 
@@ -218,12 +236,12 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                         cardCListener?.getCardChecked(cardsChecked)
 
-                        Toast.makeText(context, "$nameChecked Added to the list", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "$nameChecked Added to the list", Toast.LENGTH_LONG)
+                            .show()
 
                     }
 
-                }
-                else {
+                } else {
 
                     if (cardName != null) {
 
@@ -236,13 +254,20 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                         cardCListener?.getCardChecked(cardsChecked)
 
-                        Toast.makeText(context, "$nameChecked Removed from the list", Toast.LENGTH_LONG).show()
-               }
+                        Toast.makeText(
+                            context,
+                            "$nameChecked Removed from the list",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-            }
-            }
-            else{
-                Toast.makeText(context, "You must first add the amount of copies", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(
+                    context,
+                    "You must first add the amount of copies",
+                    Toast.LENGTH_LONG
+                ).show()
                 cardCheckBox.isChecked = false
 
             }
@@ -251,7 +276,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
         }
 
 
-        if (cardCheckBox.isChecked){
+        if (cardCheckBox.isChecked) {
 
             if (cardQuantity.text.isNotEmpty() && cardQuantity.text.isNotBlank()) {
                 cardsQuant += cardQuantity.text.toString().toInt()
@@ -264,7 +289,6 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
             }
 
         }
-
 
 
     }

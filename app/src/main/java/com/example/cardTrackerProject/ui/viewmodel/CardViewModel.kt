@@ -116,7 +116,7 @@ class CardViewModel @Inject constructor(
 
     }
 
-    fun getAllCardMyColl(){
+    fun getAllCardMyColl() {
 
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -126,7 +126,7 @@ class CardViewModel @Inject constructor(
 
     }
 
-    fun getAllCardForSaleColl(){
+    fun getAllCardForSaleColl() {
 
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -136,7 +136,7 @@ class CardViewModel @Inject constructor(
 
     }
 
-    fun getAllCardCompColl(){
+    fun getAllCardCompColl() {
 
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -146,7 +146,7 @@ class CardViewModel @Inject constructor(
 
     }
 
-    fun setCardQuantityMyColl(cardName: String, cardQuantity: Int){
+    fun setCardQuantityMyColl(cardName: String, cardQuantity: Int) {
         viewModelScope.launch {
             isLoading.postValue(true)
             setCardQuantityMyCollUseCase.invoke(cardName, cardQuantity)
@@ -154,7 +154,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int){
+    fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int) {
         viewModelScope.launch {
             isLoading.postValue(true)
             setCardQuantityForSaleCollUseCase.invoke(cardName, cardQuantity)
@@ -162,7 +162,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun setCardQuantityCompColl(cardName: String, cardQuantity: Int){
+    fun setCardQuantityCompColl(cardName: String, cardQuantity: Int) {
         viewModelScope.launch {
             isLoading.postValue(true)
             setCardQuantityCompCollUseCase.invoke(cardName, cardQuantity)
@@ -170,7 +170,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun deleteCardMyColl(cardName: String){
+    fun deleteCardMyColl(cardName: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             deleteCardMyCollUseCase.invoke(cardName)
@@ -178,7 +178,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun deleteCardForSaleColl(cardName: String){
+    fun deleteCardForSaleColl(cardName: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             deleteCardForSaleCollUseCase.invoke(cardName)
@@ -186,7 +186,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    fun deleteCardCompColl(cardName: String){
+    fun deleteCardCompColl(cardName: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             deleteCardCompCollUseCase.invoke(cardName)
@@ -194,7 +194,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    private fun getCardsMyColl(listOfCards : MutableList<MyCollectionEntity>){
+    private fun getCardsMyColl(listOfCards: MutableList<MyCollectionEntity>) {
         viewModelScope.launch {
             isLoading.postValue(true)
 
@@ -209,7 +209,7 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    private fun getCardsForSale(listOfCards : MutableList<ForSaleCollectionEntity>){
+    private fun getCardsForSale(listOfCards: MutableList<ForSaleCollectionEntity>) {
         viewModelScope.launch {
             isLoading.postValue(true)
 
@@ -224,13 +224,13 @@ class CardViewModel @Inject constructor(
         }
     }
 
-    private fun getCardsComp(listOfCards : MutableList<CompetitiveCollectionEntity>){
+    private fun getCardsComp(listOfCards: MutableList<CompetitiveCollectionEntity>) {
         viewModelScope.launch {
             isLoading.postValue(true)
 
             if (listOfCards.isNotEmpty()) {
 
-            getCardsCompUseCase(listOfCards)
+                getCardsCompUseCase(listOfCards)
 
             }
 
@@ -250,7 +250,7 @@ class CardViewModel @Inject constructor(
 
                 val cardSearchList = getCardSearchOnlyNameUseCase.invoke(cardName)
 
-                if(cardSearchList.isNotEmpty()) {
+                if (cardSearchList.isNotEmpty()) {
                     cardSearch.postValue(cardSearchList)
                 }
 
@@ -315,7 +315,7 @@ class CardViewModel @Inject constructor(
 
                 val cardSearchList = getCardSearchOnlyNameUseCase.invoke(cardName)
 
-                if(cardSearchList.isNotEmpty()) {
+                if (cardSearchList.isNotEmpty()) {
                     cardSearch.postValue(cardSearchList)
                 }
 
@@ -379,7 +379,7 @@ class CardViewModel @Inject constructor(
 
                 val cardSearchList = getCardSearchOnlyNameUseCase.invoke(cardName)
 
-                if(cardSearchList.isNotEmpty()) {
+                if (cardSearchList.isNotEmpty()) {
                     cardSearch.postValue(cardSearchList)
                 }
 
@@ -460,16 +460,16 @@ class CardViewModel @Inject constructor(
             val cardSearched = getCardSearchUseCase.invoke(searchQuery)
             val cardSearchedMyColl = getCardSearchMyCollUseCase.invoke(searchQuery)
             val cardListSend: MutableList<Card> = mutableListOf()
-            var cardSearchId : Int?
-            var cardSearchCollId : Int?
+            var cardSearchId: Int?
+            var cardSearchCollId: Int?
 
             if (cardSearched.isNotEmpty()) {
-                for ((index) in cardSearchedMyColl.withIndex()){
-                    for((index2) in cardSearched.withIndex()){
+                for ((index) in cardSearchedMyColl.withIndex()) {
+                    for ((index2) in cardSearched.withIndex()) {
                         cardSearchId = cardSearched[index2].id
                         cardSearchCollId = cardSearchedMyColl[index].id
 
-                        if (cardSearchId == cardSearchCollId){
+                        if (cardSearchId == cardSearchCollId) {
                             cardListSend.add(cardSearched[index2])
                             break
                         }
@@ -478,7 +478,7 @@ class CardViewModel @Inject constructor(
 
                 }
 
-                    cardSearch.postValue(cardListSend)
+                cardSearch.postValue(cardListSend)
 
             }
 
@@ -498,16 +498,16 @@ class CardViewModel @Inject constructor(
             val cardSearched = getCardSearchUseCase.invoke(searchQuery)
             val cardSearchedForSale = getCardSearchForSaleCollUseCase.invoke(searchQuery)
             val cardListSend: MutableList<Card> = mutableListOf()
-            var cardSearchId : Int?
-            var cardSearchForSaleId : Int?
+            var cardSearchId: Int?
+            var cardSearchForSaleId: Int?
 
             if (cardSearched.isNotEmpty()) {
-                for ((index) in cardSearchedForSale.withIndex()){
-                    for((index2) in cardSearched.withIndex()){
+                for ((index) in cardSearchedForSale.withIndex()) {
+                    for ((index2) in cardSearched.withIndex()) {
                         cardSearchId = cardSearched[index2].id
                         cardSearchForSaleId = cardSearchedForSale[index].id
 
-                        if (cardSearchId == cardSearchForSaleId){
+                        if (cardSearchId == cardSearchForSaleId) {
                             cardListSend.add(cardSearched[index2])
                             break
                         }
@@ -536,16 +536,16 @@ class CardViewModel @Inject constructor(
             val cardSearched = getCardSearchUseCase.invoke(searchQuery)
             val cardSearchedCompColl = getCardSearchCompCollUseCase.invoke(searchQuery)
             val cardListSend: MutableList<Card> = mutableListOf()
-            var cardSearchId : Int?
-            var cardSearchCompCollId : Int?
+            var cardSearchId: Int?
+            var cardSearchCompCollId: Int?
 
             if (cardSearched.isNotEmpty()) {
-                for ((index) in cardSearchedCompColl.withIndex()){
-                    for((index2) in cardSearched.withIndex()){
+                for ((index) in cardSearchedCompColl.withIndex()) {
+                    for ((index2) in cardSearched.withIndex()) {
                         cardSearchId = cardSearched[index2].id
                         cardSearchCompCollId = cardSearchedCompColl[index].id
 
-                        if (cardSearchId == cardSearchCompCollId){
+                        if (cardSearchId == cardSearchCompCollId) {
                             cardListSend.add(cardSearched[index2])
                             break
                         }

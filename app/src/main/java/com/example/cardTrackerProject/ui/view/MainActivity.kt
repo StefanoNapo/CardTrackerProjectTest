@@ -68,7 +68,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 CardTrackerProject.collectionSelected = collectionSpinner.selectedItem.toString()
-                Toast.makeText(baseContext, "Now showing " + CardTrackerProject.collectionSelected, Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    baseContext,
+                    "Now showing " + CardTrackerProject.collectionSelected,
+                    Toast.LENGTH_SHORT
+                )
                     .show()
 
                 when (CardTrackerProject.collectionSelected) {
@@ -172,7 +176,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         binding.addCardsButton.setOnClickListener() {
 
-            if(cardsChecked.isEmpty()){
+            if (cardsChecked.isEmpty()) {
                 Toast.makeText(
                     baseContext,
                     "Please select the cards first",
@@ -180,7 +184,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                 ).show()
             }
 
-            if(addCollSelected == "My Collection"){
+            if (addCollSelected == "My Collection") {
 
                 if (cardsChecked.isNotEmpty()) {
                     Toast.makeText(
@@ -208,7 +212,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                 }
 
-            }else if(addCollSelected == "For Sale Coll"){
+            } else if (addCollSelected == "For Sale Coll") {
 
                 if (cardsChecked.isNotEmpty()) {
                     Toast.makeText(
@@ -236,7 +240,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                 }
 
-            }else if(addCollSelected == "Competitive Coll"){
+            } else if (addCollSelected == "Competitive Coll") {
 
                 if (cardsChecked.isNotEmpty()) {
                     Toast.makeText(
@@ -271,7 +275,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
         //ver como limpiar realmente la lista con este boton
         //puede que sea necesario hacer un boolean global que cambie este boton y que haga tomar el valor
         //a algo del recycleradapter
-        clearListBtn.setOnClickListener(){
+        clearListBtn.setOnClickListener() {
             cardsChecked.clear()
             clearListBtn.isVisible = false
             cardViewModel.cardSearch.postValue(null)
@@ -279,46 +283,18 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
         }
 
 
-        binding.modifyCardsBtn.setOnClickListener(){
+        binding.modifyCardsBtn.setOnClickListener() {
             cardRecyclerView.clearFocus()
             when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
 
                     for (card in CardTrackerProject.cardsAmountForChange) {
-                        if (card.collection == "My Collection"){
+                        if (card.collection == "My Collection") {
                             cardViewModel.setCardQuantityMyColl(card.cardName, card.cardQuant)
                         }
                     }
 
-                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
-
-                    CardTrackerProject.cardsAmountForChange.clear()
-
-                    Toast.makeText(
-                        baseContext,
-                        "Card Quantities Successfully Changed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    cardViewModel.cardSearch.postValue(null)
-
-                    }else{
-                        Toast.makeText(
-                            baseContext,
-                            "Please change the quantities first",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-                "For Sale Collection" -> {
-
-                    for (card in CardTrackerProject.cardsAmountForChange) {
-                        if (card.collection == "For Sale Collection"){
-                            cardViewModel.setCardQuantityForSaleColl(card.cardName, card.cardQuant)
-                        }
-                    }
-
-                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
+                    if (CardTrackerProject.cardsAmountForChange.isNotEmpty()) {
 
                         CardTrackerProject.cardsAmountForChange.clear()
 
@@ -330,7 +306,35 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                         cardViewModel.cardSearch.postValue(null)
 
-                    }else{
+                    } else {
+                        Toast.makeText(
+                            baseContext,
+                            "Please change the quantities first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                "For Sale Collection" -> {
+
+                    for (card in CardTrackerProject.cardsAmountForChange) {
+                        if (card.collection == "For Sale Collection") {
+                            cardViewModel.setCardQuantityForSaleColl(card.cardName, card.cardQuant)
+                        }
+                    }
+
+                    if (CardTrackerProject.cardsAmountForChange.isNotEmpty()) {
+
+                        CardTrackerProject.cardsAmountForChange.clear()
+
+                        Toast.makeText(
+                            baseContext,
+                            "Card Quantities Successfully Changed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        cardViewModel.cardSearch.postValue(null)
+
+                    } else {
                         Toast.makeText(
                             baseContext,
                             "Please change the quantities first",
@@ -342,12 +346,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                 "Competitive Collection" -> {
 
                     for (card in CardTrackerProject.cardsAmountForChange) {
-                        if (card.collection == "Competitive Collection"){
+                        if (card.collection == "Competitive Collection") {
                             cardViewModel.setCardQuantityCompColl(card.cardName, card.cardQuant)
                         }
                     }
 
-                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
+                    if (CardTrackerProject.cardsAmountForChange.isNotEmpty()) {
 
                         CardTrackerProject.cardsAmountForChange.clear()
 
@@ -359,7 +363,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                         cardViewModel.cardSearch.postValue(null)
 
-                    }else{
+                    } else {
                         Toast.makeText(
                             baseContext,
                             "Please change the quantities first",
@@ -892,22 +896,46 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                                     )
                                 } else if (newText.length > 2 && attrChoose.isNotBlank() && atkChoose != null) {
 
-                                    cardViewModel.cardSearchWithAttrAtk(newText, attrChoose, atkChoose!!)
+                                    cardViewModel.cardSearchWithAttrAtk(
+                                        newText,
+                                        attrChoose,
+                                        atkChoose!!
+                                    )
                                 } else if (newText.length > 2 && attrChoose.isNotBlank() && defChoose != null) {
 
-                                    cardViewModel.cardSearchWithAttrDef(newText, attrChoose, defChoose!!)
+                                    cardViewModel.cardSearchWithAttrDef(
+                                        newText,
+                                        attrChoose,
+                                        defChoose!!
+                                    )
                                 } else if (newText.length > 2 && attrChoose.isNotBlank() && lvlChoose != null) {
 
-                                    cardViewModel.cardSearchWithAttrLvl(newText, attrChoose, lvlChoose!!)
+                                    cardViewModel.cardSearchWithAttrLvl(
+                                        newText,
+                                        attrChoose,
+                                        lvlChoose!!
+                                    )
                                 } else if (newText.length > 2 && defChoose != null && atkChoose != null) {
 
-                                    cardViewModel.cardSearchWithAtkDef(newText, defChoose!!, atkChoose!!)
+                                    cardViewModel.cardSearchWithAtkDef(
+                                        newText,
+                                        defChoose!!,
+                                        atkChoose!!
+                                    )
                                 } else if (newText.length > 2 && lvlChoose != null && atkChoose != null) {
 
-                                    cardViewModel.cardSearchWithAtkLvl(newText, lvlChoose!!, atkChoose!!)
+                                    cardViewModel.cardSearchWithAtkLvl(
+                                        newText,
+                                        lvlChoose!!,
+                                        atkChoose!!
+                                    )
                                 } else if (newText.length > 2 && defChoose != null && lvlChoose != null) {
 
-                                    cardViewModel.cardSearchWithDefLvl(newText, defChoose!!, lvlChoose!!)
+                                    cardViewModel.cardSearchWithDefLvl(
+                                        newText,
+                                        defChoose!!,
+                                        lvlChoose!!
+                                    )
                                 } else if (newText.length > 2 && cardTypeChoose.isNotBlank()) {
 
                                     cardViewModel.cardSearchWithType(newText, cardTypeChoose)
@@ -935,12 +963,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                         }
 
 
-
                     }
 
 
                     "My Collection" -> {
-                        for(card in CardTrackerProject.cardsToDelete){
+                        for (card in CardTrackerProject.cardsToDelete) {
                             cardViewModel.deleteCardMyColl(card)
                         }
                         CardTrackerProject.cardsToDelete.clear()
@@ -960,7 +987,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     }
                     "For Sale Collection" -> {
 
-                        for(card in CardTrackerProject.cardsToDelete){
+                        for (card in CardTrackerProject.cardsToDelete) {
                             cardViewModel.deleteCardForSaleColl(card)
                         }
                         CardTrackerProject.cardsToDelete.clear()
@@ -980,7 +1007,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     }
                     "Competitive Collection" -> {
 
-                        for(card in CardTrackerProject.cardsToDelete){
+                        for (card in CardTrackerProject.cardsToDelete) {
                             cardViewModel.deleteCardCompColl(card)
                         }
                         CardTrackerProject.cardsToDelete.clear()
@@ -998,7 +1025,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     }
 
 
-            }
+                }
                 return false
             }
 
@@ -1038,14 +1065,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
     }
 
 
-
-
     override fun getCardChecked(cardsChecked: MutableList<CardChecked>) {
         clearListBtn.isVisible = cardsChecked.isNotEmpty()
 
         this.cardsChecked = cardsChecked
 
-        for ((index) in cardsChecked.withIndex()){
+        for ((index) in cardsChecked.withIndex()) {
             cardName = cardsChecked[index].cardName
 
             cardQuant = cardsChecked[index].cardQuant

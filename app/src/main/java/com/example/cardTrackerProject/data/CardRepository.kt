@@ -61,27 +61,27 @@ class CardRepository @Inject constructor(
         cardDao.deleteAllCards()
     }
 
-    suspend fun deleteCardMyColl(cardName: String){
+    suspend fun deleteCardMyColl(cardName: String) {
         cardDao.deleteCardMyColl(cardName)
     }
 
-    suspend fun deleteCardForSaleColl(cardName: String){
+    suspend fun deleteCardForSaleColl(cardName: String) {
         cardDao.deleteCardForSaleColl(cardName)
     }
 
-    suspend fun deleteCardCompColl(cardName: String){
+    suspend fun deleteCardCompColl(cardName: String) {
         cardDao.deleteCardCompColl(cardName)
     }
 
-    suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int){
+    suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int) {
         cardDao.setCardQuantityMyColl(cardName, cardQuantity)
     }
 
-    suspend fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int){
+    suspend fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int) {
         cardDao.setCardQuantityForSaleColl(cardName, cardQuantity)
     }
 
-    suspend fun setCardQuantityCompColl(cardName: String, cardQuantity: Int){
+    suspend fun setCardQuantityCompColl(cardName: String, cardQuantity: Int) {
         cardDao.setCardQuantityCompColl(cardName, cardQuantity)
     }
 
@@ -106,8 +106,8 @@ class CardRepository @Inject constructor(
     }
 
     suspend fun searchCardsNameAndText(searchQuery: String): List<Card> {
-                val response = cardDao.searchCardsNameAndText(searchQuery)
-                return response.map { it.toDomain() }
+        val response = cardDao.searchCardsNameAndText(searchQuery)
+        return response.map { it.toDomain() }
     }
 
     suspend fun searchCardsNameWithType(searchQuery: String, searchType: String): List<Card> {

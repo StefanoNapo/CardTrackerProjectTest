@@ -7,7 +7,7 @@ import com.example.cardTrackerProject.data.model.CardPrice
 import com.example.cardTrackerProject.data.model.CardSet
 
 
-data class Card (
+data class Card(
     var id: Int? = null,
 
 
@@ -53,6 +53,38 @@ data class Card (
     var level: Int? = null
 )
 
-fun CardModel.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
+fun CardModel.toDomain() = Card(
+    id,
+    name,
+    type,
+    desc,
+    atk,
+    race,
+    attribute,
+    archetype,
+    linkval,
+    linkmarkers,
+    cardSets,
+    cardImages,
+    cardPrices,
+    def,
+    level
+)
 
-fun CardEntity.toDomain() = Card(id, name, type, desc, atk, race, attribute, archetype, linkval, linkmarkers, cardSets, cardImages, cardPrices, def, level)
+fun CardEntity.toDomain() = Card(
+    id,
+    name,
+    type,
+    desc,
+    atk,
+    race,
+    attribute,
+    archetype,
+    linkval,
+    linkmarkers,
+    cardSets,
+    cardImages,
+    cardPrices,
+    def,
+    level
+)

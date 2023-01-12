@@ -9,7 +9,7 @@ import com.example.cardTrackerProject.data.model.CardChecked
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class CardTrackerProject : Application(){
+class CardTrackerProject : Application() {
     companion object {
         var collectionSelected = ""
 
@@ -19,9 +19,9 @@ class CardTrackerProject : Application(){
 
         var cardListForSaleColl: List<ForSaleCollectionEntity> = ArrayList()
 
-        var cardListCompColl : List<CompetitiveCollectionEntity> = ArrayList()
+        var cardListCompColl: List<CompetitiveCollectionEntity> = ArrayList()
 
-        var cardsAmountForChange : MutableList<CardAmountChange> = ArrayList()
+        var cardsAmountForChange: MutableList<CardAmountChange> = ArrayList()
 
         var cardsToDelete: MutableList<String> = ArrayList()
     }

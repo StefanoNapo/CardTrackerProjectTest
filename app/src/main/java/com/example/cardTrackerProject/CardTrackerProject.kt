@@ -1,6 +1,7 @@
 package com.example.cardTrackerProject
 
 import android.app.Application
+import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
 import com.example.cardTrackerProject.data.model.CardChecked
@@ -16,6 +17,8 @@ class CardTrackerProject : Application(){
         var cardListMyColl: List<MyCollectionEntity> = ArrayList()
 
         var cardListForSaleColl: List<ForSaleCollectionEntity> = ArrayList()
+
+        var cardListCompColl : List<CompetitiveCollectionEntity> = ArrayList()
     }
 
 }

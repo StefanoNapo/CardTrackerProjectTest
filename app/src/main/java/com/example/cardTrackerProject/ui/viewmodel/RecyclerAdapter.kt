@@ -128,6 +128,13 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                 deleteBtn.isVisible = true
             }
             "Competitive Collection" -> {
+                for (card in CardTrackerProject.cardListCompColl) {
+
+                    if (card.name == currentCard.name) {
+                        cardQuantity.setText(card.quantity.toString())
+                    }
+                }
+
                 cardCheckBox.isVisible = false
                 deleteBtn.isVisible = true
             }

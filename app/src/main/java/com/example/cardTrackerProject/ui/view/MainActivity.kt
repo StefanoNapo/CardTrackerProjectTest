@@ -903,6 +903,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
                     "Competitive Collection" -> {
+                        cardViewModel.getAllCardCompColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {
                             newText?.let {

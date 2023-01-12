@@ -95,7 +95,8 @@ class CardViewModel @Inject constructor(
     private val setCardQuantityForSaleCollUseCase: SetCardQuantityForSaleCollUseCase,
     private val setCardQuantityCompCollUseCase: SetCardQuantityCompCollUseCase,
     private val deleteCardMyCollUseCase: DeleteCardMyCollUseCase,
-    private val deleteCardForSaleCollUseCase : DeleteCardForSaleCollUseCase,
+    private val deleteCardForSaleCollUseCase: DeleteCardForSaleCollUseCase,
+    private val deleteCardCompCollUseCase: DeleteCardCompCollUseCase
 
 ) : ViewModel() {
 
@@ -181,6 +182,14 @@ class CardViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading.postValue(true)
             deleteCardForSaleCollUseCase.invoke(cardName)
+            isLoading.postValue(false)
+        }
+    }
+
+    fun deleteCardCompColl(cardName: String){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            deleteCardCompCollUseCase.invoke(cardName)
             isLoading.postValue(false)
         }
     }

@@ -959,7 +959,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
                     "For Sale Collection" -> {
-                        //change dao
+
                         for(card in CardTrackerProject.cardsToDelete){
                             cardViewModel.deleteCardForSaleColl(card)
                         }
@@ -979,9 +979,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
                     "Competitive Collection" -> {
-                        //change dao
+
                         for(card in CardTrackerProject.cardsToDelete){
-                            cardViewModel.deleteCardMyColl(card)
+                            cardViewModel.deleteCardCompColl(card)
                         }
                         CardTrackerProject.cardsToDelete.clear()
 

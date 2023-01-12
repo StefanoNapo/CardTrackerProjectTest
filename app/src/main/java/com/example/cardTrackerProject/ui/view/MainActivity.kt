@@ -890,7 +890,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
                     "For Sale Collection" -> {
-
+                        cardViewModel.getAllCardForSaleColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {
                             newText?.let {

@@ -117,6 +117,13 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                 deleteBtn.isVisible = true
             }
             "For Sale Collection" -> {
+                for (card in CardTrackerProject.cardListForSaleColl) {
+
+                    if (card.name == currentCard.name) {
+                        cardQuantity.setText(card.quantity.toString())
+                    }
+                }
+
                 cardCheckBox.isVisible = false
                 deleteBtn.isVisible = true
             }

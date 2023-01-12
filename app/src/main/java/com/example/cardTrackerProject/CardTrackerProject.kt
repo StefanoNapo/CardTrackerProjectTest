@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.cardTrackerProject.data.database.entities.CompetitiveCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEntity
 import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
+import com.example.cardTrackerProject.data.model.CardAmountChange
 import com.example.cardTrackerProject.data.model.CardChecked
 import dagger.hilt.android.HiltAndroidApp
 
@@ -19,6 +20,8 @@ class CardTrackerProject : Application(){
         var cardListForSaleColl: List<ForSaleCollectionEntity> = ArrayList()
 
         var cardListCompColl : List<CompetitiveCollectionEntity> = ArrayList()
+
+        var cardsAmountForChange : MutableList<CardAmountChange> = ArrayList()
     }
 
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.CardTrackerProject
+import com.example.cardTrackerProject.data.model.CardAmountChange
 import com.example.cardTrackerProject.data.model.CardChecked
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
@@ -140,9 +141,53 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
             }
         }
 
-
-
         //hacer onTextChangeListener para el quantity y que cambie las cantidades de
+        cardQuantity.setOnFocusChangeListener { view, b ->
+            when (CardTrackerProject.collectionSelected) {
+                "My Collection" -> {
+
+                    for (card in CardTrackerProject.cardListMyColl){
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+
+                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "My Collection")
+
+                            CardTrackerProject.cardsAmountForChange += cardAmountChange
+
+                            break
+                        }
+                    }
+
+                }
+                "For Sale Collection" -> {
+
+                    for (card in CardTrackerProject.cardListForSaleColl){
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+
+                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "For Sale Collection")
+
+                            CardTrackerProject.cardsAmountForChange += cardAmountChange
+
+                            break
+                        }
+                    }
+
+                }
+                "Competitive Collection" -> {
+                    for (card in CardTrackerProject.cardListCompColl){
+                        if (card.name == currentCard.name && card.quantity != cardQuantity.text.toString().toInt()){
+
+                            val cardAmountChange = CardAmountChange(card.name!!, cardQuantity.text.toString().toInt(), "Competitive Collection")
+
+                            CardTrackerProject.cardsAmountForChange += cardAmountChange
+
+                            break
+                        }
+                    }
+                }
+            }
+
+        }
+
 
         cardCheckBox.setOnClickListener {
             val cardName = currentCard.name

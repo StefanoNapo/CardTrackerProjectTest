@@ -73,8 +73,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                 when (CardTrackerProject.collectionSelected) {
                     "My Collection" -> {
-                        // Ver donde conviene poner mas esto, si aca o en el searchview
-                       // cardViewModel.getAllCardMyColl()
+                        CardTrackerProject.cardsAmountForChange.clear()
 
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
@@ -82,18 +81,24 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                         binding.searchButton.isVisible = false
                     }
                     "For Sale Collection" -> {
+                        CardTrackerProject.cardsAmountForChange.clear()
+
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
                         binding.addCollSpinner.isVisible = false
                         binding.searchButton.isVisible = false
                     }
                     "Competitive Collection" -> {
+                        CardTrackerProject.cardsAmountForChange.clear()
+
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
                         binding.addCollSpinner.isVisible = false
                         binding.searchButton.isVisible = false
                     }
                     "Every Card" -> {
+                        CardTrackerProject.cardsAmountForChange.clear()
+
                         binding.modifyCardsBtn.isVisible = false
                         binding.addCardsButton.isVisible = true
                         binding.addCollSpinner.isVisible = true
@@ -266,43 +271,96 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         //Es necesario configurar este botón para que haga su Update y cambie las listas correspondientes
         binding.modifyCardsBtn.setOnClickListener(){
+            cardRecyclerView.clearFocus()
             when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
 
                     //Aca hacer los correspondientes cambios con update o delete
+                    for (card in CardTrackerProject.cardsAmountForChange) {
+                        if (card.collection == "My Collection"){
+                            cardViewModel.setCardQuantityMyColl(card.cardName, card.cardQuant)
+                        }
+                    }
 
+                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
+
+                    CardTrackerProject.cardsAmountForChange.clear()
+
+                    Toast.makeText(
+                        baseContext,
+                        "Card Quantities Successfully Changed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    cardViewModel.cardSearch.postValue(null)
+
+                    }else{
+                        Toast.makeText(
+                            baseContext,
+                            "Please change the quantities first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 "For Sale Collection" -> {
+
+                    for (card in CardTrackerProject.cardsAmountForChange) {
+                        if (card.collection == "For Sale Collection"){
+                            cardViewModel.setCardQuantityForSaleColl(card.cardName, card.cardQuant)
+                        }
+                    }
+
+                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
+
+                        CardTrackerProject.cardsAmountForChange.clear()
+
+                        Toast.makeText(
+                            baseContext,
+                            "Card Quantities Successfully Changed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        cardViewModel.cardSearch.postValue(null)
+
+                    }else{
+                        Toast.makeText(
+                            baseContext,
+                            "Please change the quantities first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
                 }
                 "Competitive Collection" -> {
 
+                    for (card in CardTrackerProject.cardsAmountForChange) {
+                        if (card.collection == "Competitive Collection"){
+                            cardViewModel.setCardQuantityCompColl(card.cardName, card.cardQuant)
+                        }
+                    }
+
+                    if(CardTrackerProject.cardsAmountForChange.isNotEmpty()){
+
+                        CardTrackerProject.cardsAmountForChange.clear()
+
+                        Toast.makeText(
+                            baseContext,
+                            "Card Quantities Successfully Changed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        cardViewModel.cardSearch.postValue(null)
+
+                    }else{
+                        Toast.makeText(
+                            baseContext,
+                            "Please change the quantities first",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
 
-            if (cardsChecked.isNotEmpty()) {
-                Toast.makeText(
-                    baseContext,
-                    "Added this cards to $addCollSelected:",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                for ((index) in cardsChecked.withIndex()) {
-                    cardName = cardsChecked[index].cardName
-
-                    cardQuant = cardsChecked[index].cardQuant
-
-                    //aca hacer las queries e inserts y cortarlo y pegarlo en el onClickListener del addCardsButton
-
-                    Toast.makeText(
-                        baseContext,
-                        "$cardName x$cardQuant",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                }
-
-            }
         }
 
         val recyclerAdapter = RecyclerAdapter(baseContext)

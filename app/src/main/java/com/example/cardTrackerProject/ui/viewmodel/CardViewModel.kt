@@ -90,7 +90,10 @@ class CardViewModel @Inject constructor(
     private val getCardSearchCompCollUseCase: GetCardSearchCompCollUseCase,
     private val getAllCardsMyCollUseCase: GetAllCardsMyCollUseCase,
     private val getAllCardsForSaleCollUseCase: GetAllCardsForSaleCollUseCase,
-    private val getAllCardsCompCollUseCase: GetAllCardsCompCollUseCase
+    private val getAllCardsCompCollUseCase: GetAllCardsCompCollUseCase,
+    private val setCardQuantityMyCollUseCase: SetCardQuantityMyCollUseCase,
+    private val setCardQuantityForSaleCollUseCase: SetCardQuantityForSaleCollUseCase,
+    private val setCardQuantityCompCollUseCase: SetCardQuantityCompCollUseCase,
 
 ) : ViewModel() {
 
@@ -138,6 +141,30 @@ class CardViewModel @Inject constructor(
             isLoading.postValue(false)
         }
 
+    }
+
+    fun setCardQuantityMyColl(cardName: String, cardQuantity: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            setCardQuantityMyCollUseCase.invoke(cardName, cardQuantity)
+            isLoading.postValue(false)
+        }
+    }
+
+    fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            setCardQuantityForSaleCollUseCase.invoke(cardName, cardQuantity)
+            isLoading.postValue(false)
+        }
+    }
+
+    fun setCardQuantityCompColl(cardName: String, cardQuantity: Int){
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            setCardQuantityCompCollUseCase.invoke(cardName, cardQuantity)
+            isLoading.postValue(false)
+        }
     }
 
     private fun getCardsMyColl(listOfCards : MutableList<MyCollectionEntity>){

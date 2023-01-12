@@ -61,6 +61,18 @@ class CardRepository @Inject constructor(
         cardDao.deleteAllCards()
     }
 
+    suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int){
+        cardDao.setCardQuantityMyColl(cardName, cardQuantity)
+    }
+
+    suspend fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int){
+        cardDao.setCardQuantityForSaleColl(cardName, cardQuantity)
+    }
+
+    suspend fun setCardQuantityCompColl(cardName: String, cardQuantity: Int){
+        cardDao.setCardQuantityCompColl(cardName, cardQuantity)
+    }
+
     suspend fun searchCardsOnlyName(searchQuery: String): List<Card> {
         val response = cardDao.searchCardsOnlyName(searchQuery)
         return response.map { it.toDomain() }

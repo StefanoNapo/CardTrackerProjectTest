@@ -23,6 +23,15 @@ interface CardDao {
 
 //Hacer getAllcards pero de cada collection para consultar amounts
     //Hacer update query para actualizar amounts
+    @Query("UPDATE my_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int)
+
+    @Query("UPDATE for_sale_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityForSaleColl(cardName: String, cardQuantity: Int)
+
+    @Query("UPDATE competitive_collection SET quantity=:cardQuantity WHERE name=:cardName")
+    suspend fun setCardQuantityCompColl(cardName: String, cardQuantity: Int)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(cards: List<CardEntity>)
 

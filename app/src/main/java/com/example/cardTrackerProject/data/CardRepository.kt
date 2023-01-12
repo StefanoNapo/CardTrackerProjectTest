@@ -26,6 +26,11 @@ class CardRepository @Inject constructor(
         return response.map { it.toDomain() }
     }
 
+    suspend fun getAllCardsMyColl(): List<MyCollectionEntity> {
+        val response = cardDao.getAllCardsMyColl()
+        return response.map { it }
+    }
+
     suspend fun insertCards(cards: List<CardEntity>) {
         cardDao.insertAll(cards)
     }

@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
     var cardsChecked = CardTrackerProject.cardsChecked
 
-    var cardCheckedName = CardTrackerProject.checkedCardsName
-
     var cardName: String = ""
 
     var cardQuant: Int = 0
@@ -73,17 +71,34 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                 Toast.makeText(baseContext, "Now showing " + CardTrackerProject.collectionSelected, Toast.LENGTH_SHORT)
                     .show()
 
-                if (CardTrackerProject.collectionSelected !== "Every Card") {
-                    binding.modifyCardsBtn.isVisible = true
-                    binding.addCardsButton.isVisible = false
-                    binding.addCollSpinner.isVisible = false
-                    binding.searchButton.isVisible = false
-                }
-                else {
-                    binding.modifyCardsBtn.isVisible = false
-                    binding.addCardsButton.isVisible = true
-                    binding.addCollSpinner.isVisible = true
-                    binding.searchButton.isVisible = true
+                when (CardTrackerProject.collectionSelected) {
+                    "My Collection" -> {
+                        // Ver donde conviene poner mas esto, si aca o en el searchview
+                       // cardViewModel.getAllCardMyColl()
+
+                        binding.modifyCardsBtn.isVisible = true
+                        binding.addCardsButton.isVisible = false
+                        binding.addCollSpinner.isVisible = false
+                        binding.searchButton.isVisible = false
+                    }
+                    "For Sale Collection" -> {
+                        binding.modifyCardsBtn.isVisible = true
+                        binding.addCardsButton.isVisible = false
+                        binding.addCollSpinner.isVisible = false
+                        binding.searchButton.isVisible = false
+                    }
+                    "Competitive Collection" -> {
+                        binding.modifyCardsBtn.isVisible = true
+                        binding.addCardsButton.isVisible = false
+                        binding.addCollSpinner.isVisible = false
+                        binding.searchButton.isVisible = false
+                    }
+                    "Every Card" -> {
+                        binding.modifyCardsBtn.isVisible = false
+                        binding.addCardsButton.isVisible = true
+                        binding.addCollSpinner.isVisible = true
+                        binding.searchButton.isVisible = true
+                    }
                 }
 
 
@@ -239,11 +254,14 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         }
 
+        //ver como limpiar realmente la lista con este boton
+        //puede que sea necesario hacer un boolean global que cambie este boton y que haga tomar el valor
+        //a algo del recycleradapter
         clearListBtn.setOnClickListener(){
             cardsChecked.clear()
-            cardCheckedName.clear()
             clearListBtn.isVisible = false
-            cardViewModel.cardSearch.value = null
+            cardViewModel.cardSearch.postValue(null)
+
         }
 
         //Es necesario configurar este botón para que haga su Update y cambie las listas correspondientes
@@ -857,7 +875,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
 
                     "My Collection" -> {
-
+                        cardViewModel.getAllCardMyColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {
                             newText?.let {

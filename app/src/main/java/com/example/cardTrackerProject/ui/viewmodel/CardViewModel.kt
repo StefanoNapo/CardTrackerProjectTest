@@ -87,7 +87,8 @@ class CardViewModel @Inject constructor(
     private val getCardsMyCollUseCase: GetCardsMyCollUseCase,
     private val getCardSearchMyCollUseCase: GetCardSearchMyCollUseCase,
     private val getCardSearchForSaleCollUseCase: GetCardSearchForSaleCollUseCase,
-    private val getCardSearchCompCollUseCase: GetCardSearchCompCollUseCase
+    private val getCardSearchCompCollUseCase: GetCardSearchCompCollUseCase,
+    private val getAllCardsMyCollUseCase: GetAllCardsMyCollUseCase,
 
 ) : ViewModel() {
 
@@ -103,6 +104,16 @@ class CardViewModel @Inject constructor(
 
             isLoading.postValue(false)
 
+        }
+
+    }
+
+    fun getAllCardMyColl(){
+
+        viewModelScope.launch {
+            isLoading.postValue(true)
+            getAllCardsMyCollUseCase.invoke()
+            isLoading.postValue(false)
         }
 
     }

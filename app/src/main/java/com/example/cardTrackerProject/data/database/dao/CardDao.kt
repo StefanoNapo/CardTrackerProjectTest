@@ -12,6 +12,17 @@ interface CardDao {
     @Query("SELECT * FROM card_table ORDER BY name ASC")
     suspend fun getAllCards(): List<CardEntity>
 
+    @Query("SELECT * FROM my_collection ORDER BY name ASC")
+    suspend fun getAllCardsMyColl(): List<MyCollectionEntity>
+
+    @Query("SELECT * FROM for_sale_collection ORDER BY name ASC")
+    suspend fun getAllCardsForSaleColl(): List<ForSaleCollectionEntity>
+
+    @Query("SELECT * FROM competitive_collection ORDER BY name ASC")
+    suspend fun getAllCardsCompColl(): List<CompetitiveCollectionEntity>
+
+//Hacer getAllcards pero de cada collection para consultar amounts
+    //Hacer update query para actualizar amounts
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(cards: List<CardEntity>)
 

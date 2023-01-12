@@ -81,32 +81,38 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
         val cardCheckBox = holder.itemView.cardCheckBox
         val deleteBtn = holder.itemView.deleteButton
+        val cardQuantity = holder.itemView.quantity
 
-       // Se podrá usar un listener en el adapter?
-        // MainActivity().collectionsSpinner.onItemSelectedListener
-
-        //Aca arriba se puede hacer un if que consulte si el spinner de collection esta en every card o alguna collection
-        //Y en el caso de que esté en una collection hacer que no checkee las cartas
-        //O hacer isvisible = false a un botón para que se pueda eliminar la carta de esa row
-        //y isvisible = true a las checkbox
-
-        //Obviamente esto no funciona porque toma siempre el valor original de ""
         when (CardTrackerProject.collectionSelected) {
             "Every Card" -> {
                 deleteBtn.isVisible = false
                 cardCheckBox.isVisible = true
 
-                for (cardName in CardTrackerProject.checkedCardsName) {
+                //Checkear aca tambien las cantidades y comparar con el valor del quantity
+                for (card in CardTrackerProject.cardsChecked) {
 
-                    if (cardName == currentCard.name) {
+                    if (card.cardName == currentCard.name) {
                         cardCheckBox.isChecked = true
+                        cardQuantity.setText(card.cardQuant.toString())
                         break
                     } else {
                         cardCheckBox.isChecked = false
+                        cardQuantity.text.clear()
                     }
                 }
             }
             "My Collection" -> {
+                //Hacer en cada uno de estos un bucle for checkeando con la query de getAllCards de cada collection para quantity
+                //Y hacer que el onclicklistener del boton haga la query con borrar la carta con la variable nombre del cardname
+                //Como el cardname de arriba
+
+                for (card in CardTrackerProject.cardListMyColl) {
+
+                    if (card.name == currentCard.name) {
+                        cardQuantity.setText(card.quantity.toString())
+                    }
+                }
+
                 cardCheckBox.isVisible = false
                 deleteBtn.isVisible = true
             }
@@ -120,7 +126,9 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
             }
         }
 
-        val cardQuantity = holder.itemView.quantity
+
+
+        //hacer onTextChangeListener para el quantity y que cambie las cantidades de
 
         cardCheckBox.setOnClickListener {
             val cardName = currentCard.name
@@ -140,7 +148,7 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
                         cardCListener?.getCardChecked(cardsChecked)
 
-                        CardTrackerProject.checkedCardsName += cardName
+                        Toast.makeText(context, "$nameChecked Added to the list", Toast.LENGTH_LONG).show()
 
                     }
 
@@ -157,8 +165,8 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
                         cardsChecked = cardsChecked.filter { it != cardChecked }.toMutableList()
 
                         cardCListener?.getCardChecked(cardsChecked)
-                        CardTrackerProject.checkedCardsName = CardTrackerProject.checkedCardsName.filter { it != cardName }.toMutableList()
 
+                        Toast.makeText(context, "$nameChecked Removed from the list", Toast.LENGTH_LONG).show()
                }
 
             }

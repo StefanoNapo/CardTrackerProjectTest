@@ -61,6 +61,10 @@ class CardRepository @Inject constructor(
         cardDao.deleteAllCards()
     }
 
+    suspend fun deleteCardMyColl(cardName: String){
+        cardDao.deleteCardMyColl(cardName)
+    }
+
     suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int){
         cardDao.setCardQuantityMyColl(cardName, cardQuantity)
     }

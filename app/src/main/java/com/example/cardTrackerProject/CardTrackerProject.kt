@@ -22,6 +22,8 @@ class CardTrackerProject : Application(){
         var cardListCompColl : List<CompetitiveCollectionEntity> = ArrayList()
 
         var cardsAmountForChange : MutableList<CardAmountChange> = ArrayList()
+
+        var cardsToDelete: MutableList<String> = ArrayList()
     }
 
 }

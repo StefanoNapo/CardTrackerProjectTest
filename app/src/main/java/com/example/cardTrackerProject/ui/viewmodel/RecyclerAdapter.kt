@@ -188,6 +188,17 @@ class RecyclerAdapter(private val context: Context) : ListAdapter<Card, Recycler
 
         }
 
+        deleteBtn.setOnClickListener{
+
+            val cardName = currentCard.name.toString()
+            CardTrackerProject.cardsToDelete += cardName
+
+            submitList(currentList.filter { it != currentCard })
+
+            Toast.makeText(context, "$cardName Deleted", Toast.LENGTH_SHORT).show()
+
+
+        }
 
         cardCheckBox.setOnClickListener {
             val cardName = currentCard.name

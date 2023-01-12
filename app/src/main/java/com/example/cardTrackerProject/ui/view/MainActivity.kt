@@ -75,6 +75,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     "My Collection" -> {
                         CardTrackerProject.cardsAmountForChange.clear()
 
+                        cardsChecked.clear()
+                        clearListBtn.isVisible = false
+
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
                         binding.addCollSpinner.isVisible = false
@@ -83,6 +86,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     "For Sale Collection" -> {
                         CardTrackerProject.cardsAmountForChange.clear()
 
+                        cardsChecked.clear()
+                        clearListBtn.isVisible = false
+
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
                         binding.addCollSpinner.isVisible = false
@@ -90,6 +96,9 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     }
                     "Competitive Collection" -> {
                         CardTrackerProject.cardsAmountForChange.clear()
+
+                        cardsChecked.clear()
+                        clearListBtn.isVisible = false
 
                         binding.modifyCardsBtn.isVisible = true
                         binding.addCardsButton.isVisible = false
@@ -269,13 +278,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         }
 
-        //Es necesario configurar este botón para que haga su Update y cambie las listas correspondientes
+
         binding.modifyCardsBtn.setOnClickListener(){
             cardRecyclerView.clearFocus()
             when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
 
-                    //Aca hacer los correspondientes cambios con update o delete
                     for (card in CardTrackerProject.cardsAmountForChange) {
                         if (card.collection == "My Collection"){
                             cardViewModel.setCardQuantityMyColl(card.cardName, card.cardQuant)
@@ -382,7 +390,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
         }
 
         recyclerAdapter.cardsCheckedListener(this)
-
 
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -933,6 +940,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
 
                     "My Collection" -> {
+                        for(card in CardTrackerProject.cardsToDelete){
+                            cardViewModel.deleteCardMyColl(card)
+                        }
+                        CardTrackerProject.cardsToDelete.clear()
+
                         cardViewModel.getAllCardMyColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {
@@ -944,10 +956,16 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                             }
                         }
 
-                        //Aca agregar los searchname para cada collection
 
                     }
                     "For Sale Collection" -> {
+                        //change dao
+                        for(card in CardTrackerProject.cardsToDelete){
+                            cardViewModel.deleteCardMyColl(card)
+                        }
+                        CardTrackerProject.cardsToDelete.clear()
+
+
                         cardViewModel.getAllCardForSaleColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {
@@ -961,6 +979,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
                     "Competitive Collection" -> {
+                        //change dao
+                        for(card in CardTrackerProject.cardsToDelete){
+                            cardViewModel.deleteCardMyColl(card)
+                        }
+                        CardTrackerProject.cardsToDelete.clear()
+
                         cardViewModel.getAllCardCompColl()
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {

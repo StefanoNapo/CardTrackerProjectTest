@@ -21,8 +21,7 @@ interface CardDao {
     @Query("SELECT * FROM competitive_collection ORDER BY name ASC")
     suspend fun getAllCardsCompColl(): List<CompetitiveCollectionEntity>
 
-//Hacer getAllcards pero de cada collection para consultar amounts
-    //Hacer update query para actualizar amounts
+    //Updates to set new amount of cards on each collection
     @Query("UPDATE my_collection SET quantity=:cardQuantity WHERE name=:cardName")
     suspend fun setCardQuantityMyColl(cardName: String, cardQuantity: Int)
 
@@ -37,6 +36,16 @@ interface CardDao {
 
     @Query("DELETE FROM card_table")
     suspend fun deleteAllCards()
+
+    //Card deletes for every collection with the deleteButton.OnClickListener
+    @Query("DELETE FROM my_collection WHERE name=:cardName")
+    suspend fun deleteCardMyColl(cardName: String)
+
+    @Query("DELETE FROM for_sale_collection WHERE name=:cardName")
+    suspend fun deleteCardForSaleColl(cardName: String)
+
+    @Query("DELETE FROM competitive_collection WHERE name=:cardName")
+    suspend fun deleteCardCompColl(cardName: String)
 
     //Queries for the cardSearchView
     @Query("SELECT * FROM card_table WHERE name LIKE :searchQuery ORDER BY level DESC, linkval DESC, type ASC")
@@ -697,25 +706,4 @@ interface CardDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)
 
-/*
-    @Query("SELECT * FROM card_table WHERE name = :cardName")
-    suspend fun cardsToUpdateTables(searchQuery: String, cardName: String): List<CardEntity>
-
-
-    //Using function to convert like card to card entity toDatabase function?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCardsInMyColl(cards: List<MyCollectionEntity>)
-
-
-    //Querys to set the amount of copies from a card in the collections
-    @Query("UPDATE competitive_collection SET quantity=:cardQuantity WHERE name=:cardName")
-    suspend fun setCardQuantityCompColl(cardQuantity: Int,cardName: String)
-
-    @Query("UPDATE for_sale_collection SET quantity=:cardQuantity WHERE name=:cardName")
-    suspend fun setCardQuantityForSaleColl(cardQuantity: Int,cardName: String)
-
-    @Query("UPDATE my_collection SET quantity=:cardQuantity WHERE name=:cardName")
-    suspend fun setCardQuantityMyColl(cardQuantity: Int,cardName: String)
-*/
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cardTrackerProject.CardTrackerProject
 import com.example.cardTrackerProject.data.model.CardAmountChange
 import com.example.cardTrackerProject.data.model.CardChecked
+import com.example.cardTrackerProject.data.model.CardToDelete
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.ui.CardsCheckedListener
@@ -209,7 +210,9 @@ class RecyclerAdapter(private val context: Context) :
         deleteBtn.setOnClickListener {
 
             val cardName = currentCard.name.toString()
-            CardTrackerProject.cardsToDelete += cardName
+            val cardToBeDeleted = CardToDelete(cardName,CardTrackerProject.collectionSelected)
+
+            CardTrackerProject.cardsToDelete += cardToBeDeleted
 
             submitList(currentList.filter { it != currentCard })
 

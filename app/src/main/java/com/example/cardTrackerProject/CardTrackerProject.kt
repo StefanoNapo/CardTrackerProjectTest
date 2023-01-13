@@ -6,6 +6,7 @@ import com.example.cardTrackerProject.data.database.entities.ForSaleCollectionEn
 import com.example.cardTrackerProject.data.database.entities.MyCollectionEntity
 import com.example.cardTrackerProject.data.model.CardAmountChange
 import com.example.cardTrackerProject.data.model.CardChecked
+import com.example.cardTrackerProject.data.model.CardToDelete
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -23,7 +24,7 @@ class CardTrackerProject : Application() {
 
         var cardsAmountForChange: MutableList<CardAmountChange> = ArrayList()
 
-        var cardsToDelete: MutableList<String> = ArrayList()
+        var cardsToDelete: MutableList<CardToDelete> = ArrayList()
     }
 
 }

@@ -17,6 +17,7 @@ import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.coroutines.*
 
 
@@ -272,16 +273,6 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         }
 
-        //ver como limpiar realmente la lista con este boton
-        //puede que sea necesario hacer un boolean global que cambie este boton y que haga tomar el valor
-        //a algo del recycleradapter
-        clearListBtn.setOnClickListener() {
-            cardsChecked.clear()
-            clearListBtn.isVisible = false
-            cardViewModel.cardSearch.postValue(null)
-
-        }
-
 
         binding.modifyCardsBtn.setOnClickListener() {
             cardRecyclerView.clearFocus()
@@ -384,6 +375,19 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 setHasFixedSize(true)
             }
+        }
+
+        //ver como limpiar realmente la lista con este boton
+        //puede que sea necesario hacer un boolean global que cambie este boton y que haga tomar el valor
+        //a algo del recycleradapter
+        clearListBtn.setOnClickListener() {
+            cardsChecked.clear()
+            clearListBtn.isVisible = false
+            cardViewModel.cardSearch.postValue(null)
+
+            //Hacer esto pero para toda la lista
+            binding.cardRecyclerView.cardCheckBox.isChecked = false
+            binding.cardRecyclerView.quantity.setText("")
         }
 
         cardViewModel.cardSearch.observe(this) {
@@ -967,10 +971,13 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
 
                     "My Collection" -> {
+
                         for (card in CardTrackerProject.cardsToDelete) {
-                            cardViewModel.deleteCardMyColl(card)
+                            if(card.collection == "My Collection") {
+                                cardViewModel.deleteCardMyColl(card.cardName)
+                                CardTrackerProject.cardsToDelete.remove(card)
+                            }
                         }
-                        CardTrackerProject.cardsToDelete.clear()
 
                         cardViewModel.getAllCardMyColl()
                         searchJob?.cancel()
@@ -988,9 +995,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     "For Sale Collection" -> {
 
                         for (card in CardTrackerProject.cardsToDelete) {
-                            cardViewModel.deleteCardForSaleColl(card)
+                            if(card.collection == "For Sale Collection"){
+                                cardViewModel.deleteCardForSaleColl(card.cardName)
+                                CardTrackerProject.cardsToDelete.remove(card)
+                            }
                         }
-                        CardTrackerProject.cardsToDelete.clear()
 
 
                         cardViewModel.getAllCardForSaleColl()
@@ -1008,9 +1017,12 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                     "Competitive Collection" -> {
 
                         for (card in CardTrackerProject.cardsToDelete) {
-                            cardViewModel.deleteCardCompColl(card)
+                            if(card.collection == "Competitive Collection"){
+                                cardViewModel.deleteCardCompColl(card.cardName)
+                                CardTrackerProject.cardsToDelete.remove(card)
+                            }
                         }
-                        CardTrackerProject.cardsToDelete.clear()
+
 
                         cardViewModel.getAllCardCompColl()
                         searchJob?.cancel()

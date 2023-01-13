@@ -90,7 +90,6 @@ class RecyclerAdapter(private val context: Context) :
                 deleteBtn.isVisible = false
                 cardCheckBox.isVisible = true
 
-                //Checkear aca tambien las cantidades y comparar con el valor del quantity
                 for (card in CardTrackerProject.cardsChecked) {
 
                     if (card.cardName == currentCard.name) {
@@ -104,9 +103,7 @@ class RecyclerAdapter(private val context: Context) :
                 }
             }
             "My Collection" -> {
-                //Hacer en cada uno de estos un bucle for checkeando con la query de getAllCards de cada collection para quantity
-                //Y hacer que el onclicklistener del boton haga la query con borrar la carta con la variable nombre del cardname
-                //Como el cardname de arriba
+
 
                 for (card in CardTrackerProject.cardListMyColl) {
 
@@ -142,7 +139,7 @@ class RecyclerAdapter(private val context: Context) :
             }
         }
 
-        //hacer onTextChangeListener para el quantity y que cambie las cantidades de
+
         cardQuantity.setOnFocusChangeListener { view, b ->
             when (CardTrackerProject.collectionSelected) {
                 "My Collection" -> {
@@ -275,7 +272,7 @@ class RecyclerAdapter(private val context: Context) :
 
             }
 
-            //Ver como usar las diferentes colecciones para mostras y editarlas
+
         }
 
 

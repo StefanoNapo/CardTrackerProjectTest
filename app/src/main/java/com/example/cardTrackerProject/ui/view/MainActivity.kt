@@ -17,7 +17,6 @@ import com.example.cardTrackerProject.ui.viewmodel.CardViewModel
 import com.example.cardTrackerProject.ui.viewmodel.RecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.row_layout.view.*
 import kotlinx.coroutines.*
 
 
@@ -383,11 +382,18 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
         clearListBtn.setOnClickListener() {
             cardsChecked.clear()
             clearListBtn.isVisible = false
+            cardViewModel.cardSearchForClearList()
             cardViewModel.cardSearch.postValue(null)
+            recyclerAdapter.submitList(emptyList())
+            searchView.setQuery(".........", false)
+            searchView.clearFocus()
 
-            //Hacer esto pero para toda la lista
-            binding.cardRecyclerView.cardCheckBox.isChecked = false
-            binding.cardRecyclerView.quantity.setText("")
+            Toast.makeText(
+                baseContext,
+                "List Cleared",
+                Toast.LENGTH_SHORT
+            ).show()
+
         }
 
         cardViewModel.cardSearch.observe(this) {

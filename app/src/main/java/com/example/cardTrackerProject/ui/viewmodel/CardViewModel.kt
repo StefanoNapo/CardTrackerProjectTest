@@ -450,6 +450,22 @@ class CardViewModel @Inject constructor(
 
     }
 
+    fun cardSearchForClearList() {
+
+        viewModelScope.launch {
+            isLoading.postValue(true)
+
+            val cardSearched = getCardSearchUseCase.invoke("")
+
+
+            cardSearch.postValue(cardSearched)
+
+
+            isLoading.postValue(false)
+        }
+
+    }
+
     fun cardSearchMyColl(searchQuery: String) {
 
         //Ver como hacer la busqueda para que consulte todos los valores de la tabla con los del total de cartas

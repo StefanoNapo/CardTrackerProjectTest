@@ -92,6 +92,11 @@ class RecyclerAdapter(private val context: Context) :
                 deleteBtn.isVisible = false
                 cardCheckBox.isVisible = true
 
+                if(CardTrackerProject.cardsChecked.isEmpty()){
+                    cardCheckBox.isChecked = false
+                    cardQuantity.text.clear()
+                }
+
                 for (card in CardTrackerProject.cardsChecked) {
 
                     if (card.cardName == currentCard.name) {

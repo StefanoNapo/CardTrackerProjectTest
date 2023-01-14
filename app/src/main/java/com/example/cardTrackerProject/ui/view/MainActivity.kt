@@ -376,16 +376,11 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
             }
         }
 
-        //ver como limpiar realmente la lista con este boton
-        //puede que sea necesario hacer un boolean global que cambie este boton y que haga tomar el valor
-        //a algo del recycleradapter
+
         clearListBtn.setOnClickListener() {
             cardsChecked.clear()
             clearListBtn.isVisible = false
-            cardViewModel.cardSearchForClearList()
             cardViewModel.cardSearch.postValue(null)
-            recyclerAdapter.submitList(emptyList())
-            searchView.setQuery(".........", false)
             searchView.clearFocus()
 
             Toast.makeText(
@@ -441,8 +436,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
                                         defChoose!!,
                                         lvlChoose!!
                                     )
-                                    //agregar funciones llamadas y funciones del Dao para cada tabla ¿convendra hacer un inner join?
-                                    //    para pedir por los id en comun de cada tabla con la tabla "cards_table"
+
 
                                 } else if (newText.length > 2 && cardTypeChoose.isNotBlank() && monsterTypeChoose.isNotBlank() && attrChoose.isNotBlank()
                                     && atkChoose != null && defChoose != null

@@ -242,10 +242,7 @@ class SearchOptionsDialog : DialogFragment() {
             Toast.makeText(context, "Search Filters added", Toast.LENGTH_LONG).show()
 
             dismiss()
-            //Conseguir forma de enviar esto a main activity para saber cual carta buscar
-            //cardTypeSelected
-            //monsterTypeSelected
-            //attrSelected
+
         }
 
 

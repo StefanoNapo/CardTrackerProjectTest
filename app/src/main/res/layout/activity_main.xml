@@ -8,6 +8,17 @@
     android:background="@color/white"
     tools:context=".ui.view.MainActivity">
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0.3"
+        app:srcCompat="@drawable/logo" />
+
     <Spinner
         android:id="@+id/collectionsSpinner"
         android:layout_width="410dp"
@@ -47,19 +58,21 @@
         android:background="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addCardsButton" />
+        app:layout_constraintStart_toEndOf="@+id/addCardsButton"
+        app:layout_constraintTop_toBottomOf="@+id/cardRecyclerView" />
 
     <Button
         android:id="@+id/addCardsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
         android:layout_marginEnd="190dp"
+        android:layout_marginBottom="17dp"
         android:text="Add Cards"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardRecyclerView"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -108,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:alpha="0.65"
+        android:alpha="0.7"
         android:text="Clear List"
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.example.cardTrackerProject.data.model.CardToDelete
 import com.example.cardTrackerProject.databinding.RowLayoutBinding
 import com.example.cardTrackerProject.domain.model.Card
 import com.example.cardTrackerProject.ui.CardsCheckedListener
+import com.example.cardTrackerProject.ui.components.CardImageDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout.view.*
 
@@ -216,6 +218,15 @@ class RecyclerAdapter(private val context: Context) :
             Toast.makeText(context, "$cardName Deleted", Toast.LENGTH_SHORT).show()
 
 
+        }
+
+        holder.itemView.CardImageButton.setOnClickListener() {
+
+            val cardLink = currentCard.cardImages?.get(0)?.imageUrl
+
+            val dialogFragment = CardImageDialog.newInstance(cardLink!!)
+            val fragmentManager = (holder.itemView.context as FragmentActivity).supportFragmentManager
+            dialogFragment.show(fragmentManager, "CardDialogFragment")
         }
 
         cardCheckBox.setOnClickListener {

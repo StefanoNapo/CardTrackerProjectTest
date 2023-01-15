@@ -1,5 +1,6 @@
 package com.example.cardTrackerProject.ui.view
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
     var cardQuant: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 

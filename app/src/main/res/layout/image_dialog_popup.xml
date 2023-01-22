@@ -13,7 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/closeCardBtn"
         app:layout_constraintVertical_bias="0.722"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/big_card_image" />
 
     <ImageButton
         android:id="@+id/closeCardBtn"
@@ -29,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_close_24" />
+        app:srcCompat="@drawable/ic_baseline_close_24"
+        android:contentDescription="@string/close_image_dialog_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

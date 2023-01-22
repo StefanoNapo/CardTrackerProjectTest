@@ -18,7 +18,8 @@
         android:layout_marginEnd="7dp"
         android:background="#5A57AE"
         android:minHeight="48dp"
-        app:srcCompat="@drawable/ic_baseline_close_24" />
+        app:srcCompat="@drawable/ic_baseline_close_24"
+        android:contentDescription="@string/close_search_options_button" />
 
     <TextView
         android:id="@+id/cardType"
@@ -28,7 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="27dp"
         android:layout_marginTop="93dp"
-        android:text="Card Type" />
+        android:text="@string/card_type" />
 
     <TextView
         android:id="@+id/monsterType"
@@ -38,7 +39,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
         android:layout_marginTop="156dp"
-        android:text="Monster Type" />
+        android:text="@string/monster_type" />
 
     <TextView
         android:id="@+id/monsterAttr"
@@ -48,7 +49,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="36dp"
         android:layout_marginTop="230dp"
-        android:text="Attribute" />
+        android:text="@string/attribute" />
 
     <TextView
         android:id="@+id/attack"
@@ -58,7 +59,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="41dp"
         android:layout_marginTop="308dp"
-        android:text="Attack" />
+        android:text="@string/attack" />
 
     <TextView
         android:id="@+id/defense"
@@ -68,7 +69,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="35dp"
         android:layout_marginTop="372dp"
-        android:text="Defense" />
+        android:text="@string/defense" />
 
     <TextView
         android:id="@+id/level"
@@ -78,7 +79,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="26dp"
         android:layout_marginTop="447dp"
-        android:text="Level/Rank" />
+        android:text="@string/level_rank" />
 
     <Spinner
         android:id="@+id/cardTypeSpinner"

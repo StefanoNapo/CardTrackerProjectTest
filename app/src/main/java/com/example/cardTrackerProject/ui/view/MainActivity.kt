@@ -274,6 +274,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
         }
 
+        //This listener takes every change made by the user to the card quantities inside the collection that is in display
+        // and updates the table of that collection to save the new amount
 
         binding.modifyCardsBtn.setOnClickListener() {
             cardRecyclerView.clearFocus()
@@ -378,6 +380,8 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
             }
         }
 
+
+        //This listener gets the user request to clear the list of cards selected to be added to a collection and refreshes the RecyclerView
 
         clearListBtn.setOnClickListener() {
             cardsChecked.clear()
@@ -971,6 +975,7 @@ class MainActivity : AppCompatActivity(), DialogCommunicator, CardsCheckedListen
 
                     }
 
+                    // Here we search the cards when the user is displaying one of the collections
 
                     "My Collection" -> {
 

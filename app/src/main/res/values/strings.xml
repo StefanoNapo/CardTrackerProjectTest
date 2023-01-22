@@ -2,4 +2,23 @@
     <string name="app_name">Yu-Gi-Oh! Collection Tracker</string>
     <string name="searcher" />
     <string name="search">Search</string>
+    <string name="app_logo">App Logo</string>
+    <string name="add_cards">Add Cards</string>
+    <string name="change_card_quantities">Change Card Quantities</string>
+    <string name="search_options_button">search options button</string>
+    <string name="clear_list">Clear List</string>
+    <string name="collections_spinner">Collections Spinner</string>
+    <string name="add_to_collection_spinner">Add to Collection Spinner</string>
+    <string name="big_card_image">Big Card Image</string>
+    <string name="close_image_dialog_button">Close Image Dialog Button</string>
+    <string name="card_name">Card Name</string>
+    <string name="card_image">Card Image</string>
+    <string name="x">X</string>
+    <string name="close_search_options_button">Close Search Options Button</string>
+    <string name="card_type">Card Type</string>
+    <string name="monster_type">Monster Type</string>
+    <string name="attribute">Attribute</string>
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="level_rank">Level/Rank</string>
 </resources>
